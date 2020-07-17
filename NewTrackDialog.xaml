@@ -14,8 +14,8 @@
             <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
 
-        <TabControl  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Margin="14">
-            <TabItem Header="Info" Width="60">
+        <TabControl x:Name="NTDTabControl" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="0" Margin="14">
+            <TabItem x:Name="NTDTabItemInfo" Header="Info" Width="60">
                 <StackPanel>
                     
                     <Label Margin="10 20 10 60" Content="Fill information about the track" HorizontalAlignment="Center"/>
@@ -23,30 +23,30 @@
                     <!-- TITLE -->
                     <DockPanel Margin="10 25" LastChildFill="True">
                         <Label MinWidth="100">Title</Label>
-                        <TextBox></TextBox>
+                        <TextBox x:Name="NTDTitle"></TextBox>
                     </DockPanel>
 
                     <!-- AUTHOR -->
                     <DockPanel Margin="10 25" LastChildFill="True">
                         <Label MinWidth="100">Author</Label>
-                        <TextBox></TextBox>
+                        <TextBox x:Name="NTDAuthor"></TextBox>
                     </DockPanel>
 
                     <!-- IMAGE -->
                     <DockPanel Margin="10 25" LastChildFill="True">
                         <Label MinWidth="100">Image</Label>
-                        <Button DockPanel.Dock="Right" Content="Browse" MinWidth="100"/>
-                        <TextBox></TextBox>
+                        <Button x:Name="NTDImageButton" DockPanel.Dock="Right" Content="Browse" MinWidth="100"/>
+                        <TextBox x:Name="NTDImage"></TextBox>
                     </DockPanel>
 
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Content" Width="60">
+            <TabItem x:Name="NTDTabItemContent" Header="Content" Width="60">
                 <DockPanel LastChildFill="True" >
                     <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Choose resources for your track" HorizontalAlignment="Center"/>
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Label Content="Resource type:" Margin="10"/>
-                        <ComboBox MinWidth="350" Margin="10">
+                        <ComboBox x:Name="NTDType" MinWidth="350" Margin="10">
                             <ComboBoxItem></ComboBoxItem>
                             <ComboBoxItem></ComboBoxItem>
                             <ComboBoxItem></ComboBoxItem>
@@ -55,10 +55,10 @@
                     <GroupBox DockPanel.Dock="Top" Header="Choose files" VerticalAlignment="Stretch">
                         <DockPanel>
                             <StackPanel DockPanel.Dock="Right" Margin="20" MinWidth="80">
-                                <Button Content="+" Margin="0 5"/>
-                                <Button Content="-" Margin="0 5"/>
+                                <Button x:Name="NTDFilesAdd" Content="+" Margin="0 5"/>
+                                <Button x:Name="NTDFilesRemove" Content="-" Margin="0 5"/>
                             </StackPanel>
-                            <ListBox DockPanel.Dock="Left">
+                            <ListBox x:Name="NTDFiles" DockPanel.Dock="Left">
                             </ListBox>
                         </DockPanel>
                     </GroupBox>
@@ -66,7 +66,7 @@
 
                 </DockPanel>
             </TabItem>
-            <TabItem Header="Tags" Width="60">
+            <TabItem x:Name="NTDTabItemTags" Header="Tags" Width="60">
                 <DockPanel>
                     <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Set keywords for the track" HorizontalAlignment="Center"/>
                     <Grid>
@@ -75,14 +75,14 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox Grid.Column="0">
+                        <ListBox x:Name="NTDTags" Grid.Column="0">
 
                         </ListBox>
                         <StackPanel Grid.Column="1">
-                            <TextBox Margin="20 20 20 0" HorizontalAlignment="Stretch"/>
+                            <TextBox x:Name="NTDTagsText" Margin="20 20 20 0" HorizontalAlignment="Stretch"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Margin="10" MinWidth="80" Content="-"/>
-                                <Button Margin="10" MinWidth="80" Content="+"/>
+                                <Button x:Name="NTDTagsAdd" Margin="10" MinWidth="80" Content="-"/>
+                                <Button x:Name="NTDTagsRemove" Margin="10" MinWidth="80" Content="+"/>
                             </StackPanel>
                         </StackPanel>
 
@@ -91,8 +91,8 @@
             </TabItem>
         </TabControl>
 
-        <Button Content="Next" HorizontalAlignment="Left" Margin="674,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.603,0.913"/>
-        <Button Content="Previous" HorizontalAlignment="Left" Margin="581,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.659,0.718"/>
+        <Button x:Name="NTDNextButton" Content="Next" HorizontalAlignment="Left" Margin="674,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.603,0.913"/>
+        <Button x:Name="NTDPrevButton" Content="Previous" HorizontalAlignment="Left" Margin="581,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.659,0.718"/>
 
 
 

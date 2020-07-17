@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noteslider.Code;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,21 +8,22 @@ using System.Windows.Controls;
 
 namespace Noteslider.Events
 {
-    public class MainWindowMenuNotifier 
+    public class MainWindowManager 
         : ISubscriber<MainWindowMenuNewTrackEvt>
         , ISubscriber<MainWindowMenuOpenTrackEvt>
         , ISubscriber<MainWindowMenuPlayEvt>
         , ISubscriber<MainWindowMenuSettingsEvt>
     {
         DockPanel panel;
-        public MainWindowMenuNotifier(DockPanel panel)
+        public MainWindowManager(DockPanel panel)
         {
             this.panel = panel;
         }
 
         public void Handle(MainWindowMenuNewTrackEvt Notification)
         {
-            throw new NotImplementedException();
+            var dialog = new NewTrackDialogManager();
+            dialog.Show();
         }
 
         public void Handle(MainWindowMenuOpenTrackEvt Notification)

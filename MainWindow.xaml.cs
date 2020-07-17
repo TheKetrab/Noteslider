@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noteslider.Events;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,15 +21,32 @@ namespace Noteslider
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainWindowManager notifier;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            notifier = new MainWindowManager(this.MainWindowMenu);
             InitEvents();
+            Register();
+        }
+
+        public void Register()
+        {
+            EventAgregator.Instance.AddSubscriber<MainWindowMenuNewTrackEvt>(notifier);
+            EventAgregator.Instance.AddSubscriber<MainWindowMenuOpenTrackEvt>(notifier);
+            EventAgregator.Instance.AddSubscriber<MainWindowMenuPlayEvt>(notifier);
+            EventAgregator.Instance.AddSubscriber<MainWindowMenuSettingsEvt>(notifier);
         }
 
         public void InitEvents()
         {
-            this.bubu
+            this.MainWindowMenuNewTrackButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };
+            this.MainWindowMenuOpenTrackButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuOpenTrackEvt()); };
+            this.MainWindowMenuPlayButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt()); };
+            this.MainWindowMenuSettingsButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
         }
+
     }
 }
