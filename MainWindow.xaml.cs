@@ -42,10 +42,14 @@ namespace Noteslider
 
         public void InitEvents()
         {
-            this.MainWindowMenuNewTrackButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };
-            this.MainWindowMenuOpenTrackButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuOpenTrackEvt()); };
-            this.MainWindowMenuPlayButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt()); };
-            this.MainWindowMenuSettingsButton.Click += (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
+            MainWindowMenuNewTrackButton.Click += 
+                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };
+            MainWindowMenuOpenTrackButton.Click += 
+                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuOpenTrackEvt()); };
+            MainWindowMenuPlayButton.Click += 
+                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt()); };
+            MainWindowMenuSettingsButton.Click += 
+                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
         }
 
     }

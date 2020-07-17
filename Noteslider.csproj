@@ -71,9 +71,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Code\NewTrackDialogManager.cs" />
-    <Compile Include="Events\MainWindowMenuEvents.cs" />
+    <Compile Include="Code\OpenTrackDialogManager.cs" />
+    <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Path.cs" />
+    <Compile Include="Events\TrackEvents.cs" />
     <Compile Include="Model\Track.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

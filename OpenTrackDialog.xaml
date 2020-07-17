@@ -7,6 +7,42 @@
         mc:Ignorable="d"
         Title="OpenTrackDialog" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70*"/>
+            <ColumnDefinition Width="30*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="OTDListView" Grid.Row="0" Grid.Column="0" SelectionMode="Single" SelectedIndex="0">
+            <ListViewItem>
+                <Label Content="foo"/>
+            </ListViewItem>
+            <ListViewItem>
+                <Label Content="bar"/>
+            </ListViewItem>
+            <ListViewItem>
+                <Label Content="baz"/>
+            </ListViewItem>
+            <ListViewItem>
+                <Label Content="qux"/>
+            </ListViewItem>
+        </ListView>
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <Image x:Name="OTDInfoImage" Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/testImg.jpg" MaxWidth="150" Margin="10"/>
+            <Label x:Name="OTDInfoTitle" Content="TITLE OF SELECTED" HorizontalAlignment="Center" Margin="10 0"/>
+            <Label x:Name="OTDInfoAuthor" Content="Author: " HorizontalAlignment="Left" Margin="10 0"/>
+            <Label x:Name="OTDInfoLength" Content="Length: " HorizontalAlignment="Left" Margin="10 0"/>
+        </StackPanel>
+        <Label x:Name="OTDInfoAboutLibrary" Grid.Row="1" Grid.Column="0" Content="INFO ABOUT LIBRARY"/>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5,10"/>
+            <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5,10" Width="80"/>
+        </StackPanel>
+
+
     </Grid>
 </Window>

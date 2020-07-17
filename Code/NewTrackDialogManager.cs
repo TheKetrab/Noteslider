@@ -26,10 +26,10 @@ namespace Noteslider.Code
             dialog.NTDPrevButton.Click += (s, e) => { SetPage(page - 1); };
             dialog.NTDTabControl.SelectionChanged += (s,e) =>
             {
-                var x = s as TabControl;
-                if (x != null)
+                var tabControl = s as TabControl;
+                if (tabControl != null)
                 {
-                    page = x.SelectedIndex;
+                    page = tabControl.SelectedIndex;
                     CheckPage(page);
                 }
             };
@@ -62,7 +62,8 @@ namespace Noteslider.Code
 
         public void Show()
         {
-            dialog.Show();
+            dialog.ShowDialog();
         }
+
     }
 }

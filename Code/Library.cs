@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Noteslider
+namespace Noteslider.Code
 {
-    public class Path
+    class Library
     {
-        public static string Library = "";
     }
 }

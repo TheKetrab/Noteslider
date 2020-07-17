@@ -28,7 +28,8 @@ namespace Noteslider.Events
 
         public void Handle(MainWindowMenuOpenTrackEvt Notification)
         {
-            throw new NotImplementedException();
+            var dialog = new OpenTrackDialogManager();
+            dialog.Show();
         }
 
         public void Handle(MainWindowMenuPlayEvt Notification)
