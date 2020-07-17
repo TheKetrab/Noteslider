@@ -23,6 +23,12 @@ namespace Noteslider
         public MainWindow()
         {
             InitializeComponent();
+            InitEvents();
+        }
+
+        public void InitEvents()
+        {
+            this.bubu
         }
     }
 }

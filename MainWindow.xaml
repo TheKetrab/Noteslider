@@ -20,24 +20,23 @@
             <ColumnDefinition MaxWidth="300" Width="20*"/>
         </Grid.ColumnDefinitions>
 
-        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">
+        <DockPanel x:Name="MainWindowMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">
 
-            <Button Background="#00000000">
+            <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
                 <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoNew.png"/>
             </Button>
-            <Button Background="#00000000">
+            <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
                 <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoOpen.png"/>
             </Button>
-            <Button Background="#00000000">
+            <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
                 <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoPlay.png"/>
             </Button>
-            <Button Background="#00000000">
+            <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
                 <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoSettings.png"/>
             </Button>
 
         </DockPanel>
-        <!--
-        <TextBlock FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">Column 1, Row 1</TextBlock> -->
+
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
             <TabItem Header="General">
                 <Label Content="Content goes here..." />
@@ -53,8 +52,8 @@
             VerticalAlignment="Stretch" 
             Grid.Column="1" Grid.Row="1" 
             Margin="5">
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
-                <Rectangle Fill="Red" Width="100" Height="100"></Rectangle>
+            <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
+
             </StackPanel>
         </ScrollViewer>
 
