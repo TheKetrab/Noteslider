@@ -9,17 +9,15 @@ namespace Noteslider.Code
     public class OpenTrackDialogManager
     {
         private OpenTrackDialog dialog;
+        private List<TrackInfo> lib;
+
         public OpenTrackDialogManager()
         {
             dialog = new OpenTrackDialog();
-            LoadLibrary();
+            lib = Library.LoadLibraryInfo();
             InitEvents();
         }
 
-        private void LoadLibrary()
-        {
-            // TODO
-        }
 
         private void InitEvents()
         {

@@ -30,6 +30,7 @@ namespace Noteslider
         public Track(TrackType type)
         {
             Type = type;
+            TrackInfo = new TrackInfo();
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Noteslider
         /// </summary>
         private Track()
         {
-
+            TrackInfo = new TrackInfo();
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Noteslider
         /// </summary>
         /// <param name="nsPath"></param>
         /// <returns></returns>
-        public Track ReadTrack(string nsPath)
+        public static Track ReadTrack(string nsPath)
         {
             Track t = new Track();
             using (BinaryReader reader = new BinaryReader(File.OpenRead(nsPath)))
@@ -72,7 +73,7 @@ namespace Noteslider
             return t;
         }
 
-        public TrackInfo ReadTrackInfo(string nsPath)
+        public static TrackInfo ReadTrackInfo(string nsPath)
         {
             TrackInfo ti = new TrackInfo();
             using (BinaryReader reader = new BinaryReader(File.OpenRead(nsPath)))
