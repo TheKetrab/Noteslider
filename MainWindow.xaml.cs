@@ -26,7 +26,6 @@ namespace Noteslider
         public MainWindow()
         {
             InitializeComponent();
-
             notifier = new MainWindowManager(this.MainWindowMenu);
             InitEvents();
             Register();

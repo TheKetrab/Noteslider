@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noteslider.Code;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,10 +28,19 @@ namespace Noteslider
         public List<string> Tags;
         public List<string> Data;
 
-        public Track(TrackType type)
+
+        public Track(TrackType type, string author, string name, string imgPath) 
+            : this(type)
+        {
+            TrackInfo.Author = author;
+            TrackInfo.Name = name;
+            TrackInfo.Image = imgPath;
+            TrackInfo.Length = 0; // TODO
+        }
+
+        public Track(TrackType type) : this()
         {
             Type = type;
-            TrackInfo = new TrackInfo();
         }
 
         /// <summary>
@@ -39,6 +49,17 @@ namespace Noteslider
         private Track()
         {
             TrackInfo = new TrackInfo();
+            Tags = new List<string>();
+            Data = new List<string>();
+        }
+
+        public static TrackType GetTrackType(int num)
+        {
+            if (num == 0) return TrackType.TYPE_TEXT;
+            if (num == 1) return TrackType.TYPE_IMAGE;
+            if (num == 2) return TrackType.TYPE_PDF;
+            return TrackType.TYPE_UNDEFINED;
+
         }
 
         /// <summary>
@@ -72,6 +93,8 @@ namespace Noteslider
 
             return t;
         }
+
+
 
         public static TrackInfo ReadTrackInfo(string nsPath)
         {
@@ -116,5 +139,12 @@ namespace Noteslider
             }
 
         }
+
+        public string GetTrackDirPath()
+        {
+            return Paths.Library + "/" + TrackInfo.Name;
+        }
+
+
     }
 }

@@ -47,9 +47,9 @@
                     <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Label Content="Resource type:" Margin="10"/>
                         <ComboBox x:Name="NTDType" MinWidth="350" Margin="10">
-                            <ComboBoxItem></ComboBoxItem>
-                            <ComboBoxItem></ComboBoxItem>
-                            <ComboBoxItem></ComboBoxItem>
+                            <ComboBoxItem Content="Text"></ComboBoxItem>
+                            <ComboBoxItem Content="Image"></ComboBoxItem>
+                            <ComboBoxItem Content="PDF"></ComboBoxItem>
                         </ComboBox>
                     </StackPanel>
                     <GroupBox DockPanel.Dock="Top" Header="Choose files" VerticalAlignment="Stretch">
