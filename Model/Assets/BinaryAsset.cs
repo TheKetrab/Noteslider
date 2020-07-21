@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Noteslider.Model
+namespace Noteslider.Model.Assets
 {
     /// <summary>
     /// Represents metadata about file (in binary format)

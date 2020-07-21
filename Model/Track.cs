@@ -1,6 +1,6 @@
 ﻿using Noteslider.Code;
 using Noteslider.Code.AssetFactoryDir;
-using Noteslider.Model;
+using Noteslider.Model.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;

@@ -1,4 +1,4 @@
-﻿using Noteslider.Model;
+﻿using Noteslider.Model.Assets;
 using System;
 using System.Collections.Generic;
 using System.Drawing.Imaging;

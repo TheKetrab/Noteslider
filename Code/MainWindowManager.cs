@@ -14,7 +14,6 @@ namespace Noteslider.Events
         , ISubscriber<MainWindowMenuPlayEvt>
         , ISubscriber<MainWindowMenuSettingsEvt>
     {
-        TrackRenderer renderer;
         DockPanel panel;
 
         public MainWindowManager(DockPanel panel)
