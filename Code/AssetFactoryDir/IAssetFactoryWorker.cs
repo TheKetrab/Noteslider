@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-    public interface IAssetFactoryWorker<T> where T : Asset
+    public interface IAssetFactoryWorker
     {
-        T CreateAsset(BinaryAsset basset);
-        BinaryAsset SerializeAsset(T asset);
+        Asset CreateAsset(BinaryAsset basset);
+        BinaryAsset SerializeAsset(Asset asset);
         AssetType GetType();
     }
 

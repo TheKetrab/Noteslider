@@ -7,9 +7,13 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-    public class AssetTxtWorker : IAssetFactoryWorker<TxtAsset>
+    public class AssetTxtWorker : IAssetFactoryWorker
     {
-        public TxtAsset CreateAsset(BinaryAsset basset)
+        public AssetTxtWorker()
+        {
+
+        }
+        public Asset CreateAsset(BinaryAsset basset)
         {
             var asset = new TxtAsset()
             {
@@ -18,13 +22,14 @@ namespace Noteslider.Code.AssetFactoryDir
             return asset;
         }
 
-        public BinaryAsset SerializeAsset(TxtAsset asset)
+        public BinaryAsset SerializeAsset(Asset asset)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(asset.data);
+            var txtAsset = asset as TxtAsset;
+            byte[] bytes = Encoding.UTF8.GetBytes(txtAsset.data);
             return new BinaryAsset(asset.Type, bytes);
         }
 
-        AssetType IAssetFactoryWorker<TxtAsset>.GetType()
+        AssetType IAssetFactoryWorker.GetType()
         {
             return AssetType.TYPE_TXT;
         }

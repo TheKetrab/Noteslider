@@ -17,8 +17,8 @@ namespace Noteslider.Code.AssetFactoryDir
         private static AssetFactory _instance;
         private static object _lock = new object();
 
-        private Dictionary<AssetType,IAssetFactoryWorker<Asset>> _workers = 
-            new Dictionary<AssetType, IAssetFactoryWorker<Asset>>();
+        private Dictionary<AssetType, IAssetFactoryWorker> _workers =
+            new Dictionary<AssetType, IAssetFactoryWorker>();
 
         
         public static AssetFactory Instance
@@ -65,13 +65,13 @@ namespace Noteslider.Code.AssetFactoryDir
             }
         }
 
-        public void AddWorker<T>(IAssetFactoryWorker<T> worker) where T:Asset
+        public void AddWorker(IAssetFactoryWorker worker)
         {
             var type = worker.GetType();
             if (_workers.ContainsKey(type))
                 throw new ArgumentException();
 
-            _workers.Add(type, worker as IAssetFactoryWorker<Asset>);
+            _workers.Add(type, worker);
         }
 
 

@@ -7,19 +7,24 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-    public class AssetDocWorker : IAssetFactoryWorker<DocAsset>
+    public class AssetDocWorker : IAssetFactoryWorker
     {
-        public DocAsset CreateAsset(BinaryAsset basset)
+        public AssetDocWorker()
+        {
+
+        }
+
+        public Asset CreateAsset(BinaryAsset basset)
         {
             throw new NotImplementedException();
         }
 
-        public BinaryAsset SerializeAsset(DocAsset asset)
+        public BinaryAsset SerializeAsset(Asset asset)
         {
             throw new NotImplementedException();
         }
 
-        AssetType IAssetFactoryWorker<DocAsset>.GetType()
+        AssetType IAssetFactoryWorker.GetType()
         {
             return AssetType.TYPE_DOC;
         }

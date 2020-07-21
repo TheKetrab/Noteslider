@@ -16,8 +16,25 @@ namespace Noteslider.Model
 
 
     public abstract class Asset {
-        public AssetType Type { get; }
+        public AssetType Type { get; protected set; }
+
         public abstract void Render();
+
+        public static AssetType MatchAssetType(string extension)
+        {
+            switch(extension.ToLower())
+            {
+                case ".txt": return AssetType.TYPE_TXT;
+                case ".doc":
+                case ".docx": return AssetType.TYPE_DOC;
+                case ".jpg":
+                case ".jpeg": return AssetType.TYPE_JPG;
+                case ".png": return AssetType.TYPE_PNG;
+                case ".pdf": return AssetType.TYPE_PDF;
+            }
+
+            throw new ArgumentException();
+        }
     }
 
     /** IMAGE */
@@ -28,8 +45,10 @@ namespace Noteslider.Model
         }
     }
     public class JpgAsset : ImageAsset {
+        public JpgAsset() { Type = AssetType.TYPE_JPG; }
     }
     public class PngAsset : ImageAsset {
+        public PngAsset() { Type = AssetType.TYPE_PNG; }
     }
 
     /** TEXT */
@@ -41,13 +60,18 @@ namespace Noteslider.Model
         }
     }
     public class TxtAsset : TextAsset {
+        public TxtAsset() { Type = AssetType.TYPE_TXT; }
 
     }
-    public class DocAsset : TextAsset { }
+    public class DocAsset : TextAsset {
+        public DocAsset() { Type = AssetType.TYPE_DOC; }
+    }
 
     /** PDF */
     public class PdfAsset : Asset
     {
+        public PdfAsset() { Type = AssetType.TYPE_PDF; }
+
         public override void Render()
         {
             throw new NotImplementedException();

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Win32;
+using Noteslider.Code.AssetFactoryDir;
+using Noteslider.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -103,13 +105,12 @@ namespace Noteslider.Code
 
             Track track = new Track(type, author, name, image);
 
-            // CREATE DIRECTORY
-            var dir = new DirectoryInfo(Paths.Library);
-            Directory.CreateDirectory(track.GetTrackDirPath());
-
             // REGISTER
             RegisterTags(track);
-            RegisterData(track.GetTrackDirPath(),track);
+            RegisterData(track);
+
+            // SAVE TO FILE
+            track.WriteTrack();
 
             //EventAgregator.Instance.Publish<> publish new track event
 
@@ -130,23 +131,21 @@ namespace Noteslider.Code
         }
 
         /// <summary>
-        /// Collects info about data and copy it to specyfic directory.
+        /// Collects info about data and injects it into track's assets list.
         /// </summary>
-        public void RegisterData(string trackDirPath, Track track)
+        public void RegisterData(Track track)
         {
-            var dataPaths = dialog.NTDFiles.Items;
-            var mainPath = track.GetTrackDirPath();
+            var filePaths = dialog.NTDFiles.Items;
 
-            for (int i=0; i<dataPaths.Count; i++)
+            foreach (string file in filePaths)
             {
-                // COPY
-                string src = dataPaths[i].ToString();
-                string ext = new DirectoryInfo(src).Extension;
-                string dest = String.Format("{0}/data{1}{2}", mainPath, i, ext);
-                File.Copy(src, dest);
+                FileInfo fi = new FileInfo(file);
+                AssetType type = Asset.MatchAssetType(fi.Extension);
+                var bytes = File.ReadAllBytes(file);
 
-                // REGISTER
-                //track.Data.Add(dest);
+                var basset = new BinaryAsset(type, bytes);
+                var asset = AssetFactory.Instance.CreateAsset(basset);
+                track.Data.Add(asset);
             }
         }
 

@@ -10,9 +10,13 @@ using System.Windows.Media.Imaging;
 namespace Noteslider.Code.AssetFactoryDir
 {
 
-    public class AssetPngWorker : IAssetFactoryWorker<PngAsset>
+    public class AssetPngWorker : IAssetFactoryWorker
     {
-        public PngAsset CreateAsset(BinaryAsset basset)
+        public AssetPngWorker()
+        {
+
+        }
+        public Asset CreateAsset(BinaryAsset basset)
         {
             BitmapSource s = (BitmapSource)new ImageSourceConverter().ConvertFrom(basset.GetBytes());
             var asset = new PngAsset()
@@ -22,13 +26,14 @@ namespace Noteslider.Code.AssetFactoryDir
             return asset;
         }
 
-        public BinaryAsset SerializeAsset(PngAsset asset)
+        public BinaryAsset SerializeAsset(Asset asset)
         {
-            byte[] bytes = Program.PngToBytes(asset.data);
+            var pngAsset = asset as PngAsset;
+            byte[] bytes = Program.PngToBytes(pngAsset.data);
             return new BinaryAsset(AssetType.TYPE_PNG, bytes);
         }
 
-        AssetType IAssetFactoryWorker<PngAsset>.GetType()
+        AssetType IAssetFactoryWorker.GetType()
         {
             return AssetType.TYPE_PNG;
         }

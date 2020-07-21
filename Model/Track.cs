@@ -122,11 +122,11 @@ namespace Noteslider
 
 
         /// <summary>
-        /// Writes resources and .ns file to directory LIB/Author/Name/
+        /// Writes metadata and data to file: LIB/Name.ns
         /// </summary>
         public void WriteTrack()
         {
-            var path = string.Format("{0}/{1}.ns", Paths.Library, TrackInfo.Name);           
+            var path = GetTrackPath();           
             using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
             {
                 // TRACK INFO
@@ -153,9 +153,9 @@ namespace Noteslider
 
         }
 
-        public string GetTrackDirPath()
+        public string GetTrackPath()
         {
-            return Paths.Library + "/" + TrackInfo.Name;
+            return Paths.Library + "/" + TrackInfo.Name + ".ns";
         }
 
 

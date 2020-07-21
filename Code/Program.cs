@@ -16,14 +16,16 @@ namespace Noteslider.Code
 
         public static void MainFunc(StartupEventArgs e)
         {
+            // COMPOSITION ROOT
+            var worker1 = new AssetJpgWorker();
+            AssetFactory.Instance.AddWorker(worker1);
             var af = AssetFactory.Instance;
-            af.AddWorker(new AssetJpgWorker());
+//            af.AddWorker(new AssetJpgWorker());
             af.AddWorker(new AssetPngWorker());
             af.AddWorker(new AssetPdfWorker());
             af.AddWorker(new AssetTxtWorker());
             af.AddWorker(new AssetDocWorker());
 
-            // COMPOSITION ROOT
 
         }
 
