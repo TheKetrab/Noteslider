@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Noteslider.Code;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,10 @@ namespace Noteslider
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Program.MainFunc(e);
+        }
     }
 }

@@ -70,13 +70,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Code\AssetFactoryDir\AssetDocWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetFactory.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetJpgWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetPdfWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetPngWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetTxtWorker.cs" />
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
+    <Compile Include="Code\Program.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
     <Compile Include="Events\TrackEvents.cs" />
+    <Compile Include="Model\Asset.cs" />
+    <Compile Include="Model\BinaryAsset.cs" />
     <Compile Include="Model\Track.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

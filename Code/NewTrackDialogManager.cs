@@ -146,7 +146,7 @@ namespace Noteslider.Code
                 File.Copy(src, dest);
 
                 // REGISTER
-                track.Data.Add(dest);
+                //track.Data.Add(dest);
             }
         }
 

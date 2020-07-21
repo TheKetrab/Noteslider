@@ -10,7 +10,7 @@ namespace Noteslider.Model
 {
     public enum AssetType
     {
-        TYPE_TXT, TYPE_JPG, TYPE_PNG, TYPE_PDF
+        TYPE_TXT, TYPE_DOC, TYPE_JPG, TYPE_PNG, TYPE_PDF
     }
 
 
@@ -22,7 +22,7 @@ namespace Noteslider.Model
     public class PngAsset : ImageAsset { }
 
     /** TEXT */
-    public abstract class TextAsset { }
+    public abstract class TextAsset : Asset { }
     public class TxtAsset : TextAsset { }
     public class DocAsset : TextAsset { }
 
