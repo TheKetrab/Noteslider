@@ -8,11 +8,6 @@ using System.Threading.Tasks;
 namespace Noteslider.Code.AssetFactoryDir
 {
 
-    public interface IAssetFactoryWorker<T> where T:Asset
-    {
-        T CreateAsset(BinaryAsset basset);
-        AssetType GetType();
-    }
 
     /// <summary>
     /// Interpretes binary asset using worker and creates real assets (images, text files, pdf, ...)
