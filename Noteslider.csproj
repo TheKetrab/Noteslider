@@ -52,6 +52,10 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Common, Version=4.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Drawing.Common.4.7.0\lib\net461\System.Drawing.Common.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -81,6 +85,7 @@
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
     <Compile Include="Code\Program.cs" />
+    <Compile Include="Code\TrackRenderer.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
@@ -135,6 +140,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

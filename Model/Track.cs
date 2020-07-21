@@ -1,4 +1,5 @@
 ﻿using Noteslider.Code;
+using Noteslider.Code.AssetFactoryDir;
 using Noteslider.Model;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ namespace Noteslider
         public TrackInfo TrackInfo { get; set; }
         public TrackType Type { get; set; }
         public List<string> Tags;
-        public List<BinaryAsset> Data;
+        public List<Asset> Data;
 
 
         public Track(TrackType type, string author, string name, string imgPath) 
@@ -52,7 +53,7 @@ namespace Noteslider
         {
             TrackInfo = new TrackInfo();
             Tags = new List<string>();
-            Data = new List<BinaryAsset>();
+            Data = new List<Asset>();
         }
 
         public static TrackType GetTrackType(int num)
@@ -93,7 +94,8 @@ namespace Noteslider
                 for (int i = 0; i < dataCnt; i++)
                 {
                     var basset = BinaryAsset.ReadBinaryAsset(reader);
-                    t.Data.Add(basset);
+                    var asset = AssetFactory.Instance.CreateAsset(basset);
+                    t.Data.Add(asset);
                 }
 
             }
@@ -142,8 +144,11 @@ namespace Noteslider
 
                 // DATA
                 writer.Write(Data.Count);
-                foreach (var d in Data)
-                    d.WriteBinaryAsset(writer);
+                foreach (var asset in Data)
+                {
+                    var basset = AssetFactory.Instance.SerializeAsset(asset);
+                    basset.WriteBinaryAsset(writer);
+                }
             }
 
         }

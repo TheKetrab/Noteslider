@@ -15,6 +15,11 @@ namespace Noteslider.Code.AssetFactoryDir
             throw new NotImplementedException();
         }
 
+        public BinaryAsset SerializeAsset(PdfAsset asset)
+        {
+            throw new NotImplementedException();
+        }
+
         AssetType IAssetFactoryWorker<PdfAsset>.GetType()
         {
             return AssetType.TYPE_PDF;

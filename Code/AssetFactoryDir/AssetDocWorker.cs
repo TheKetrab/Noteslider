@@ -14,6 +14,11 @@ namespace Noteslider.Code.AssetFactoryDir
             throw new NotImplementedException();
         }
 
+        public BinaryAsset SerializeAsset(DocAsset asset)
+        {
+            throw new NotImplementedException();
+        }
+
         AssetType IAssetFactoryWorker<DocAsset>.GetType()
         {
             return AssetType.TYPE_DOC;

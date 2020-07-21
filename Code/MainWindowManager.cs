@@ -14,7 +14,9 @@ namespace Noteslider.Events
         , ISubscriber<MainWindowMenuPlayEvt>
         , ISubscriber<MainWindowMenuSettingsEvt>
     {
+        TrackRenderer renderer;
         DockPanel panel;
+
         public MainWindowManager(DockPanel panel)
         {
             this.panel = panel;
@@ -41,5 +43,6 @@ namespace Noteslider.Events
         {
             throw new NotImplementedException();
         }
+
     }
 }

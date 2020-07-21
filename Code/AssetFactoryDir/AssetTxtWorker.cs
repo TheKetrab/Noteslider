@@ -11,7 +11,17 @@ namespace Noteslider.Code.AssetFactoryDir
     {
         public TxtAsset CreateAsset(BinaryAsset basset)
         {
-            throw new NotImplementedException();
+            var asset = new TxtAsset()
+            {
+                data = Encoding.UTF8.GetString(basset.GetBytes())
+            };
+            return asset;
+        }
+
+        public BinaryAsset SerializeAsset(TxtAsset asset)
+        {
+            byte[] bytes = Encoding.UTF8.GetBytes(asset.data);
+            return new BinaryAsset(asset.Type, bytes);
         }
 
         AssetType IAssetFactoryWorker<TxtAsset>.GetType()

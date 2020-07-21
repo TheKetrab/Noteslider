@@ -13,23 +13,34 @@ namespace Noteslider.Model
     public class BinaryAsset
     {
         private byte[] bytes;
-        public int Length { get { return bytes.Length; } }
+        public Int64 Length { get { return bytes.Length; } }
         public AssetType Type { get; }
 
-        private BinaryAsset(AssetType type, byte[] bytes)
+        public BinaryAsset(AssetType type, byte[] bytes)
         {
             this.bytes = bytes;
             this.Type = type;
         }
 
+        public byte[] GetBytes() { return bytes; }
+
         public void WriteBinaryAsset(BinaryWriter writer)
         {
-            throw new NotImplementedException(); // TODO
+            writer.Write((int)Type);
+            writer.Write(Length);
+            foreach (byte b in bytes) writer.Write(b);
         }
 
         public static BinaryAsset ReadBinaryAsset(BinaryReader reader)
         {
-            throw new NotImplementedException(); // TODO
+            AssetType type = (AssetType)reader.ReadInt32();
+            Int64 len = reader.ReadInt64();
+            byte[] bytes = new byte[len];
+
+            for (Int64 i = 0; i < len; i++)
+                bytes[i] = reader.ReadByte();
+
+            return new BinaryAsset(type,bytes);
         }
 
     }

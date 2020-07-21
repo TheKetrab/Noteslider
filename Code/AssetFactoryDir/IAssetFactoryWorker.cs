@@ -10,6 +10,7 @@ namespace Noteslider.Code.AssetFactoryDir
     public interface IAssetFactoryWorker<T> where T : Asset
     {
         T CreateAsset(BinaryAsset basset);
+        BinaryAsset SerializeAsset(T asset);
         AssetType GetType();
     }
 

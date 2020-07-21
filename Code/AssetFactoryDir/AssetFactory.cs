@@ -39,11 +39,25 @@ namespace Noteslider.Code.AssetFactoryDir
             }
         }
 
-        public Asset CreateAsset(AssetType type, BinaryAsset basset)
+        public Asset CreateAsset(BinaryAsset basset)
         {
+            var type = basset.Type;
             if (_workers.ContainsKey(type))
             {
                 return _workers[type].CreateAsset(basset);
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        public BinaryAsset SerializeAsset(Asset a)
+        {
+            var type = a.Type;
+            if (_workers.ContainsKey(type))
+            {
+                return _workers[type].SerializeAsset(a);
             }
             else
             {

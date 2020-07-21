@@ -23,6 +23,7 @@ namespace Noteslider
     {
         private MainWindowManager notifier;
 
+
         public MainWindow()
         {
             InitializeComponent();
