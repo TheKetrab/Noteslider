@@ -1,4 +1,5 @@
 ﻿using Noteslider.Code;
+using Noteslider.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,6 +13,7 @@ namespace Noteslider
     {
         TYPE_TEXT, TYPE_IMAGE, TYPE_PDF, TYPE_UNDEFINED
     }
+    
 
     public class TrackInfo
     {
@@ -26,7 +28,7 @@ namespace Noteslider
         public TrackInfo TrackInfo { get; set; }
         public TrackType Type { get; set; }
         public List<string> Tags;
-        public List<string> Data;
+        public List<BinaryAsset> Data;
 
 
         public Track(TrackType type, string author, string name, string imgPath) 
@@ -50,7 +52,7 @@ namespace Noteslider
         {
             TrackInfo = new TrackInfo();
             Tags = new List<string>();
-            Data = new List<string>();
+            Data = new List<BinaryAsset>();
         }
 
         public static TrackType GetTrackType(int num)
@@ -88,7 +90,12 @@ namespace Noteslider
 
                 // DATA
                 int dataCnt = reader.ReadInt32();
-                for (int i = 0; i < dataCnt; i++) t.Data.Add(reader.ReadString());
+                for (int i = 0; i < dataCnt; i++)
+                {
+                    var basset = BinaryAsset.ReadBinaryAsset(reader);
+                    t.Data.Add(basset);
+                }
+
             }
 
             return t;
@@ -117,7 +124,7 @@ namespace Noteslider
         /// </summary>
         public void WriteTrack()
         {
-            var path = String.Format("{0}/{1}/{2}.ns", Paths.Library, TrackInfo.Name, TrackInfo.Name);           
+            var path = string.Format("{0}/{1}.ns", Paths.Library, TrackInfo.Name);           
             using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
             {
                 // TRACK INFO
@@ -135,7 +142,8 @@ namespace Noteslider
 
                 // DATA
                 writer.Write(Data.Count);
-                foreach (var d in Data) writer.Write(d);
+                foreach (var d in Data)
+                    d.WriteBinaryAsset(writer);
             }
 
         }
