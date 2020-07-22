@@ -75,21 +75,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Code\AssetFactoryDir\AssetDocWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetFactory.cs" />
+    <Compile Include="Code\AssetFactoryDir\AssetStringWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\_AssetFactory.cs" />
     <Compile Include="Code\AssetFactoryDir\AssetJpgWorker.cs" />
     <Compile Include="Code\AssetFactoryDir\AssetPdfWorker.cs" />
     <Compile Include="Code\AssetFactoryDir\AssetPngWorker.cs" />
     <Compile Include="Code\AssetFactoryDir\AssetTxtWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\IAssetFactoryWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\_IAssetFactoryWorker.cs" />
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
     <Compile Include="Code\Program.cs" />
-    <Compile Include="Code\Render\IAssetRenderer.cs" />
-    <Compile Include="Code\Render\ImageAssetRenderer.cs" />
-    <Compile Include="Code\Render\PdfAssetRenderer.cs" />
-    <Compile Include="Code\Render\TextAssetRenderer.cs" />
-    <Compile Include="Code\Render\TrackRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRenderer\AssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\_AssetRendererFactory.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\_IAssetRendererWorker.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\ImageAssetRendererWorker.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\PdfAssetRendererWorker.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\TextAssetRendererWorker.cs" />
+    <Compile Include="Code\Renderer\AssetRenderer\ImageAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRenderer\PdfAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRenderer\TextAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\TrackRenderer.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />

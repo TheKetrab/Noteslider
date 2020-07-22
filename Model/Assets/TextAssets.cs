@@ -17,4 +17,9 @@ namespace Noteslider.Model.Assets
     {
         public DocAsset() { Type = AssetType.TYPE_DOC; }
     }
+
+    public class StringAsset : TextAsset
+    {
+        public StringAsset() { Type = AssetType.TYPE_UNKNOWN;  }
+    }
 }

@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Noteslider.Code.Render
+namespace Noteslider.Code.Renderer
 {
-    public interface IAssetRenderer
+    public interface IAssetRendererWorker
     {
-        void Render(Asset a, params object[] p);
+        AssetRenderer CreateInstance(Asset asset);
+        Type GetRendererType();
     }
 }

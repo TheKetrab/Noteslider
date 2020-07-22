@@ -31,16 +31,23 @@ namespace Noteslider.Code
             dialog.NTDNextButton.Click += (s, e) => { SetPage(page + 1); };
             dialog.NTDPrevButton.Click += (s, e) => { SetPage(page - 1); };
 
+            dialog.NTDImageButton.Click += (s, e) =>
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+                // start dialog
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    string path = openFileDialog.FileName;
+                    dialog.NTDImage.Text = path;
+                }
+
+            };
+
             dialog.NTDFilesAdd.Click += (s, e) =>
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
-
-                // type?
-                var type = Track.GetTrackType(dialog.NTDType.SelectedIndex);
-                if (type == TrackType.TYPE_TEXT) openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
-                if (type == TrackType.TYPE_IMAGE) openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
-                if (type == TrackType.TYPE_PDF) openFileDialog.Filter = "PDF Files(*.pdf)|*.pdf|All Files(*.*)|*.*";
-
                 // start dialog
                 if (openFileDialog.ShowDialog() == true)
                 {
@@ -98,12 +105,12 @@ namespace Noteslider.Code
         /// </summary>
         public void CreateTrack()
         {
-            var type = Track.GetTrackType(dialog.NTDType.SelectedIndex);
+            
             var author = dialog.NTDAuthor.Text;
             var name = dialog.NTDTitle.Text;
             var image = dialog.NTDImage.Text;
 
-            Track track = new Track(type, author, name, image);
+            Track track = new Track(author, name, image);
 
             // REGISTER
             RegisterTags(track);

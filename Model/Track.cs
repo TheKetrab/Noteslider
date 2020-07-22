@@ -10,12 +10,6 @@ using System.Threading.Tasks;
 
 namespace Noteslider
 {
-    public enum TrackType
-    {
-        TYPE_TEXT, TYPE_IMAGE, TYPE_PDF, TYPE_UNDEFINED
-    }
-    
-
     public class TrackInfo
     {
         public string Name { get; set; }
@@ -27,13 +21,12 @@ namespace Noteslider
     public class Track
     {
         public TrackInfo TrackInfo { get; set; }
-        public TrackType Type { get; set; }
         public List<string> Tags;
         public List<Asset> Data;
 
 
-        public Track(TrackType type, string author, string name, string imgPath) 
-            : this(type)
+        public Track(string author, string name, string imgPath) 
+            : this()
         {
             TrackInfo.Author = author;
             TrackInfo.Name = name;
@@ -41,10 +34,7 @@ namespace Noteslider
             TrackInfo.Length = 0; // TODO
         }
 
-        public Track(TrackType type) : this()
-        {
-            Type = type;
-        }
+
 
         /// <summary>
         /// Only to create track using ReadTrack
@@ -56,14 +46,6 @@ namespace Noteslider
             Data = new List<Asset>();
         }
 
-        public static TrackType GetTrackType(int num)
-        {
-            if (num == 0) return TrackType.TYPE_TEXT;
-            if (num == 1) return TrackType.TYPE_IMAGE;
-            if (num == 2) return TrackType.TYPE_PDF;
-            return TrackType.TYPE_UNDEFINED;
-
-        }
 
         /// <summary>
         /// 
@@ -80,10 +62,6 @@ namespace Noteslider
                 t.TrackInfo.Author = reader.ReadString();
                 t.TrackInfo.Image = reader.ReadString();
                 t.TrackInfo.Length = reader.ReadInt32();
-
-                // TYPE
-                byte b = reader.ReadByte();
-                t.Type = (TrackType)b;
 
                 // TAGS
                 int tagsCnt = reader.ReadInt32();
@@ -134,9 +112,6 @@ namespace Noteslider
                 writer.Write(TrackInfo.Author);
                 writer.Write(TrackInfo.Image);
                 writer.Write(TrackInfo.Length);
-
-                // TYPE
-                writer.Write((byte)Type);
 
                 // TAGS
                 writer.Write(Tags.Count);

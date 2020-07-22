@@ -46,9 +46,9 @@
         </TabControl>
 
         <ScrollViewer 
-            x:Name="TrackRenderArea"
+            x:Name="ScrollViewer"
             VerticalScrollBarVisibility="Auto" 
-            HorizontalScrollBarVisibility="Disabled" 
+            HorizontalScrollBarVisibility="Auto" 
             HorizontalAlignment="Stretch" 
             VerticalAlignment="Stretch" 
             Grid.Column="1" Grid.Row="1" 

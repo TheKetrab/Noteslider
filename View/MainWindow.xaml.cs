@@ -1,4 +1,6 @@
-﻿using Noteslider.Events;
+﻿using Noteslider.Code.Renderer;
+using Noteslider.Events;
+using Noteslider.Model.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,8 +42,15 @@ namespace Noteslider
             EventAgregator.Instance.AddSubscriber<MainWindowMenuSettingsEvt>(notifier);
         }
 
+        protected override void OnRender(DrawingContext drawingContext)
+        {
+            base.OnRender(drawingContext);
+            //TrackRenderer.Instance.Render(); TODO
+        }
+
         public void InitEvents()
         {
+
             MainWindowMenuNewTrackButton.Click += 
                 (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };
             MainWindowMenuOpenTrackButton.Click += 

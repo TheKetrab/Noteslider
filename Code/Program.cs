@@ -1,4 +1,6 @@
 ﻿using Noteslider.Code.AssetFactoryDir;
+using Noteslider.Code.Renderer;
+using Noteslider.Model.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,26 +9,41 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Noteslider.Code
 {
 
     public class Program
     {
+        public static MainWindow Window
+        {
+            get
+            {
+                return (MainWindow)Application.Current.MainWindow;
+            }
+        }
 
         public static void MainFunc(StartupEventArgs e)
         {
-            // COMPOSITION ROOT
-            var worker1 = new AssetJpgWorker();
-            AssetFactory.Instance.AddWorker(worker1);
+            /** ----- ----- -----
+             * COMPOSITION ROOT *
+             * ----- ----- ----- */
+
+            // REGISTER ASSET FACTORY
             var af = AssetFactory.Instance;
-//            af.AddWorker(new AssetJpgWorker());
+            af.AddWorker(new AssetJpgWorker());
             af.AddWorker(new AssetPngWorker());
             af.AddWorker(new AssetPdfWorker());
             af.AddWorker(new AssetTxtWorker());
             af.AddWorker(new AssetDocWorker());
+            af.AddWorker(new AssetStringWorker());
 
-
+            // REGISTER RENDERERS
+            var arf = AssetRendererFactory.Instance;
+            arf.SetRendererProvider<TextAsset>(new TextAssetRendererWorker());
+            arf.SetRendererProvider<ImageAsset>(new ImageAssetRendererWorker());
+            arf.SetRendererProvider<PdfAsset>(new PdfAssetRendererWorker());
         }
 
         public static byte[] JpgToBytes(BitmapSource source)
@@ -49,5 +66,18 @@ namespace Noteslider.Code
         }
 
 
+    }
+
+    public static class ExtensionMethods
+
+    {
+        private static Action EmptyDelegate = delegate () { };
+
+
+        public static void Refresh(this UIElement uiElement)
+
+        {
+            uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+        }
     }
 }
