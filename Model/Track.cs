@@ -22,7 +22,7 @@ namespace Noteslider
     {
         public TrackInfo TrackInfo { get; set; }
         public List<string> Tags;
-        public List<Asset> Data;
+        public List<Asset> Assets;
 
 
         public Track(string author, string name, string imgPath) 
@@ -43,7 +43,7 @@ namespace Noteslider
         {
             TrackInfo = new TrackInfo();
             Tags = new List<string>();
-            Data = new List<Asset>();
+            Assets = new List<Asset>();
         }
 
 
@@ -73,7 +73,7 @@ namespace Noteslider
                 {
                     var basset = BinaryAsset.ReadBinaryAsset(reader);
                     var asset = AssetFactory.Instance.CreateAsset(basset);
-                    t.Data.Add(asset);
+                    t.Assets.Add(asset);
                 }
 
             }
@@ -117,9 +117,9 @@ namespace Noteslider
                 writer.Write(Tags.Count);
                 foreach (var t in Tags) writer.Write(t);
 
-                // DATA
-                writer.Write(Data.Count);
-                foreach (var asset in Data)
+                // ASSETS
+                writer.Write(Assets.Count);
+                foreach (var asset in Assets)
                 {
                     var basset = AssetFactory.Instance.SerializeAsset(asset);
                     basset.WriteBinaryAsset(writer);

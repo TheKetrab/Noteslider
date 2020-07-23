@@ -1,34 +1,36 @@
 ﻿using Noteslider.Code.Renderer;
 using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
+using System.Windows.Documents;
 
 namespace Noteslider.Model.Assets
 {
-    public enum AssetType
-    {
-        TYPE_TXT, TYPE_DOC, TYPE_JPG, TYPE_PNG, TYPE_PDF, TYPE_UNKNOWN
-    }
-
 
     public abstract class Asset {
-        public AssetType Type { get; protected set; }
-        public AssetRenderer Renderer;
 
-        public static AssetType MatchAssetType(string extension)
+        private static Dictionary<string, Type> _extensions =
+            new Dictionary<string, Type>();
+
+        public string GetAssetType()
         {
-            switch(extension.ToLower())
-            {
-                case ".txt": return AssetType.TYPE_TXT;
-                case ".doc":
-                case ".docx": return AssetType.TYPE_DOC;
-                case ".jpg":
-                case ".jpeg": return AssetType.TYPE_JPG;
-                case ".png": return AssetType.TYPE_PNG;
-                case ".pdf": return AssetType.TYPE_PDF;
-                default: return AssetType.TYPE_UNKNOWN;
-            }
+            return this.GetType().Name;
+        }
 
-            throw new ArgumentException();
+        public static void RegisterExtension<T>(string extension) where T:Asset
+        {
+            if (extension.Length < 2 || extension[0] != '.')
+                throw new ArgumentException("Extension should have format '.x'");
+
+            _extensions[extension.ToLower()] = typeof(T);
+        }
+
+        public static Type GetAssetType(string extension)
+        {
+            if (_extensions.ContainsKey(extension))
+                return _extensions[extension];
+            else
+                throw new ArgumentException();
         }
     }
 

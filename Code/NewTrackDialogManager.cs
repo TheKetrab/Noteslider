@@ -114,7 +114,7 @@ namespace Noteslider.Code
 
             // REGISTER
             RegisterTags(track);
-            RegisterData(track);
+            RegisterAssets(track);
 
             // SAVE TO FILE
             track.WriteTrack();
@@ -140,19 +140,18 @@ namespace Noteslider.Code
         /// <summary>
         /// Collects info about data and injects it into track's assets list.
         /// </summary>
-        public void RegisterData(Track track)
+        public void RegisterAssets(Track track)
         {
             var filePaths = dialog.NTDFiles.Items;
-
             foreach (string file in filePaths)
             {
                 FileInfo fi = new FileInfo(file);
-                AssetType type = Asset.MatchAssetType(fi.Extension);
+                Type type = Asset.GetAssetType(fi.Extension);
                 var bytes = File.ReadAllBytes(file);
 
                 var basset = new BinaryAsset(type, bytes);
                 var asset = AssetFactory.Instance.CreateAsset(basset);
-                track.Data.Add(asset);
+                track.Assets.Add(asset);
             }
         }
 

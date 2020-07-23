@@ -11,7 +11,7 @@ namespace Noteslider.Code.AssetFactoryDir
     {
         Asset CreateAsset(BinaryAsset basset);
         BinaryAsset SerializeAsset(Asset asset);
-        AssetType GetType();
+        Type GetAssetType();
     }
 
 }

@@ -13,27 +13,30 @@ namespace Noteslider.Model.Assets
     public class BinaryAsset
     {
         private byte[] bytes;
+        public Type AssetType { get; private set; }
         public Int64 Length { get { return bytes.Length; } }
-        public AssetType Type { get; }
 
-        public BinaryAsset(AssetType type, byte[] bytes)
+
+        public BinaryAsset(Type assetType, byte[] bytes)
         {
+            this.AssetType = assetType;
             this.bytes = bytes;
-            this.Type = type;
         }
 
         public byte[] GetBytes() { return bytes; }
 
         public void WriteBinaryAsset(BinaryWriter writer)
         {
-            writer.Write((int)Type);
+            string strType = AssetTypeToString(AssetType);
+            writer.Write(strType);
             writer.Write(Length);
             foreach (byte b in bytes) writer.Write(b);
         }
 
         public static BinaryAsset ReadBinaryAsset(BinaryReader reader)
         {
-            AssetType type = (AssetType)reader.ReadInt32();
+            string strType = reader.ReadString();
+            Type type = ResolveAssetType(strType);
             Int64 len = reader.ReadInt64();
             byte[] bytes = new byte[len];
 
@@ -42,6 +45,17 @@ namespace Noteslider.Model.Assets
 
             return new BinaryAsset(type,bytes);
         }
+
+        public static string AssetTypeToString(Type type)
+        {
+            return type.FullName;
+        }
+
+        public static Type ResolveAssetType(string strType)
+        {
+            return Type.GetType(strType);
+        }
+
 
     }
 }

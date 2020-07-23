@@ -7,13 +7,8 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-
-    public class AssetPdfWorker : IAssetFactoryWorker
+    public class StringAssetWorker : IAssetFactoryWorker
     {
-        public AssetPdfWorker()
-        {
-
-        }
         public Asset CreateAsset(BinaryAsset basset)
         {
             throw new NotImplementedException();
@@ -24,9 +19,9 @@ namespace Noteslider.Code.AssetFactoryDir
             throw new NotImplementedException();
         }
 
-        AssetType IAssetFactoryWorker.GetType()
+        public Type GetAssetType()
         {
-            return AssetType.TYPE_PDF;
+            return typeof(StringAsset);
         }
     }
 }

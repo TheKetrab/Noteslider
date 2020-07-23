@@ -10,16 +10,16 @@ namespace Noteslider.Model.Assets
     }
     public class TxtAsset : TextAsset
     {
-        public TxtAsset() { Type = AssetType.TYPE_TXT; }
+        public TxtAsset() { }
 
     }
     public class DocAsset : TextAsset
     {
-        public DocAsset() { Type = AssetType.TYPE_DOC; }
+        public DocAsset() { }
     }
 
     public class StringAsset : TextAsset
     {
-        public StringAsset() { Type = AssetType.TYPE_UNKNOWN;  }
+        public StringAsset() { }
     }
 }

@@ -41,7 +41,7 @@ namespace Noteslider.Events
             var strAsset = new StringAsset();
             strAsset.data = "blablabla";
 
-            track.Data.Add(strAsset);
+            track.Assets.Add(strAsset);
 
             var renderer = AssetRendererFactory.Instance.Create(strAsset);
         }

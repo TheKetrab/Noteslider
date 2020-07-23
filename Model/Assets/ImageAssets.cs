@@ -10,11 +10,11 @@ namespace Noteslider.Model.Assets
     }
     public class JpgAsset : ImageAsset
     {
-        public JpgAsset() { Type = AssetType.TYPE_JPG; }
+        public JpgAsset() {  }
     }
     public class PngAsset : ImageAsset
     {
-        public PngAsset() { Type = AssetType.TYPE_PNG; }
+        public PngAsset() { }
     }
 
 }

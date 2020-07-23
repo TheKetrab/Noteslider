@@ -45,6 +45,7 @@ namespace Noteslider.Code.Renderer
             return _renderers[type]?.CreateInstance(asset);
         }
 
+
         private Type GetContainedType(Type type)
         {
             if (type.BaseType == null) return null;

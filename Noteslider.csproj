@@ -74,27 +74,28 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\AssetFactoryDir\AssetDocWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetStringWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\DocAssetWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\StringAssetWorker.cs" />
     <Compile Include="Code\AssetFactoryDir\_AssetFactory.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetJpgWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetPdfWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetPngWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\AssetTxtWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\JpgAssetWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\PdfAssetWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\PngAssetWorker.cs" />
+    <Compile Include="Code\AssetFactoryDir\TxtAssetWorker.cs" />
     <Compile Include="Code\AssetFactoryDir\_IAssetFactoryWorker.cs" />
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
     <Compile Include="Code\Program.cs" />
-    <Compile Include="Code\Renderer\AssetRenderer\AssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRendererFactory\_AssetRendererWorker.cs" />
+    <Compile Include="Code\Renderer\AssetRendererUI\AssetRenderer.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\_AssetRendererFactory.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\_IAssetRendererWorker.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\ImageAssetRendererWorker.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\PdfAssetRendererWorker.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\TextAssetRendererWorker.cs" />
-    <Compile Include="Code\Renderer\AssetRenderer\ImageAssetRenderer.cs" />
-    <Compile Include="Code\Renderer\AssetRenderer\PdfAssetRenderer.cs" />
-    <Compile Include="Code\Renderer\AssetRenderer\TextAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRendererUI\ImageAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRendererUI\PdfAssetRenderer.cs" />
+    <Compile Include="Code\Renderer\AssetRendererUI\TextAssetRenderer.cs" />
     <Compile Include="Code\Renderer\TrackRenderer.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />

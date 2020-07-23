@@ -11,5 +11,6 @@ namespace Noteslider.Code.Renderer
     {
         AssetRenderer CreateInstance(Asset asset);
         Type GetRendererType();
+        bool ResponsibleFor(string extension);
     }
 }

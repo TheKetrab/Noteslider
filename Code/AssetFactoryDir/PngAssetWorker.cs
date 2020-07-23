@@ -1,27 +1,25 @@
 ﻿using Noteslider.Model.Assets;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Imaging;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-    public class AssetJpgWorker : IAssetFactoryWorker
+
+    public class PngAssetWorker : IAssetFactoryWorker
     {
-        public AssetJpgWorker()
+        public PngAssetWorker()
         {
 
         }
         public Asset CreateAsset(BinaryAsset basset)
         {
             BitmapSource s = (BitmapSource)new ImageSourceConverter().ConvertFrom(basset.GetBytes());
-            var asset = new JpgAsset()
+            var asset = new PngAsset()
             {
                 data = s
             };
@@ -30,16 +28,14 @@ namespace Noteslider.Code.AssetFactoryDir
 
         public BinaryAsset SerializeAsset(Asset asset)
         {
-            var jpgAsset = asset as JpgAsset;
-            byte[] bytes = Program.JpgToBytes(jpgAsset.data);
-            return new BinaryAsset(AssetType.TYPE_JPG, bytes);
+            var pngAsset = asset as PngAsset;
+            byte[] bytes = Program.PngToBytes(pngAsset.data);
+            return new BinaryAsset(GetAssetType(), bytes);
         }
 
-        AssetType IAssetFactoryWorker.GetType()
+        public Type GetAssetType()
         {
-            return AssetType.TYPE_JPG;
+            return typeof(PngAsset);
         }
     }
-
-
 }

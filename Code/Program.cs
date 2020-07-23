@@ -32,18 +32,35 @@ namespace Noteslider.Code
 
             // REGISTER ASSET FACTORY
             var af = AssetFactory.Instance;
-            af.AddWorker(new AssetJpgWorker());
-            af.AddWorker(new AssetPngWorker());
-            af.AddWorker(new AssetPdfWorker());
-            af.AddWorker(new AssetTxtWorker());
-            af.AddWorker(new AssetDocWorker());
-            af.AddWorker(new AssetStringWorker());
+            af.AddWorker(new JpgAssetWorker());
+            af.AddWorker(new PngAssetWorker());
+            af.AddWorker(new PdfAssetWorker());
+            af.AddWorker(new TxtAssetWorker());
+            af.AddWorker(new DocAssetWorker());
+            af.AddWorker(new StringAssetWorker());
 
             // REGISTER RENDERERS
             var arf = AssetRendererFactory.Instance;
             arf.SetRendererProvider<TextAsset>(new TextAssetRendererWorker());
             arf.SetRendererProvider<ImageAsset>(new ImageAssetRendererWorker());
             arf.SetRendererProvider<PdfAsset>(new PdfAssetRendererWorker());
+
+
+            Asset.RegisterExtension<TxtAsset>(".txt");
+            Asset.RegisterExtension<DocAsset>(".doc");
+            Asset.RegisterExtension<DocAsset>(".docx");
+            Asset.RegisterExtension<JpgAsset>(".jpg");
+            Asset.RegisterExtension<PngAsset>(".png");
+            Asset.RegisterExtension<PdfAsset>(".pdf");
+
+            /*
+                        AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".jpg");
+                        AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".png");
+                        AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".txt");
+                        AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".doc");
+                        AssetRendererWorker.AddExtension<PdfAssetRendererWorker>(".pdf");
+            */
+
         }
 
         public static byte[] JpgToBytes(BitmapSource source)

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.AssetFactoryDir
 {
-    public class AssetDocWorker : IAssetFactoryWorker
+    public class DocAssetWorker : IAssetFactoryWorker
     {
-        public AssetDocWorker()
+        public DocAssetWorker()
         {
 
         }
@@ -24,9 +24,9 @@ namespace Noteslider.Code.AssetFactoryDir
             throw new NotImplementedException();
         }
 
-        AssetType IAssetFactoryWorker.GetType()
+        public Type GetAssetType()
         {
-            return AssetType.TYPE_DOC;
+            return typeof(DocAsset);
         }
     }
 }
