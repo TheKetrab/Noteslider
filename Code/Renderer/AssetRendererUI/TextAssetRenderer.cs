@@ -1,4 +1,4 @@
-﻿using Noteslider.Model.Assets;
+﻿using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,6 @@ namespace Noteslider.Code.Renderer
     public class TextAssetRenderer : AssetRenderer
     {
         Label label;
-
 
         public TextAssetRenderer(Asset asset) : base(asset) 
         {

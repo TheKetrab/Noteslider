@@ -1,6 +1,6 @@
 ﻿using Noteslider.Code;
 using Noteslider.Code.Renderer;
-using Noteslider.Model.Assets;
+using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,8 +38,7 @@ namespace Noteslider.Events
         public void Handle(MainWindowMenuPlayEvt Notification)
         {
             var track = new Track("aut","nam","imp");
-            var strAsset = new StringAsset();
-            strAsset.data = "blablabla";
+            var strAsset = new TextAsset("blablabla");
 
             track.Assets.Add(strAsset);
 

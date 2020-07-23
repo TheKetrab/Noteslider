@@ -1,6 +1,6 @@
-﻿using Noteslider.Code.AssetFactoryDir;
+﻿
 using Noteslider.Code.Renderer;
-using Noteslider.Model.Assets;
+using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Media;
 
 namespace Noteslider.Code
 {
@@ -30,14 +32,7 @@ namespace Noteslider.Code
              * COMPOSITION ROOT *
              * ----- ----- ----- */
 
-            // REGISTER ASSET FACTORY
-            var af = AssetFactory.Instance;
-            af.AddWorker(new JpgAssetWorker());
-            af.AddWorker(new PngAssetWorker());
-            af.AddWorker(new PdfAssetWorker());
-            af.AddWorker(new TxtAssetWorker());
-            af.AddWorker(new DocAssetWorker());
-            af.AddWorker(new StringAssetWorker());
+            
 
             // REGISTER RENDERERS
             var arf = AssetRendererFactory.Instance;
@@ -46,22 +41,44 @@ namespace Noteslider.Code
             arf.SetRendererProvider<PdfAsset>(new PdfAssetRendererWorker());
 
 
-            Asset.RegisterExtension<TxtAsset>(".txt");
-            Asset.RegisterExtension<DocAsset>(".doc");
-            Asset.RegisterExtension<DocAsset>(".docx");
-            Asset.RegisterExtension<JpgAsset>(".jpg");
-            Asset.RegisterExtension<PngAsset>(".png");
-            Asset.RegisterExtension<PdfAsset>(".pdf");
+            AssetConverter.RegisterExtension<TextAsset>(".txt");
+            AssetConverter.RegisterExtension<DocAsset>(".doc");
+            AssetConverter.RegisterExtension<DocAsset>(".docx");
+            AssetConverter.RegisterExtension<JpgAsset>(".jpg");
+            AssetConverter.RegisterExtension<PngAsset>(".png");
+            AssetConverter.RegisterExtension<PdfAsset>(".pdf");
 
-            /*
-                        AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".jpg");
-                        AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".png");
-                        AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".txt");
-                        AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".doc");
-                        AssetRendererWorker.AddExtension<PdfAssetRendererWorker>(".pdf");
-            */
+            AssetConverter.RegisterConversionTo<TextAsset>((basset) =>
+            {
+                var text = Encoding.UTF8.GetString(basset.Bytes);
+                return new TextAsset(text);
+            });
 
-        }
+            AssetConverter.RegisterConversionTo<PngAsset>((basset) =>
+            {
+                var data = (BitmapSource) new ImageSourceConverter()
+                    .ConvertFrom(basset.Bytes);
+                return new PngAsset(data);
+            });
+
+            AssetConverter.RegisterConversionTo<JpgAsset>((basset) =>
+            {
+                var data = (BitmapSource) new ImageSourceConverter()
+                    .ConvertFrom(basset.Bytes);
+                return new JpgAsset(data);
+            });
+
+
+
+        /*
+                    AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".jpg");
+                    AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".png");
+                    AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".txt");
+                    AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".doc");
+                    AssetRendererWorker.AddExtension<PdfAssetRendererWorker>(".pdf");
+        */
+
+    }
 
         public static byte[] JpgToBytes(BitmapSource source)
         {
@@ -81,6 +98,7 @@ namespace Noteslider.Code
             encoder.Save(stream);
             return stream.ToArray();
         }
+
 
 
     }

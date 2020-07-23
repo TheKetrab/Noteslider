@@ -1,4 +1,4 @@
-﻿using Noteslider.Model.Assets;
+﻿using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Noteslider.Code.Renderer
     {
         public override AssetRenderer CreateInstance(Asset asset)
         {
-            return new ImageAssetRenderer(asset);
+            throw new NotImplementedException();
         }
 
         public override Type GetRendererType()

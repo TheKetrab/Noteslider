@@ -1,6 +1,5 @@
 ﻿using Noteslider.Code;
-using Noteslider.Code.AssetFactoryDir;
-using Noteslider.Model.Assets;
+using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -72,7 +71,7 @@ namespace Noteslider
                 for (int i = 0; i < dataCnt; i++)
                 {
                     var basset = BinaryAsset.ReadBinaryAsset(reader);
-                    var asset = AssetFactory.Instance.CreateAsset(basset);
+                    var asset = AssetConverter.ResolveBinaryAsset(basset);
                     t.Assets.Add(asset);
                 }
 
@@ -121,7 +120,7 @@ namespace Noteslider
                 writer.Write(Assets.Count);
                 foreach (var asset in Assets)
                 {
-                    var basset = AssetFactory.Instance.SerializeAsset(asset);
+                    var basset = asset.ToBinaryAsset();
                     basset.WriteBinaryAsset(writer);
                 }
             }

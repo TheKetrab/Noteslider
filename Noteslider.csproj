@@ -74,14 +74,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\AssetFactoryDir\DocAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\StringAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\_AssetFactory.cs" />
-    <Compile Include="Code\AssetFactoryDir\JpgAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\PdfAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\PngAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\TxtAssetWorker.cs" />
-    <Compile Include="Code\AssetFactoryDir\_IAssetFactoryWorker.cs" />
+    <Compile Include="Code\Assets\_AssetConverter.cs" />
+    <Compile Include="Code\Assets\DocAsset.cs" />
+    <Compile Include="Code\Assets\PngAsset.cs" />
+    <Compile Include="Code\Assets\JpgAsset.cs" />
+    <Compile Include="Code\Assets\_IBinAssetConvertable.cs" />
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
@@ -101,11 +98,11 @@
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
     <Compile Include="Events\TrackEvents.cs" />
-    <Compile Include="Model\Assets\Asset.cs" />
-    <Compile Include="Model\Assets\ImageAssets.cs" />
-    <Compile Include="Model\Assets\PdfAsset.cs" />
-    <Compile Include="Model\Assets\TextAssets.cs" />
-    <Compile Include="Model\Assets\BinaryAsset.cs" />
+    <Compile Include="Code\Assets\_Asset.cs" />
+    <Compile Include="Code\Assets\ImageAssets.cs" />
+    <Compile Include="Code\Assets\PdfAsset.cs" />
+    <Compile Include="Code\Assets\TextAsset.cs" />
+    <Compile Include="Code\Assets\_BinaryAsset.cs" />
     <Compile Include="Model\Track.cs" />
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

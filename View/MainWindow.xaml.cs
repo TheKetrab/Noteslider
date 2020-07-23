@@ -1,6 +1,6 @@
 ﻿using Noteslider.Code.Renderer;
 using Noteslider.Events;
-using Noteslider.Model.Assets;
+using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
-using Noteslider.Code.AssetFactoryDir;
-using Noteslider.Model.Assets;
+using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -146,11 +145,11 @@ namespace Noteslider.Code
             foreach (string file in filePaths)
             {
                 FileInfo fi = new FileInfo(file);
-                Type type = Asset.GetAssetType(fi.Extension);
+                Type type = AssetConverter.GetAssetTypeByExtension(fi.Extension);
                 var bytes = File.ReadAllBytes(file);
 
                 var basset = new BinaryAsset(type, bytes);
-                var asset = AssetFactory.Instance.CreateAsset(basset);
+                var asset = AssetConverter.ResolveBinaryAsset(basset);
                 track.Assets.Add(asset);
             }
         }

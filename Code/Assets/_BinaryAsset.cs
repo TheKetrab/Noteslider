@@ -5,32 +5,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Noteslider.Model.Assets
+namespace Noteslider.Code.Assets
 {
     /// <summary>
     /// Represents metadata about file (in binary format)
     /// </summary>
     public class BinaryAsset
     {
-        private byte[] bytes;
+        public byte[] Bytes { get; }
         public Type AssetType { get; private set; }
-        public Int64 Length { get { return bytes.Length; } }
+        public Int64 Length { get { return Bytes.Length; } }
 
 
         public BinaryAsset(Type assetType, byte[] bytes)
         {
-            this.AssetType = assetType;
-            this.bytes = bytes;
+            AssetType = assetType;
+            Bytes = bytes;
         }
 
-        public byte[] GetBytes() { return bytes; }
 
         public void WriteBinaryAsset(BinaryWriter writer)
         {
             string strType = AssetTypeToString(AssetType);
             writer.Write(strType);
             writer.Write(Length);
-            foreach (byte b in bytes) writer.Write(b);
+            foreach (byte b in Bytes) writer.Write(b);
         }
 
         public static BinaryAsset ReadBinaryAsset(BinaryReader reader)
