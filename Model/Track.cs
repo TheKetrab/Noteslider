@@ -15,6 +15,9 @@ namespace Noteslider
         public string Author { get; set; }
         public string Image { get; set; }
         public int Length { get; set; }
+
+        // other
+        public string Path { get; set; }
     }
 
     public class Track

@@ -13,10 +13,17 @@ namespace Noteslider.Code.Renderer
     public class TrackRenderer
     {
         private Track _track;
+        private List<AssetRenderer> _renderers =
+            new List<AssetRenderer>();
 
         public TrackRenderer(Track track)
         {
             _track = track;
+            foreach (var asset in _track.Assets)
+            {
+                var renderer = AssetRendererFactory.Instance.Create(asset);
+                _renderers.Add(renderer);
+            }
         }
 
         
@@ -25,8 +32,6 @@ namespace Noteslider.Code.Renderer
         /// </summary>
         public void Render()
         {
-            // TODO
-            //if (_track == null) return;
             //foreach (Asset a in _track.Data)
             //    a.Renderer.Render();
         }

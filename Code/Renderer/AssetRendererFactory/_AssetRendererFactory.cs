@@ -41,8 +41,9 @@ namespace Noteslider.Code.Renderer
 
         public AssetRenderer Create<T>(T asset) where T:Asset
         {
-            var type = GetContainedType(typeof(T));
-            return _renderers[type]?.CreateInstance(asset);
+            var type = GetContainedType(asset.GetType());
+            if (type == null) throw new ArgumentException();
+            return _renderers[type].CreateInstance(asset);
         }
 
 

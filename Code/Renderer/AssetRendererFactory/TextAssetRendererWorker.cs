@@ -7,16 +7,11 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.Renderer
 {
-    public class TextAssetRendererWorker : AssetRendererWorker
+    public class TextAssetRendererWorker : IAssetRendererWorker
     {
-        public override AssetRenderer CreateInstance(Asset asset)
+        public AssetRenderer CreateInstance(Asset asset)
         {
             return new TextAssetRenderer(asset);
-        }
-
-        public override Type GetRendererType()
-        {
-            return typeof(TextAssetRenderer);
         }
     }
 }

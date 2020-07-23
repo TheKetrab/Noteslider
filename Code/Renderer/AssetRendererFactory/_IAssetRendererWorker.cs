@@ -10,7 +10,5 @@ namespace Noteslider.Code.Renderer
     public interface IAssetRendererWorker
     {
         AssetRenderer CreateInstance(Asset asset);
-        Type GetRendererType();
-        bool ResponsibleFor(string extension);
     }
 }

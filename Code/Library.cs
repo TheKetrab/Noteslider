@@ -32,8 +32,13 @@ namespace Noteslider.Code
                 LoadLibraryInfoRecursive(d, list);
 
             foreach (var f in files)
-                if (f.Extension.ToLower().Equals(".ns"))
-                    list.Add(Track.ReadTrackInfo(f.FullName));
+                if (f.Extension.ToLower().Equals(".ns")) 
+                {
+                    var ti = Track.ReadTrackInfo(f.FullName);
+                    ti.Path = f.FullName;
+                    list.Add(ti);
+
+                }
 
         }
 

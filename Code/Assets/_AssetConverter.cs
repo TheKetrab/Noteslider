@@ -25,7 +25,7 @@ namespace Noteslider.Code.Assets
         public static Asset ResolveBinaryAsset(BinaryAsset basset)
         {
             var f = _converters[basset.AssetType];
-            return f.DynamicInvoke() as Asset;
+            return f.DynamicInvoke(basset) as Asset;
         }
 
 

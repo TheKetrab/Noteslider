@@ -31,16 +31,22 @@ namespace Noteslider.Code
             /** ----- ----- -----
              * COMPOSITION ROOT *
              * ----- ----- ----- */
+            AssetRendererFactoryInit();
+            AssetConverterInit();
 
-            
 
-            // REGISTER RENDERERS
+        }
+
+        public static void AssetRendererFactoryInit()
+        {
             var arf = AssetRendererFactory.Instance;
             arf.SetRendererProvider<TextAsset>(new TextAssetRendererWorker());
             arf.SetRendererProvider<ImageAsset>(new ImageAssetRendererWorker());
             arf.SetRendererProvider<PdfAsset>(new PdfAssetRendererWorker());
+        }
 
-
+        public static void AssetConverterInit()
+        {
             AssetConverter.RegisterExtension<TextAsset>(".txt");
             AssetConverter.RegisterExtension<DocAsset>(".doc");
             AssetConverter.RegisterExtension<DocAsset>(".docx");
@@ -56,29 +62,20 @@ namespace Noteslider.Code
 
             AssetConverter.RegisterConversionTo<PngAsset>((basset) =>
             {
-                var data = (BitmapSource) new ImageSourceConverter()
+                var data = (BitmapSource)new ImageSourceConverter()
                     .ConvertFrom(basset.Bytes);
                 return new PngAsset(data);
             });
 
             AssetConverter.RegisterConversionTo<JpgAsset>((basset) =>
             {
-                var data = (BitmapSource) new ImageSourceConverter()
+                var data = (BitmapSource)new ImageSourceConverter()
                     .ConvertFrom(basset.Bytes);
                 return new JpgAsset(data);
             });
 
 
-
-        /*
-                    AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".jpg");
-                    AssetRendererWorker.AddExtension<ImageAssetRendererWorker>(".png");
-                    AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".txt");
-                    AssetRendererWorker.AddExtension<TextAssetRendererWorker>(".doc");
-                    AssetRendererWorker.AddExtension<PdfAssetRendererWorker>(".pdf");
-        */
-
-    }
+        }
 
         public static byte[] JpgToBytes(BitmapSource source)
         {
