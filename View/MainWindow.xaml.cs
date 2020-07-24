@@ -24,7 +24,12 @@ namespace Noteslider
     public partial class MainWindow : Window
     {
         private MainWindowManager notifier;
+        private TrackRenderer trackRenderer;
 
+        public void SetTrackRenderer(TrackRenderer trackRenderer)
+        {
+            this.trackRenderer = trackRenderer;
+        }
 
         public MainWindow()
         {
@@ -45,6 +50,7 @@ namespace Noteslider
         protected override void OnRender(DrawingContext drawingContext)
         {
             base.OnRender(drawingContext);
+            trackRenderer?.Render();
             //TrackRenderer.Instance.Render(); TODO
         }
 

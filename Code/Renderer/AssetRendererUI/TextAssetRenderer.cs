@@ -15,42 +15,47 @@ namespace Noteslider.Code.Renderer
         public TextAssetRenderer(Asset asset) : base(asset) 
         {
             label = new Label();
-            label.Content = "BLABLABLA";
+
+            var txtAsset = asset as TextAsset;
+
+            label.Content = txtAsset.data;
             Window.MainWindowNotePanel.Children.Add(label);
+
+            ScaleToWidth();
         }
 
-
-        /*
-        public override void Render(params object[] p)
+        private bool ScrollViewerHorizontalBarVisible()
         {
-            
-            Label label = new Label();
-            label.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Left;
+            //var y = Window.ScrollViewer.ActualWidth;
+            //var t4 = Window.ScrollViewer.ViewportWidth;
 
-            panel.Children.Add(label);
+            //label.ActualWidth
 
-            label.Content = "ddddddddddddddddddddddddddddddddddddddddddddDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDddddddddddddddddddddddddddddddddddddddddddddddddd";
-            scrollViewer.UpdateLayout();
+            Window.ScrollViewer.UpdateLayout();
+            label.UpdateLayout();
+            //var visibility = Window.ScrollViewer.ComputedHorizontalScrollBarVisibility;
+            //return visibility == System.Windows.Visibility.Visible;
 
-            //l.Content = "X";
-            while (true)
-            {
-                var visibility = scrollViewer.ComputedHorizontalScrollBarVisibility;
-                if (visibility == System.Windows.Visibility.Visible)
-                {
-                    l.FontSize--;
-                    scrollViewer.UpdateLayout();
-
-                    //Program.Window.Refresh();
-                }
-                else
-                {
-                    break;
-                }
-            }
-            
+            return label.ActualWidth > Window.ScrollViewer.ViewportWidth - MARGIN;
         }
-    */
+
+        public override void ScaleToWidth()
+        {
+            //label.Width = Window.ScrollViewer.ViewportWidth;
+            //label.UpdateLayout();
+            
+            Window.ScrollViewer.UpdateLayout();
+            for (var i = label.FontSize; !ScrollViewerHorizontalBarVisible(); i++)
+                label.FontSize++;
+
+            for (var i = label.FontSize; i > 1 && ScrollViewerHorizontalBarVisible(); i--)
+                label.FontSize--;
+
+            label.UpdateLayout();
+
+        }
+
+
 
     }
 }

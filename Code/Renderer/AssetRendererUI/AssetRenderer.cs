@@ -11,6 +11,7 @@ namespace Noteslider.Code.Renderer
 {
     public abstract class AssetRenderer : UIElement
     {
+        public const int MARGIN = 10;
         private Asset _asset;
         public AssetRenderer(Asset asset)
         {
@@ -24,6 +25,8 @@ namespace Noteslider.Code.Renderer
         {
             get { return (MainWindow)Application.Current.MainWindow; }
         }
+
+        public abstract void ScaleToWidth();
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Noteslider.Code.Renderer;
+using Noteslider.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +35,9 @@ namespace Noteslider.Code
                 int i = dialog.OTDListView.SelectedIndex;
                 var track = Track.ReadTrack(lib[i].Path);
                 TrackRenderer tr = new TrackRenderer(track);
+                Program.Window.SetTrackRenderer(tr);
                 tr.Render();
+                dialog.Close();
                 // TODO
             };
             dialog.OTDCancelButton.Click += (s, e) => { dialog.Close(); };

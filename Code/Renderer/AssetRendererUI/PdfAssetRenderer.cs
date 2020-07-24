@@ -12,6 +12,11 @@ namespace Noteslider.Code.Renderer
     {
         public PdfAssetRenderer(Asset asset) : base(asset) { }
 
-        
+        public override void ScaleToWidth()
+        {
+            throw new NotImplementedException();
+        }
+
+
     }
 }

@@ -23,5 +23,12 @@ namespace Noteslider.Code.Renderer
             Window.MainWindowNotePanel.Children.Add(image);
         }
 
+        public override void ScaleToWidth()
+        {
+            image.Width = Window.ScrollViewer.ViewportWidth - MARGIN;
+            image.UpdateLayout();
+        }
+
+
     }
 }

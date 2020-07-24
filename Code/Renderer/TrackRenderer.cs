@@ -32,8 +32,10 @@ namespace Noteslider.Code.Renderer
         /// </summary>
         public void Render()
         {
-            //foreach (Asset a in _track.Data)
-            //    a.Renderer.Render();
+            foreach (var renderer in _renderers)
+            {
+                renderer.ScaleToWidth();
+            }
         }
 
 
