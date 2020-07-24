@@ -1,6 +1,7 @@
 ﻿using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,8 +16,9 @@ namespace Noteslider.Code.Renderer
         public TextAssetRenderer(Asset asset) : base(asset) 
         {
             label = new Label();
+            label.FontFamily = new System.Windows.Media.FontFamily("Lucida Console");//  FontFamily.;//  "Courier, Lucida Console, monospace";
 
-            var txtAsset = asset as TextAsset;
+              var txtAsset = asset as TextAsset;
 
             label.Content = txtAsset.data;
             Window.MainWindowNotePanel.Children.Add(label);

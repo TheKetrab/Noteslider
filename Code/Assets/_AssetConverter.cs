@@ -44,8 +44,8 @@ namespace Noteslider.Code.Assets
         {
             if (_extensions.ContainsKey(extension))
                 return _extensions[extension];
-            else
-                throw new ArgumentException();
+            else // DEFAULT INTERPRETE AS TEXT ASSET
+                return typeof(TextAsset);
         }
     }
 }
