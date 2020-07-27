@@ -18,7 +18,8 @@ namespace Noteslider.Events
 
     public class MainWindowMenuPlayEvt
     {
-
+        public bool WantToPlay { get; }
+        public MainWindowMenuPlayEvt(bool play) { WantToPlay = play; }
     }
 
     public class MainWindowMenuSettingsEvt

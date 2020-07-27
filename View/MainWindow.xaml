@@ -67,6 +67,8 @@
             <GroupBox Header="Tags">
 
             </GroupBox>
+            <Label Content="Speed"/>
+            <Slider x:Name="SpeedSlider" Value="1"/>
         </StackPanel>
 
         <Menu Margin="0,0,0,391" Grid.ColumnSpan="2" Background="#FF424242">

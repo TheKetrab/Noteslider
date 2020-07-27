@@ -37,12 +37,8 @@ namespace Noteslider.Events
 
         public void Handle(MainWindowMenuPlayEvt Notification)
         {
-            var track = new Track("aut","nam","imp");
-            var strAsset = new TextAsset("blablabla");
-
-            track.Assets.Add(strAsset);
-
-            var renderer = AssetRendererFactory.Instance.Create(strAsset);
+            if (Notification.WantToPlay) Program.Window.StartPlaying();
+            else Program.Window.StopPlaying();
         }
 
         public void Handle(MainWindowMenuSettingsEvt Notification)

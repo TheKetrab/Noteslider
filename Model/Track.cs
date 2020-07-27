@@ -14,7 +14,7 @@ namespace Noteslider
         public string Name { get; set; }
         public string Author { get; set; }
         public string Image { get; set; }
-        public int Length { get; set; }
+        public double SliderValue { get; set; }
 
         // other
         public string Path { get; set; }
@@ -33,7 +33,7 @@ namespace Noteslider
             TrackInfo.Author = author;
             TrackInfo.Name = name;
             TrackInfo.Image = imgPath;
-            TrackInfo.Length = 0; // TODO
+            TrackInfo.SliderValue = 1.0;
         }
 
 
@@ -63,7 +63,7 @@ namespace Noteslider
                 t.TrackInfo.Name = reader.ReadString();
                 t.TrackInfo.Author = reader.ReadString();
                 t.TrackInfo.Image = reader.ReadString();
-                t.TrackInfo.Length = reader.ReadInt32();
+                t.TrackInfo.SliderValue = reader.ReadDouble();
 
                 // TAGS
                 int tagsCnt = reader.ReadInt32();
@@ -94,7 +94,7 @@ namespace Noteslider
                 ti.Name = reader.ReadString();
                 ti.Author = reader.ReadString();
                 ti.Image = reader.ReadString();
-                ti.Length = reader.ReadInt32();
+                ti.SliderValue = reader.ReadDouble();
             }
 
             return ti;
@@ -113,7 +113,7 @@ namespace Noteslider
                 writer.Write(TrackInfo.Name);
                 writer.Write(TrackInfo.Author);
                 writer.Write(TrackInfo.Image);
-                writer.Write(TrackInfo.Length);
+                writer.Write(TrackInfo.SliderValue);
 
                 // TAGS
                 writer.Write(Tags.Count);

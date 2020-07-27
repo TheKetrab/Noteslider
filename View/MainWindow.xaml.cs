@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
+using Noteslider.Code;
 
 namespace Noteslider
 {
@@ -25,6 +27,13 @@ namespace Noteslider
     {
         private MainWindowManager notifier;
         private TrackRenderer trackRenderer;
+        public bool Playing { get; private set; }
+
+
+        public void StopPlaying()
+        {
+            Playing = false;
+        }
 
         public void SetTrackRenderer(TrackRenderer trackRenderer)
         {
@@ -37,6 +46,37 @@ namespace Noteslider
             notifier = new MainWindowManager(this.MainWindowMenu);
             InitEvents();
             Register();
+        }
+
+        public async Task AutoScroll(double offset, int millisecondsDelay)
+        {
+            await Task.Delay(millisecondsDelay);
+            ScrollViewer.ScrollToVerticalOffset(ScrollViewer.VerticalOffset + offset);
+            ScrollViewer.UpdateLayout();
+        }
+
+        public async void StartPlaying()
+        {
+            Playing = true;
+
+            double speed;
+            int time;
+            double half = SpeedSlider.Maximum / 2;
+            const int basePow = 2;
+
+            while(Playing)
+            {
+                if (SpeedSlider.Value == 0) { speed = 0; time = 5; }
+                else
+                {
+                    speed = Math.Pow(basePow, SpeedSlider.Value - half);
+                    if (speed <= 0.5) { speed *= 2; time = 4; }
+                    else if (speed <= 1) { time = 2; }
+                    else { speed /= 2; time = 1; }
+                }
+                
+                await AutoScroll(speed, time);
+            }
         }
 
         public void Register()
@@ -62,7 +102,10 @@ namespace Noteslider
             MainWindowMenuOpenTrackButton.Click += 
                 (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuOpenTrackEvt()); };
             MainWindowMenuPlayButton.Click += 
-                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt()); };
+                (s, e) => {
+                    if (Playing) EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt(false)); 
+                    else EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt(true));
+                };
             MainWindowMenuSettingsButton.Click += 
                 (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
         }
