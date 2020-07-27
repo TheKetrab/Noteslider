@@ -74,6 +74,27 @@ namespace Noteslider.Code
                 return new JpgAsset(data);
             });
 
+            AssetConverter.RegisterConversionTo<PdfAsset>((basset) =>
+            {
+                // CREATE DIR IF DOES NOT EXIST
+                if (!Directory.Exists(Paths.Temp))
+                    Directory.CreateDirectory(Paths.Temp);
+
+                var data = basset.Bytes;
+                string tempPath;
+
+                do // random until new name
+                {
+                    var randomName = RandomString(50);
+                    tempPath = $"{Paths.Temp}\\{randomName}.pdf";
+
+                } while (File.Exists(tempPath));
+
+
+                var file = File.Create(tempPath);
+                file.Write(data, 0, data.Length);
+                return new PdfAsset(tempPath);
+            });
 
         }
 
@@ -96,20 +117,17 @@ namespace Noteslider.Code
             return stream.ToArray();
         }
 
-
-
-    }
-
-    public static class ExtensionMethods
-
-    {
-        private static Action EmptyDelegate = delegate () { };
-
-
-        public static void Refresh(this UIElement uiElement)
-
+        private static Random random = new Random();
+        public static string RandomString(int length)
         {
-            uiElement.Dispatcher.Invoke(DispatcherPriority.Render, EmptyDelegate);
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
     }
+
+
+
+
 }

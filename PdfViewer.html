@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+    </style>
+    <script>
+        function LoadPdf(path) {
+
+            var frame = document.createElement("iframe");
+            alert("IFRAME:");
+            alert(frame);
+            frame.setAttribute("src", "C:\Users\ketra\Desktop\Toss a Coin to Your Witcher (Classical guitar).pdf");
+            document.getElementById("try2").appendChild(frame);
+/*
+            document.getElementById("try").innerHTML = "DZIALAJ !!!!";
+            var frame = document.getElementById("frame");
+            //frame.src = path + '#toolbar=0&navpanes=0&scrollbar=0';
+            frame.setAttribute("src", path);
+            //frame.src = path;
+            */
+            alert(frame.src);
+            
+        }
+        function Refresh() {
+            //var frame = document.getElementById("frame");
+            //frame.src = frame.src;
+            //alert(frame.src);
+        }
+    </script>
+</head>
+
+<body scroll="no">
+    <div id="try">blablabla</div>
+    <div id="try2"></div>
+    <!--
+        <iframe id="frame" class="no-scroll" scrolling="no" src="C:\Users\ketra\Desktop\Toss a Coin to Your Witcher (Classical guitar).pdf"
+                type="application/pdf" width="100%" height="3000" />
+    -->
+</body>
+
+
+</html>

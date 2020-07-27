@@ -34,7 +34,7 @@
             <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
                 <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoSettings.png"/>
             </Button>
-
+            
         </DockPanel>
 
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
