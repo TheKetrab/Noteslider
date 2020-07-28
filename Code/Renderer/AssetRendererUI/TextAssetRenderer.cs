@@ -18,7 +18,7 @@ namespace Noteslider.Code.Renderer
         {
             label = new Label();
             label.Background = new SolidColorBrush(Colors.White);
-            label.FontFamily = new System.Windows.Media.FontFamily("Lucida Console");//  FontFamily.;//  "Courier, Lucida Console, monospace";
+            label.FontFamily = new System.Windows.Media.FontFamily("Lucida Console");
 
               var txtAsset = asset as TextAsset;
 
@@ -50,10 +50,13 @@ namespace Noteslider.Code.Renderer
             
             Window.ScrollViewer.UpdateLayout();
             for (var i = label.FontSize; !ScrollViewerHorizontalBarVisible(); i++)
-                label.FontSize++;
+                label.FontSize = i;
 
             for (var i = label.FontSize; i > 1 && ScrollViewerHorizontalBarVisible(); i--)
-                label.FontSize--;
+                label.FontSize = i;
+
+            for (var i = label.FontSize; ScrollViewerHorizontalBarVisible(); i+=0.1)
+                label.FontSize = i;
 
             label.UpdateLayout();
 

@@ -1,42 +1,97 @@
-﻿using Syncfusion.PdfViewer.WPF;
-using Noteslider.Code.Assets;
+﻿using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using Syncfusion.Windows.PdfViewer;
+using System.Text.RegularExpressions;
+using System.IO;
+using Windows.Storage;
+using Windows.Data.Pdf;
+using System.Windows.Media.Imaging;
+using Windows.Storage.Streams;
+using System.Windows;
 
 namespace Noteslider.Code.Renderer
 {
     public class PdfAssetRenderer : AssetRenderer
     {
-        WebBrowser browser;
+        // each pdf page is converted to image
+        Image[] images;
 
         public PdfAssetRenderer(Asset asset) : base(asset) {
 
             var pdfAsset = asset as PdfAsset;
-            browser = new WebBrowser();
-            browser.Navigate(Paths.PdfViewer);
+            // Task.Run(async () => await Procede(pdfAsset)); TODO Window.MainWindowNotePanel.Children.Add(img); exception
+            Procede(pdfAsset);
+        }
 
-            browser.LoadCompleted += (s, e) =>
+        private async Task Procede(PdfAsset asset)
+        {
+
+            await InterpretePdf(asset.data);
+
+            foreach(var img in images)
+                Window.MainWindowNotePanel.Children.Add(img);
+
+            ScaleToWidth();
+        }
+
+        private static async Task<BitmapImage> PageToBitmapAsync(PdfPage page)
+        {
+            BitmapImage image = new BitmapImage();
+            using (var stream = new InMemoryRandomAccessStream())
             {
-                browser.InvokeScript("LoadPdf", pdfAsset.data);
-                browser.InvokeScript("Refresh");
-            };
+                await page.RenderToStreamAsync(stream);
 
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.StreamSource = stream.AsStream();
+                image.EndInit();
+            }
 
-            browser.Height = 600;
+            return image;
+        }
 
-            Window.MainWindowNotePanel.Children.Add(browser);
+        private async Task InterpretePdf(string pdfPath)
+        {
+            // 1. Read PDF
+            // 2. Convert each page to Image
 
+            var file = await StorageFile.GetFileFromPathAsync(pdfPath);
+            var pdfDoc = await PdfDocument.LoadFromFileAsync(file);
+
+            if (pdfDoc == null) return;
+
+            images = new Image[pdfDoc.PageCount];
+            for (uint i = 0; i < pdfDoc.PageCount; i++)
+            {
+                using (var page = pdfDoc.GetPage(i))
+                {
+                    var bitmap = await PageToBitmapAsync(page);
+                    var image = new Image
+                    {
+                        Source = bitmap,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Margin = new Thickness(0, 4, 0, 4),
+                        MaxWidth = 800
+                    };
+                    images[i] = image;
+                }
+            }
         }
 
         public override void ScaleToWidth()
         {
-            browser.Width = Window.ScrollViewer.ViewportWidth - MARGIN;
-            browser.UpdateLayout();
+            // scaling at the begining will be skipped
+            if (images == null) return;
+
+            foreach(var img in images)
+            {
+                img.Width = Window.ScrollViewer.ViewportWidth - MARGIN;
+                img.UpdateLayout();
+            }
         }
 
 

@@ -19,18 +19,6 @@ namespace Noteslider.Code.Renderer
             new List<AssetRenderer>();
 
 
-        private void AutoScroll()
-        {
-            for (int i=0; i<5; i++)
-            {
-                Thread.Sleep(1000);
-                
-                Program.Window.ScrollViewer.ScrollToVerticalOffset(Program.Window.ScrollViewer.VerticalOffset +100);
-                Program.Window.ScrollViewer.UpdateLayout();
-
-            }
-        }
-
         public TrackRenderer(Track track)
         {
             _track = track;

@@ -93,6 +93,7 @@ namespace Noteslider.Code
 
                 var file = File.Create(tempPath);
                 file.Write(data, 0, data.Length);
+                file.Close();
                 return new PdfAsset(tempPath);
             });
 
