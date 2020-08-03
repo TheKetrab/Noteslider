@@ -16,9 +16,9 @@ namespace Noteslider.Events
         , ISubscriber<MainWindowMenuPlayEvt>
         , ISubscriber<MainWindowMenuSettingsEvt>
     {
-        DockPanel panel;
+        StackPanel panel;
 
-        public MainWindowManager(DockPanel panel)
+        public MainWindowManager(StackPanel panel)
         {
             this.panel = panel;
         }

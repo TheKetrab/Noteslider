@@ -115,6 +115,24 @@ namespace Noteslider
                 };
             MainWindowMenuSettingsButton.Click += 
                 (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
+
+
+            ButtonHideLeftPanel.Click += async (s,e) => {
+
+                double buttonWidth = ButtonHideLeftPanel.ActualWidth;
+                double panelWidth = MWLeftPanelTabControl.ActualWidth;
+
+                var anim = new MarginAnimator(LeftPanel);
+                await anim.AnimateMargin(new Thickness(-(panelWidth - buttonWidth), 0, 0, 0));
+            };
+            ButtonHideRightPanel.Click += async (s, e) => {
+
+                double buttonWidth = ButtonHideRightPanel.ActualWidth;
+                double panelWidth = MWRightPanelStackPanel.ActualWidth;
+
+                var anim = new MarginAnimator(RightPanel);
+                await anim.AnimateMargin(new Thickness(0, 0, -(panelWidth-buttonWidth), 0));
+            };
         }
 
     }

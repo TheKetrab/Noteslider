@@ -89,6 +89,7 @@
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\NewTrackDialogManager.cs" />
     <Compile Include="Code\OpenTrackDialogManager.cs" />
+    <Compile Include="Code\MarginAnimator.cs" />
     <Compile Include="Code\Program.cs" />
     <Compile Include="Code\Renderer\AssetRendererUI\AssetRenderer.cs" />
     <Compile Include="Code\Renderer\AssetRendererFactory\_AssetRendererFactory.cs" />
