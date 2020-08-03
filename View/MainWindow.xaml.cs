@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Threading;
 using Noteslider.Code;
+using Windows.UI.ViewManagement;
 
 namespace Noteslider
 {
@@ -46,7 +47,9 @@ namespace Noteslider
             notifier = new MainWindowManager(this.MainWindowMenu);
             InitEvents();
             Register();
+
         }
+
 
         public async Task AutoScroll(double offset, int millisecondsDelay)
         {

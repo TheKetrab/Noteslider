@@ -41,6 +41,8 @@ namespace Noteslider.Code
                 // TODO
             };
             dialog.OTDCancelButton.Click += (s, e) => { dialog.Close(); };
+
+
         }
 
         public void Show()

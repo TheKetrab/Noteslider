@@ -13,7 +13,8 @@ namespace Noteslider
     {
         public string Name { get; set; }
         public string Author { get; set; }
-        public string Image { get; set; }
+        public int ImageLen { get; set; }
+        public byte[] Image { get; set; }
         public double SliderValue { get; set; }
 
         // other
@@ -30,10 +31,21 @@ namespace Noteslider
         public Track(string author, string name, string imgPath) 
             : this()
         {
-            TrackInfo.Author = author;
+            TrackInfo.Author = author ?? "UNKNOWN"; // TODO language
             TrackInfo.Name = name;
-            TrackInfo.Image = imgPath;
             TrackInfo.SliderValue = 1.0;
+
+            if (string.IsNullOrEmpty(imgPath))
+            {
+                TrackInfo.Image = null;
+                TrackInfo.ImageLen = 0;
+            }
+            else
+            {
+                TrackInfo.Image = File.ReadAllBytes(imgPath);
+                TrackInfo.ImageLen = TrackInfo.Image.Length;
+            }
+
         }
 
 
@@ -62,7 +74,8 @@ namespace Noteslider
                 // TRACK INFO
                 t.TrackInfo.Name = reader.ReadString();
                 t.TrackInfo.Author = reader.ReadString();
-                t.TrackInfo.Image = reader.ReadString();
+                t.TrackInfo.ImageLen = reader.ReadInt32();
+                t.TrackInfo.Image = reader.ReadBytes(t.TrackInfo.ImageLen);
                 t.TrackInfo.SliderValue = reader.ReadDouble();
 
                 // TAGS
@@ -93,7 +106,8 @@ namespace Noteslider
                 // TRACK INFO
                 ti.Name = reader.ReadString();
                 ti.Author = reader.ReadString();
-                ti.Image = reader.ReadString();
+                ti.ImageLen = reader.ReadInt32();
+                ti.Image = reader.ReadBytes(ti.ImageLen);
                 ti.SliderValue = reader.ReadDouble();
             }
 
@@ -112,6 +126,7 @@ namespace Noteslider
                 // TRACK INFO
                 writer.Write(TrackInfo.Name);
                 writer.Write(TrackInfo.Author);
+                writer.Write(TrackInfo.ImageLen);
                 writer.Write(TrackInfo.Image);
                 writer.Write(TrackInfo.SliderValue);
 

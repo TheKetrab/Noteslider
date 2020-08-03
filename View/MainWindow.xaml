@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="Noteslider" Height="450" Width="800" Background="#FF2C2C2C"        
         MinWidth="800"
-        MinHeight="450"
+        MinHeight="450" Icon="Logo64.png"
+        WindowStartupLocation="CenterScreen"
         >
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition MaxHeight="100" Height="15*"/>
@@ -38,11 +40,11 @@
         </DockPanel>
 
         <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
-            <TabItem Header="General">
+            <TabItem Header="Main">
                 <Label Content="Content goes here..." />
             </TabItem>
-            <TabItem Header="Security" />
-            <TabItem Header="Details" />
+            <TabItem Header="Tracks" />
+            <TabItem Header="Tags" />
         </TabControl>
 
         <ScrollViewer 
@@ -76,4 +78,5 @@
         </Menu>
 
     </Grid>
+
 </Window>

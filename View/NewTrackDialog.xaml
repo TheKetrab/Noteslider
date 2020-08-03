@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Noteslider"
         mc:Ignorable="d"
-        Title="NewTrackDialog" Height="600" Width="800"
+        Title="NewTrackDialog" Height="400" Width="600"
         ResizeMode="NoResize"
         >
     <Grid>
@@ -18,22 +18,22 @@
             <TabItem x:Name="NTDTabItemInfo" Header="Info" Width="60">
                 <StackPanel>
                     
-                    <Label Margin="10 20 10 60" Content="Fill information about the track" HorizontalAlignment="Center"/>
+                    <Label Margin="10 20 10 30" Content="Fill information about the track" HorizontalAlignment="Center"/>
                     
                     <!-- TITLE -->
-                    <DockPanel Margin="10 25" LastChildFill="True">
+                    <DockPanel Margin="10 10" LastChildFill="True">
                         <Label MinWidth="100">Title</Label>
                         <TextBox x:Name="NTDTitle"></TextBox>
                     </DockPanel>
 
                     <!-- AUTHOR -->
-                    <DockPanel Margin="10 25" LastChildFill="True">
+                    <DockPanel Margin="10 10" LastChildFill="True">
                         <Label MinWidth="100">Author</Label>
                         <TextBox x:Name="NTDAuthor"></TextBox>
                     </DockPanel>
 
                     <!-- IMAGE -->
-                    <DockPanel Margin="10 25" LastChildFill="True">
+                    <DockPanel Margin="10 10" LastChildFill="True">
                         <Label MinWidth="100">Image</Label>
                         <Button x:Name="NTDImageButton" DockPanel.Dock="Right" Content="Browse" MinWidth="100"/>
                         <TextBox x:Name="NTDImage"></TextBox>
@@ -44,14 +44,11 @@
             <TabItem x:Name="NTDTabItemContent" Header="Content" Width="60">
                 <DockPanel LastChildFill="True" >
                     <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Choose resources for your track" HorizontalAlignment="Center"/>
-                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Label Content="Resource type:" Margin="10"/>
-                        <ComboBox x:Name="NTDType" MinWidth="350" Margin="10">
-                            <ComboBoxItem Content="Text"></ComboBoxItem>
-                            <ComboBoxItem Content="Image"></ComboBoxItem>
-                            <ComboBoxItem Content="PDF"></ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel>
+                    <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
+                        <Label Content="Web asset:" Margin="10"/>
+                        <Button x:Name="NTDWebAssetButton" DockPanel.Dock="Right" Margin="0 10 10 10" Width="60" Content="+" />
+                        <TextBox x:Name="NTDWebAssetValue" Margin="0 10"/>
+                    </DockPanel>
                     <GroupBox DockPanel.Dock="Top" Header="Choose files" VerticalAlignment="Stretch">
                         <DockPanel>
                             <StackPanel DockPanel.Dock="Right" Margin="20" MinWidth="80">
@@ -75,7 +72,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox x:Name="NTDTags" Grid.Column="0">
+                        <ListBox x:Name="NTDTags" Grid.Column="0" Margin="10">
 
                         </ListBox>
                         <StackPanel Grid.Column="1">
@@ -91,8 +88,8 @@
             </TabItem>
         </TabControl>
 
-        <Button x:Name="NTDNextButton" Content="Next" HorizontalAlignment="Left" Margin="674,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.603,0.913"/>
-        <Button x:Name="NTDPrevButton" Content="Previous" HorizontalAlignment="Left" Margin="581,21,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.659,0.718"/>
+        <Button x:Name="NTDNextButton" Content="Next" HorizontalAlignment="Left" Margin="492,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.603,0.913"/>
+        <Button x:Name="NTDPrevButton" Content="Previous" HorizontalAlignment="Left" Margin="399,10,0,0" Grid.Row="1" VerticalAlignment="Top" Width="88" Height="24" RenderTransformOrigin="0.659,0.718"/>
 
 
 

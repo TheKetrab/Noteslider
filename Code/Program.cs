@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using System.Security.Cryptography.X509Certificates;
 using System.Windows.Media;
+using System.Runtime.CompilerServices;
+using System.Windows.Controls;
 
 namespace Noteslider.Code
 {
@@ -124,6 +126,26 @@ namespace Noteslider.Code
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
+    }
+
+    public static class Extension
+    {
+        public static void AlignWindowLocationToMainWindowCenter(this Window window)
+        {
+            Window parent = Application.Current.MainWindow;
+            window.Left = parent.Left + (parent.Width - window.Width) / 2;
+            window.Top = parent.Top + (parent.Height - window.Height) / 2;
+        }
+
+        public static int NumberOnList(this ListView list, ListViewItem item)
+        {
+            for (int i = 0; i < list.Items.Count; i++)
+                if (list.ItemContainerGenerator.ContainerFromIndex(i) == item)
+                    return i;
+
+            return -1;
         }
 
     }
