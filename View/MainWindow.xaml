@@ -25,16 +25,16 @@
         <DockPanel x:Name="MainWindowMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">
 
             <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
-                <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoNew.png"/>
+                <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
             </Button>
             <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
-                <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoOpen.png"/>
+                <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
             </Button>
             <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
-                <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoPlay.png"/>
+                <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
             </Button>
             <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
-                <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/IcoSettings.png"/>
+                <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
             </Button>
             
         </DockPanel>

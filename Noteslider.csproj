@@ -100,6 +100,7 @@
     <Compile Include="Code\Renderer\AssetRendererUI\PdfAssetRenderer.cs" />
     <Compile Include="Code\Renderer\AssetRendererUI\TextAssetRenderer.cs" />
     <Compile Include="Code\Renderer\TrackRenderer.cs" />
+    <Compile Include="Code\ResourceHelper.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
@@ -184,6 +185,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Logo64.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Default.png" />
+    <Resource Include="Resources\IcoNew.png" />
+    <Resource Include="Resources\IcoOpen.png" />
+    <Resource Include="Resources\IcoPause.png" />
+    <Resource Include="Resources\IcoPlay.png" />
+    <Resource Include="Resources\IcoSettings.png" />
+    <Resource Include="Resources\Logo64.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

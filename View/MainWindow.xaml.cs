@@ -34,6 +34,8 @@ namespace Noteslider
         public void StopPlaying()
         {
             Playing = false;
+            MainWindowMenuPlayButtonImg.Source =
+                ResourceHelper.LoadBitmapFromResource("Resources/IcoPlay.png");
         }
 
         public void SetTrackRenderer(TrackRenderer trackRenderer)
@@ -61,6 +63,8 @@ namespace Noteslider
         public async void StartPlaying()
         {
             Playing = true;
+            MainWindowMenuPlayButtonImg.Source = 
+                ResourceHelper.LoadBitmapFromResource("Resources/IcoPause.png");
 
             double speed;
             int time;

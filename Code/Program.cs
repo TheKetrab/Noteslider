@@ -14,6 +14,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Windows.Media;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Reflection;
 
 namespace Noteslider.Code
 {
@@ -127,6 +128,9 @@ namespace Noteslider.Code
             return new string(Enumerable.Repeat(chars, length)
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
+
+
+
 
     }
 

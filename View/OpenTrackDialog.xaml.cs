@@ -48,7 +48,7 @@ namespace Noteslider
             OTDInfoAuthor.Content = author;
             OTDInfoImage.Source = bytes != null ?
                 (BitmapSource)new ImageSourceConverter().ConvertFrom(bytes) :
-                (BitmapSource)new ImageSourceConverter().ConvertFrom(File.ReadAllBytes(Paths.DefaultImage));
+                ResourceHelper.LoadBitmapFromResource("Resources/Default.png");
         }
 
         private void ListViewItem_MouseLeave(object sender, MouseEventArgs e)
