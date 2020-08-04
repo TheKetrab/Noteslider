@@ -78,12 +78,12 @@ namespace Noteslider
         }
 
 
-        private void OTDLoadButton_Click_1(object sender, RoutedEventArgs e)
+        private void OTDLoadButton_Click(object sender, RoutedEventArgs e)
         {
             int i = OTDListView.SelectedIndex;
             LoadTrack(i);
             Close();
         }
-        
+
     }
 }

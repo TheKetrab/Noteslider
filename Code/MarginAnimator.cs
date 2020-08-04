@@ -46,6 +46,7 @@ namespace Noteslider.Code
                 // update
                 _element.Margin = ModifyThickness(_element.Margin, left, top, right, bottom);
                 _element.UpdateLayout();
+                Program.Window.RepaintTrackRenderer();
             }
         }
 

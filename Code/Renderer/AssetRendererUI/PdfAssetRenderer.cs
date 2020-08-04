@@ -89,7 +89,7 @@ namespace Noteslider.Code.Renderer
 
             foreach(var img in images)
             {
-                img.Width = Window.ScrollViewer.ViewportWidth - MARGIN;
+                img.Width = Window.ScrollViewer.ActualWidth - MARGIN;
                 img.UpdateLayout();
             }
         }

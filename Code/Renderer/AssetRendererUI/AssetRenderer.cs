@@ -11,7 +11,7 @@ namespace Noteslider.Code.Renderer
 {
     public abstract class AssetRenderer : UIElement
     {
-        public const int MARGIN = 10;
+        public const int MARGIN = 25;
         private Asset _asset;
         public AssetRenderer(Asset asset)
         {

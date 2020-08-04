@@ -34,6 +34,12 @@ namespace Noteslider
         private bool _leftPanelHidden, _rightPanelHidden;
         private bool _leftPanelMoving, _rightPanelMoving;
 
+
+        public void RepaintTrackRenderer()
+        {
+            trackRenderer?.Render();
+        }
+
         public void StopPlaying()
         {
             Playing = false;
@@ -97,15 +103,20 @@ namespace Noteslider
             EventAgregator.Instance.AddSubscriber<MainWindowMenuSettingsEvt>(notifier);
         }
 
-        protected override void OnRender(DrawingContext drawingContext)
-        {
-            base.OnRender(drawingContext);
-            trackRenderer?.Render();
-            //TrackRenderer.Instance.Render(); TODO
-        }
+ 
 
         public void InitEvents()
         {
+            SizeChanged += (s,e) =>
+            {
+                trackRenderer?.Render();
+
+                // percentage left and right panel
+                LeftPanel.MinWidth = this.ActualWidth * 0.15;
+                RightPanel.MinWidth = this.ActualWidth * 0.15;
+                // TODO if panel hidden or visible -> set margin!!!
+            };
+
 
             MainWindowMenuNewTrackButton.Click += 
                 (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };

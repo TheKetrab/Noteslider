@@ -34,7 +34,7 @@ namespace Noteslider.Code.Renderer
 
         
         /// <summary>
-        /// Called on window repaint.
+        /// Called on event SizeChanged.
         /// </summary>
         public void Render()
         {

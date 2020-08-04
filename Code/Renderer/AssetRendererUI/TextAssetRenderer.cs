@@ -40,7 +40,7 @@ namespace Noteslider.Code.Renderer
             //var visibility = Window.ScrollViewer.ComputedHorizontalScrollBarVisibility;
             //return visibility == System.Windows.Visibility.Visible;
 
-            return label.ActualWidth > Window.ScrollViewer.ViewportWidth - MARGIN;
+            return label.ActualWidth > Window.ScrollViewer.ActualWidth - MARGIN;
         }
 
         public override void ScaleToWidth()
