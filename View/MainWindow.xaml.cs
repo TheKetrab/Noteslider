@@ -109,12 +109,22 @@ namespace Noteslider
         {
             SizeChanged += (s,e) =>
             {
+                // ***** ***** *****
+                // RENDER ON RESIZE
                 trackRenderer?.Render();
+                // ***** ***** *****
+
 
                 // percentage left and right panel
-                LeftPanel.MinWidth = this.ActualWidth * 0.15;
-                RightPanel.MinWidth = this.ActualWidth * 0.15;
+                
+                LeftPanel.Width = this.ActualWidth * 0.15;
+                RightPanel.Width = this.ActualWidth * 0.15;
+                //LeftPanel.UpdateLayout();
+                //RightPanel.UpdateLayout();
                 // TODO if panel hidden or visible -> set margin!!!
+
+
+                //LeftPanel.Width = Math.Max(LeftPanel.Width, tabItemWidth * 3);
             };
 
 

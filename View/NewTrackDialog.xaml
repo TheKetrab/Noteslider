@@ -8,6 +8,15 @@
         Title="NewTrackDialog" Height="400" Width="600"
         ResizeMode="NoResize"
         >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleBase.xaml" />
+                <ResourceDictionary Source="Style/StyleOverlayNTD.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="88*"/>

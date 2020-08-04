@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="OpenTrackDialog" Height="400" Width="600"
         WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleBase.xaml" />
+                <ResourceDictionary Source="Style/StyleOverlayOTD.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70*"/>

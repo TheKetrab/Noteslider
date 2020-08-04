@@ -5,11 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Noteslider"
         mc:Ignorable="d"
-        Title="Noteslider" Height="450" Width="800" Background="#FF2C2C2C"        
+        Title="Noteslider" Height="450" Width="800"        
         MinWidth="800"
         MinHeight="450" Icon="Logo64.png"
         WindowStartupLocation="CenterScreen"
         >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Style/StyleBase.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -39,11 +46,11 @@
             <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
                 <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
                 <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
-                    <TabItem Header="Main">
+                    <TabItem x:Name="MWTabItemMain" Header="Main" Background="Blue">
                         <Label Content="Content goes here..." />
                     </TabItem>
-                    <TabItem Header="Tracks" />
-                    <TabItem Header="Tags" />
+                    <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
+                    <TabItem x:Name="MWTabItemTags" Header="Tags" />
                 </TabControl>
             </DockPanel>
 
@@ -51,7 +58,7 @@
                 <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
                 <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <GroupBox Header="Info" Margin="5" BorderBrush="Black">
-                        <Image Source="">
+                        <Image>
                         </Image>
                     </GroupBox>
                     <GroupBox Header="Tags">
