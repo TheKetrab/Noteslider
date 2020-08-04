@@ -31,6 +31,9 @@ namespace Noteslider
         public bool Playing { get; private set; }
 
 
+        private bool _leftPanelHidden, _rightPanelHidden;
+        private bool _leftPanelMoving, _rightPanelMoving;
+
         public void StopPlaying()
         {
             Playing = false;
@@ -119,19 +122,66 @@ namespace Noteslider
 
             ButtonHideLeftPanel.Click += async (s,e) => {
 
-                double buttonWidth = ButtonHideLeftPanel.ActualWidth;
-                double panelWidth = MWLeftPanelTabControl.ActualWidth;
+                // exit if
+                if (_leftPanelMoving) return;
 
-                var anim = new MarginAnimator(LeftPanel);
-                await anim.AnimateMargin(new Thickness(-(panelWidth - buttonWidth), 0, 0, 0));
+                // func
+                if (_leftPanelHidden)
+                {
+                    _leftPanelMoving = true;
+
+                    var anim = new MarginAnimator(LeftPanel);
+                    await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
+                    ButtonHideLeftPanel.Content = "<";
+
+                    _leftPanelHidden = false;
+                    _leftPanelMoving = false;
+                } 
+                
+                else
+                {
+                    _leftPanelMoving = true;
+
+                    double panelWidth = MWLeftPanelTabControl.ActualWidth;
+                    var anim = new MarginAnimator(LeftPanel);
+                    await anim.AnimateMargin(new Thickness(-panelWidth, 0, 0, 0));
+                    ButtonHideLeftPanel.Content = ">";
+
+                    _leftPanelHidden = true;
+                    _leftPanelMoving = false;
+                }
             };
             ButtonHideRightPanel.Click += async (s, e) => {
 
-                double buttonWidth = ButtonHideRightPanel.ActualWidth;
-                double panelWidth = MWRightPanelStackPanel.ActualWidth;
+                // exit if
+                if (_rightPanelMoving) return;
 
-                var anim = new MarginAnimator(RightPanel);
-                await anim.AnimateMargin(new Thickness(0, 0, -(panelWidth-buttonWidth), 0));
+                // func
+                if (_rightPanelHidden)
+                {
+                    _rightPanelMoving = true;
+
+                    var anim = new MarginAnimator(RightPanel);
+                    await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
+                    ButtonHideRightPanel.Content = ">";
+
+                    _rightPanelHidden = false;
+                    _rightPanelMoving = false;
+                }
+
+                else
+                {
+                    _rightPanelMoving = true;
+
+                    double panelWidth = MWRightPanelStackPanel.ActualWidth;
+                    var anim = new MarginAnimator(RightPanel);
+                    await anim.AnimateMargin(new Thickness(0, 0, -panelWidth, 0));
+                    ButtonHideRightPanel.Content = "<";
+
+                    _rightPanelHidden = true;
+                    _rightPanelMoving = false;
+                }
+
             };
         }
 

@@ -40,14 +40,14 @@
             </ListViewItem>
         </ListView>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Image x:Name="OTDInfoImage" Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/testImg.jpg" MaxWidth="150" Margin="10" MaxHeight="150"/>
+            <Image x:Name="OTDInfoImage" Source="" MaxWidth="150" Margin="10" MaxHeight="150"/>
             <Label x:Name="OTDInfoTitle" Content="TITLE OF SELECTED" HorizontalAlignment="Center" Margin="10 0"/>
             <Label x:Name="OTDInfoAuthor" Content="AUTHOR" HorizontalAlignment="Center" Margin="10 0"/>
         </StackPanel>
         <Label x:Name="OTDInfoAboutLibrary" Grid.Row="1" Grid.Column="0" Content="INFO ABOUT LIBRARY"/>
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5 5"/>
+            <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5 5" Click="OTDLoadButton_Click" />
             <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5 5" Width="80"/>
         </StackPanel>
 

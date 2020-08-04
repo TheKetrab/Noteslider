@@ -31,15 +31,6 @@ namespace Noteslider.Code
 
         private void InitEvents()
         {
-            dialog.OTDLoadButton.Click += (s, e) => {
-                int i = dialog.OTDListView.SelectedIndex;
-                var track = Track.ReadTrack(lib[i].Path);
-                TrackRenderer tr = new TrackRenderer(track);
-                Program.Window.SetTrackRenderer(tr);
-                tr.Render();
-                dialog.Close();
-                // TODO
-            };
             dialog.OTDCancelButton.Click += (s, e) => { dialog.Close(); };
 
 

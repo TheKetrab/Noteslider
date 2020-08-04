@@ -15,7 +15,7 @@ namespace Noteslider.Code
         int _delay;
 
 
-        public MarginAnimator(FrameworkElement element, double step = 3, int delay = 2)
+        public MarginAnimator(FrameworkElement element, double step = 5, int delay = 2)
         {
             _element = element;
             _step = step;

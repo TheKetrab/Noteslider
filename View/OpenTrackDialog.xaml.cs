@@ -51,6 +51,14 @@ namespace Noteslider
                 ResourceHelper.LoadBitmapFromResource("Resources/Default.png");
         }
 
+        private void LoadTrack(int i)
+        {
+            var track = Track.ReadTrack(tracks[i].Path);
+            TrackRenderer tr = new TrackRenderer(track);
+            Program.Window.SetTrackRenderer(tr);
+            tr.Render();
+        }
+
         private void ListViewItem_MouseLeave(object sender, MouseEventArgs e)
         {
             int selected = OTDListView.SelectedIndex;
@@ -65,11 +73,17 @@ namespace Noteslider
         private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             int i = OTDListView.SelectedIndex;
-            var track = Track.ReadTrack(tracks[i].Path);
-            TrackRenderer tr = new TrackRenderer(track);
-            Program.Window.SetTrackRenderer(tr);
-            tr.Render();
-            this.Close();
+            LoadTrack(i);
+            Close();
         }
+
+
+        private void OTDLoadButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            int i = OTDListView.SelectedIndex;
+            LoadTrack(i);
+            Close();
+        }
+        
     }
 }
