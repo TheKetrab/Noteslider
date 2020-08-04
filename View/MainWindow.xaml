@@ -23,7 +23,7 @@
     
     
     <WindowChrome.WindowChrome>
-        <WindowChrome 
+        <WindowChrome CaptionHeight="48"
             />
     </WindowChrome.WindowChrome>
 
@@ -37,96 +37,91 @@
     </Window.CommandBindings>
 
     <Border x:Name="MainWindowBorder" BorderBrush="LightCoral" BorderThickness="0">
-    <DockPanel LastChildFill="True">
-        <DockPanel DockPanel.Dock="Top" MaxHeight="32" Background="#1a1a1a">
-            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent">
-                <Image Margin="10 5 5 5" Source="/Noteslider;component/Resources/Logo64.png"/>
-                <Label Margin="5" Content="Noteslider" Background="Transparent"/>
-            </StackPanel>
+        <DockPanel LastChildFill="True">
 
-            <!--Caption buttons-->
-            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" Background="Transparent">
-                <Button Style="{StaticResource MicrophoneButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
-                    Command=""/>
-                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
-                    Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
-                <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
-                        Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
-                <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
-                        Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
-                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
-                        Command="{x:Static SystemCommands.CloseWindowCommand}"/>
-            </StackPanel>
-        </DockPanel>        
-        
+            <!-- TITLE BAR -->
+            <DockPanel DockPanel.Dock="Top" MaxHeight="48" Background="#1a1a1a" LastChildFill="True">
+                <!--Left-->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent" VerticalAlignment="Top">
+                    <Image Margin="10 5 0 5" MaxHeight="16" Source="/Noteslider;component/Resources/Logo64.png"/>
+                    <Label Margin="5" Content="Noteslider" Background="Transparent"/>
+                </StackPanel>
 
-            <!--App content-->
-            <Grid DockPanel.Dock="Bottom">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10*"/>
-                    <RowDefinition Height="90*"/>
-                </Grid.RowDefinitions>
-                <StackPanel 
-                x:Name="MainWindowMenu" Grid.Row="0"
-                HorizontalAlignment="Center" MaxHeight="100"
-                Orientation="Horizontal"
-                >
-                    <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
+                <!--Caption buttons-->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent">
+                    <Button Style="{StaticResource MicrophoneButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                        Command=""/>
+                    <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                        Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
+                    <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
+                            Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
+                    <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
+                            Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
+                    <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
+                </StackPanel>
+
+                <!--Center-->
+                <StackPanel Margin="5" x:Name="MainWindowMenu" Orientation="Horizontal" MaxHeight="48" HorizontalAlignment="Center">
+                    <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
                         <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
+                    <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
                         <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
+                    <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
                         <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
+                    <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
                         <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
                     </Button>
                 </StackPanel>
-                <DockPanel Grid.Row="1" LastChildFill="True">
 
-                    <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
-                        <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
-                        <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
-                            <TabItem x:Name="MWTabItemMain" Header="Main" Background="Blue">
-                                <Label Content="Content goes here..." />
-                            </TabItem>
-                            <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
-                            <TabItem x:Name="MWTabItemTags" Header="Tags" />
-                        </TabControl>
-                    </DockPanel>
+            </DockPanel>
 
-                    <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
-                        <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
-                        <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <GroupBox Header="Info" Margin="5" BorderBrush="Black">
-                                <Image>
-                                </Image>
-                            </GroupBox>
-                            <GroupBox Header="Tags">
 
-                            </GroupBox>
-                            <Label Content="Speed"/>
-                            <Slider x:Name="SpeedSlider" Value="1"/>
-                        </StackPanel>
-                    </DockPanel>
-
-                    <ScrollViewer DockPanel.Dock="Left"
-                x:Name="ScrollViewer"
-                VerticalScrollBarVisibility="Auto" 
-                HorizontalScrollBarVisibility="Auto" 
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Margin="5">
-                        <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
-
-                        </StackPanel>
-                    </ScrollViewer>
+            <!--App content-->
+            <DockPanel LastChildFill="True">
+                <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
+                    <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
+                    <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+                        <TabItem x:Name="MWTabItemMain" Header="Main">
+                            <Label Content="Content goes here..." />
+                        </TabItem>
+                        <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
+                        <TabItem x:Name="MWTabItemTags" Header="Tags" />
+                    </TabControl>
                 </DockPanel>
-            </Grid>
 
-    </DockPanel>
+                <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
+                    <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
+                    <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <GroupBox Header="Info" Margin="5" BorderBrush="Black">
+                            <Image>
+                            </Image>
+                        </GroupBox>
+                        <GroupBox Header="Tags">
+
+                        </GroupBox>
+                        <Label Content="Speed"/>
+                        <Slider x:Name="SpeedSlider" Value="1"/>
+                    </StackPanel>
+                </DockPanel>
+
+                <ScrollViewer DockPanel.Dock="Left"
+                    x:Name="ScrollViewer"
+                    VerticalScrollBarVisibility="Auto" 
+                    HorizontalScrollBarVisibility="Auto" 
+                    HorizontalAlignment="Stretch" 
+                    VerticalAlignment="Stretch" 
+                    Margin="5">
+                    <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+
+        </DockPanel>
     </Border>
 
 
