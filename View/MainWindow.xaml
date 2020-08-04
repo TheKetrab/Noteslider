@@ -9,154 +9,130 @@
         MinWidth="800"
         MinHeight="450" Icon="Logo64.png"
         WindowStartupLocation="CenterScreen"
+        
         >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleBase.xaml" />
+                <ResourceDictionary Source="Style/StyleTitleBar.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="15*"/>
-            <RowDefinition Height="85*"/>
-        </Grid.RowDefinitions>
-        <StackPanel 
-            x:Name="MainWindowMenu" Grid.Row="0"
-            HorizontalAlignment="Center" MaxHeight="100"
-            Orientation="Horizontal"
-            >
-            <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
-                <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
-            </Button>
-        </StackPanel>
-        <DockPanel Grid.Row="1" LastChildFill="True">
-
-            <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
-                <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
-                <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
-                    <TabItem x:Name="MWTabItemMain" Header="Main" Background="Blue">
-                        <Label Content="Content goes here..." />
-                    </TabItem>
-                    <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
-                    <TabItem x:Name="MWTabItemTags" Header="Tags" />
-                </TabControl>
-            </DockPanel>
-
-            <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
-                <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
-                <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <GroupBox Header="Info" Margin="5" BorderBrush="Black">
-                        <Image>
-                        </Image>
-                    </GroupBox>
-                    <GroupBox Header="Tags">
-
-                    </GroupBox>
-                    <Label Content="Speed"/>
-                    <Slider x:Name="SpeedSlider" Value="1"/>
-                </StackPanel>
-            </DockPanel>
-
-            <ScrollViewer DockPanel.Dock="Left"
-            x:Name="ScrollViewer"
-            VerticalScrollBarVisibility="Auto" 
-            HorizontalScrollBarVisibility="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch" 
-            Margin="5">
-                <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
-
-                </StackPanel>
-            </ScrollViewer>
-        </DockPanel>
-    </Grid>
-
-    <!--
-    <Grid x:Name="MWGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition MaxHeight="100" Height="15*"/>
-            <RowDefinition Height="85*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition MaxWidth="300" Width="20*"/>
-            <ColumnDefinition Width="60*"/>
-            <ColumnDefinition MaxWidth="300" Width="20*"/>
-        </Grid.ColumnDefinitions>
-
-        <DockPanel x:Name="MainWindowMenu" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" Margin="5">
-
-            <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
-                <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
-            </Button>
-            <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
-                <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
-            </Button>
-            
-        </DockPanel>
-
-        <DockPanel Grid.Row="1" Grid.Column="0" LastChildFill="True">
-            <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
-            <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
-                <TabItem Header="Main">
-                    <Label Content="Content goes here..." />
-                </TabItem>
-                <TabItem Header="Tracks" />
-                <TabItem Header="Tags" />
-            </TabControl>
-        </DockPanel>
+    
+    
+    <WindowChrome.WindowChrome>
+        <WindowChrome 
+            />
+    </WindowChrome.WindowChrome>
 
 
+    <!--Title bar button commands-->
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
+        <CommandBinding Command="{x:Static SystemCommands.MaximizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Maximize" />
+        <CommandBinding Command="{x:Static SystemCommands.MinimizeWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Minimize" />
+        <CommandBinding Command="{x:Static SystemCommands.RestoreWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Restore" />
+    </Window.CommandBindings>
 
-        <ScrollViewer 
-            x:Name="ScrollViewer"
-            VerticalScrollBarVisibility="Auto" 
-            HorizontalScrollBarVisibility="Auto" 
-            HorizontalAlignment="Stretch" 
-            VerticalAlignment="Stretch" 
-            Grid.Column="1" Grid.Row="1" 
-            Margin="5">
-            <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
-
+    <Border x:Name="MainWindowBorder" BorderBrush="LightCoral" BorderThickness="0">
+    <DockPanel LastChildFill="True">
+        <DockPanel DockPanel.Dock="Top" MaxHeight="32" Background="#1a1a1a">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent">
+                <Image Margin="10 5 5 5" Source="/Noteslider;component/Resources/Logo64.png"/>
+                <Label Margin="5" Content="Noteslider" Background="Transparent"/>
             </StackPanel>
-        </ScrollViewer>
 
-        <DockPanel Grid.Column="2" Grid.Row="1" LastChildFill="True">
-            <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
-            <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                <GroupBox Header="Info" Margin="5" BorderBrush="Black">
-                    <Image Source="C:/Projekty/.NET/Noteslider/Noteslider/icons/testImg.jpg">
-                    </Image>                
-                </GroupBox>
-                <GroupBox Header="Tags">
-
-                </GroupBox>
-                <Label Content="Speed"/>
-                <Slider x:Name="SpeedSlider" Value="1"/>
+            <!--Caption buttons-->
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right" Background="Transparent">
+                <Button Style="{StaticResource MicrophoneButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                    Command=""/>
+                <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                    Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
+                <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
+                        Command="{x:Static SystemCommands.RestoreWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Restore"/>
+                <Button x:Name="MaximizeButton" Visibility="Visible" Style="{StaticResource MaximizeButtonStyle}" 
+                        Command="{x:Static SystemCommands.MaximizeWindowCommand}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Maximize" />
+                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
+                        Command="{x:Static SystemCommands.CloseWindowCommand}"/>
             </StackPanel>
-        </DockPanel>
+        </DockPanel>        
+        
 
-        <Menu Margin="0,0,0,391" Grid.ColumnSpan="2" Background="#FF424242">
-            
-        </Menu>
+            <!--App content-->
+            <Grid DockPanel.Dock="Bottom">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="90*"/>
+                </Grid.RowDefinitions>
+                <StackPanel 
+                x:Name="MainWindowMenu" Grid.Row="0"
+                HorizontalAlignment="Center" MaxHeight="100"
+                Orientation="Horizontal"
+                >
+                    <Button x:Name="MainWindowMenuNewTrackButton" Background="#00000000">
+                        <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuOpenTrackButton" Background="#00000000">
+                        <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuPlayButton" Background="#00000000">
+                        <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuSettingsButton" Background="#00000000">
+                        <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
+                    </Button>
+                </StackPanel>
+                <DockPanel Grid.Row="1" LastChildFill="True">
 
-    </Grid>
--->
+                    <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
+                        <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
+                        <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+                            <TabItem x:Name="MWTabItemMain" Header="Main" Background="Blue">
+                                <Label Content="Content goes here..." />
+                            </TabItem>
+                            <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
+                            <TabItem x:Name="MWTabItemTags" Header="Tags" />
+                        </TabControl>
+                    </DockPanel>
+
+                    <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
+                        <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
+                        <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <GroupBox Header="Info" Margin="5" BorderBrush="Black">
+                                <Image>
+                                </Image>
+                            </GroupBox>
+                            <GroupBox Header="Tags">
+
+                            </GroupBox>
+                            <Label Content="Speed"/>
+                            <Slider x:Name="SpeedSlider" Value="1"/>
+                        </StackPanel>
+                    </DockPanel>
+
+                    <ScrollViewer DockPanel.Dock="Left"
+                x:Name="ScrollViewer"
+                VerticalScrollBarVisibility="Auto" 
+                HorizontalScrollBarVisibility="Auto" 
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Stretch" 
+                Margin="5">
+                        <StackPanel x:Name="MainWindowNotePanel" VerticalAlignment="Top" HorizontalAlignment="Center">
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </DockPanel>
+            </Grid>
+
+    </DockPanel>
+    </Border>
+
+
+
+
+
+
+
 </Window>
