@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 
 namespace Noteslider.Code
@@ -16,6 +19,7 @@ namespace Noteslider.Code
     {
         private int page;
         private NewTrackDialog dialog;
+        private byte[] imgBytes; // bytes to save and store image
 
 
         public NewTrackDialogManager()
@@ -30,7 +34,7 @@ namespace Noteslider.Code
             dialog.NTDNextButton.Click += (s, e) => { SetPage(page + 1); };
             dialog.NTDPrevButton.Click += (s, e) => { SetPage(page - 1); };
 
-            dialog.NTDImageButton.Click += (s, e) =>
+            dialog.NTDImageButtonBrowse.Click += (s, e) =>
             {
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
@@ -39,7 +43,22 @@ namespace Noteslider.Code
                 if (openFileDialog.ShowDialog() == true)
                 {
                     string path = openFileDialog.FileName;
-                    dialog.NTDImage.Text = path;
+                    var bytes = File.ReadAllBytes(path);
+                    var img = (BitmapSource)new ImageSourceConverter().ConvertFrom(bytes);
+                    dialog.NTDImage.Source = img;
+                    imgBytes = bytes;
+                }
+
+            };
+
+            dialog.NTDImageButtonPaste.Click += (s, e) =>
+            {
+                var image = System.Windows.Clipboard.GetImage();
+                if (image != null)
+                {
+                    var bytes = Program.JpgToBytes(image);
+                    dialog.NTDImage.Source = image;
+                    imgBytes = bytes;
                 }
 
             };
@@ -107,9 +126,8 @@ namespace Noteslider.Code
             
             var author = dialog.NTDAuthor.Text;
             var name = dialog.NTDTitle.Text;
-            var image = dialog.NTDImage.Text;
 
-            Track track = new Track(author, name, image);
+            Track track = new Track(author, name, imgBytes);
 
             // REGISTER
             RegisterTags(track);

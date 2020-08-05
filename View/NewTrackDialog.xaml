@@ -28,25 +28,38 @@
                 <StackPanel>
                     
                     <Label Margin="10 20 10 30" Content="Fill information about the track" HorizontalAlignment="Center"/>
-                    
-                    <!-- TITLE -->
-                    <DockPanel Margin="10 10" LastChildFill="True">
-                        <Label MinWidth="100">Title</Label>
-                        <TextBox x:Name="NTDTitle"></TextBox>
-                    </DockPanel>
 
-                    <!-- AUTHOR -->
-                    <DockPanel Margin="10 10" LastChildFill="True">
-                        <Label MinWidth="100">Author</Label>
-                        <TextBox x:Name="NTDAuthor"></TextBox>
-                    </DockPanel>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="55*"/>
+                            <ColumnDefinition Width="35*"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- IMAGE -->
-                    <DockPanel Margin="10 10" LastChildFill="True">
-                        <Label MinWidth="100">Image</Label>
-                        <Button x:Name="NTDImageButton" DockPanel.Dock="Right" Content="Browse" MinWidth="100"/>
-                        <TextBox x:Name="NTDImage"></TextBox>
-                    </DockPanel>
+                        <StackPanel Grid.Column="0">
+                            <!-- TITLE -->
+                            <DockPanel Margin="10 10" LastChildFill="True">
+                                <Label MinWidth="100">Title</Label>
+                                <TextBox x:Name="NTDTitle"></TextBox>
+                            </DockPanel>
+
+                            <!-- AUTHOR -->
+                            <DockPanel Margin="10 10" LastChildFill="True">
+                                <Label MinWidth="100">Author</Label>
+                                <TextBox x:Name="NTDAuthor"></TextBox>
+                            </DockPanel>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <Image x:Name="NTDImage" Source="/Noteslider;component/Resources/Default.png" Margin="5 -25 5 5" Width="150" Height="150"/>
+                            <Label Content="Select image for the track" HorizontalAlignment="Center"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button x:Name="NTDImageButtonBrowse" Content="Browse" Width="64" Margin="5 0"/>
+                                <Button x:Name="NTDImageButtonPaste" Content="Paste" Width="64" Margin="5 0"/>
+                            </StackPanel>
+
+
+                        </StackPanel>
+                    </Grid>
 
                 </StackPanel>
             </TabItem>

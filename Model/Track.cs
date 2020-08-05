@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -28,21 +29,21 @@ namespace Noteslider
         public List<Asset> Assets;
 
 
-        public Track(string author, string name, string imgPath) 
+        public Track(string author, string name, byte[] img) 
             : this()
         {
             TrackInfo.Author = author ?? "UNKNOWN"; // TODO language
             TrackInfo.Name = name;
             TrackInfo.SliderValue = 1.0;
 
-            if (string.IsNullOrEmpty(imgPath))
+            if (img == null)
             {
                 TrackInfo.Image = null;
                 TrackInfo.ImageLen = 0;
             }
             else
             {
-                TrackInfo.Image = File.ReadAllBytes(imgPath);
+                TrackInfo.Image = img;
                 TrackInfo.ImageLen = TrackInfo.Image.Length;
             }
 
@@ -107,7 +108,10 @@ namespace Noteslider
                 ti.Name = reader.ReadString();
                 ti.Author = reader.ReadString();
                 ti.ImageLen = reader.ReadInt32();
-                ti.Image = reader.ReadBytes(ti.ImageLen);
+
+                if (ti.ImageLen > 0)
+                    ti.Image = reader.ReadBytes(ti.ImageLen);
+
                 ti.SliderValue = reader.ReadDouble();
             }
 
@@ -127,7 +131,7 @@ namespace Noteslider
                 writer.Write(TrackInfo.Name);
                 writer.Write(TrackInfo.Author);
                 writer.Write(TrackInfo.ImageLen);
-                writer.Write(TrackInfo.Image);
+                if (TrackInfo.Image != null) writer.Write(TrackInfo.Image);
                 writer.Write(TrackInfo.SliderValue);
 
                 // TAGS

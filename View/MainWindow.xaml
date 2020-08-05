@@ -63,6 +63,7 @@
 
                 <!--Center-->
                 <StackPanel Margin="5" x:Name="MainWindowMenu" Orientation="Horizontal" MaxHeight="48" HorizontalAlignment="Center">
+                    <!-- TODO: scroll to top, scroll to bottom, edit current track, close track -->
                     <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
                         <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
                     </Button>
