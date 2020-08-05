@@ -15,7 +15,52 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+
+    <!-- TAB CONTROL -->
     
+    <Style TargetType="TabItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TabItem">
+                    <Border BorderThickness="1" BorderBrush="#040404">
+                    <Grid Name="TabItemHeader">
+                        <ContentPresenter 
+                            x:Name="ContentSite"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center"
+                            ContentSource="Header"
+                            Margin="5 2"                            
+                        />
+                    </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="TabItemHeader" Property="TextElement.Foreground" Value="LightGray" />
+                            <Setter TargetName="TabItemHeader" Property="Background" Value="#1B2631" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="False">
+                            <Setter TargetName="TabItemHeader" Property="TextElement.Foreground" Value="LightGray" />
+                            <Setter TargetName="TabItemHeader" Property="Background" Value="#515A5A" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+ 
+
+<!--
+    <Style TargetType="TabItem">
+        <Setter Property="Background" Value="#6c6c6c"/>
+        <Setter Property="Foreground" Value="#d9d9d9" />
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Black"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+-->    
     <!-- PANELS -->
     <Style TargetType="StackPanel">
         <Setter Property="Background" Value="#FF2C2C2C"/>
@@ -27,7 +72,7 @@
     <!-- LABELS -->
     <Style TargetType="Label">
         <Setter Property="FontFamily" Value="Calibri"/>
-        <Setter Property="Background" Value="#414141"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Foreground" Value="#bfc0c0"/>
     </Style>
     

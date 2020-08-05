@@ -129,6 +129,11 @@ namespace Noteslider.Code
               .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
+        public static void PrintDebug(string msg)
+        {
+            Window.DEBUG.Content = msg;
+        }
+
 
 
 

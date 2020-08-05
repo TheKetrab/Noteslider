@@ -102,6 +102,7 @@
     <Compile Include="Code\Renderer\AssetRendererUI\TextAssetRenderer.cs" />
     <Compile Include="Code\Renderer\TrackRenderer.cs" />
     <Compile Include="Code\ResourceHelper.cs" />
+    <Compile Include="Converter.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
@@ -143,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Style\StyleOverlayOTD.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Style\StyleStretchingTab.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

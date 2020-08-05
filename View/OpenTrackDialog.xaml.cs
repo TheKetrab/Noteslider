@@ -57,6 +57,12 @@ namespace Noteslider
             TrackRenderer tr = new TrackRenderer(track);
             Program.Window.SetTrackRenderer(tr);
             tr.Render();
+
+            Program.Window.MWInfoTitle.Content = track.TrackInfo.Name;
+            Program.Window.MWInfoAuthor.Content = track.TrackInfo.Author;
+            Program.Window.MWInfoImage.Source = track.TrackInfo.Image != null ?
+                (BitmapSource)new ImageSourceConverter().ConvertFrom(track.TrackInfo.Image) :
+                ResourceHelper.LoadBitmapFromResource("Resources/Default.png");
         }
 
         private void ListViewItem_MouseLeave(object sender, MouseEventArgs e)

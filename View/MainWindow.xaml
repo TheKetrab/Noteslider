@@ -16,7 +16,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleBase.xaml" />
                 <ResourceDictionary Source="Style/StyleTitleBar.xaml" />
-
+                <ResourceDictionary Source="Style/StyleStretchingTab.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -36,7 +36,7 @@
         <CommandBinding Command="{x:Static SystemCommands.RestoreWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Restore" />
     </Window.CommandBindings>
 
-    <Border x:Name="MainWindowBorder" BorderBrush="LightCoral" BorderThickness="0">
+    <Border x:Name="MainWindowBorder" BorderBrush="#1A1818" BorderThickness="1">
         <DockPanel LastChildFill="True">
 
             <!-- TITLE BAR -->
@@ -84,27 +84,43 @@
             <DockPanel LastChildFill="True">
                 <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
                     <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
-                    <TabControl x:Name="MWLeftPanelTabControl" DockPanel.Dock="Left" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0" Grid.Row="1">
+
+                    <TabControl Background="#414141" x:Name="MWLeftPanelTabControl" Style="{DynamicResource StretchingTabControl}">
                         <TabItem x:Name="MWTabItemMain" Header="Main">
                             <Label Content="Content goes here..." />
                         </TabItem>
                         <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
                         <TabItem x:Name="MWTabItemTags" Header="Tags" />
                     </TabControl>
+
                 </DockPanel>
 
                 <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
                     <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
-                    <StackPanel x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                        <GroupBox Header="Info" Margin="5" BorderBrush="Black">
-                            <Image>
-                            </Image>
-                        </GroupBox>
-                        <GroupBox Header="Tags">
+                    <StackPanel Background="#414141" x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <StackPanel Background="Transparent">
+                            <Image x:Name="MWInfoImage" Source="/Noteslider;component/Resources/Default.png" MaxWidth="150" Margin="10" MaxHeight="150"/>
+                            <Label x:Name="MWInfoTitle" Content="TITLE OF CHOSEN" HorizontalAlignment="Center" Margin="10 0"/>
+                            <Label x:Name="MWInfoAuthor" Content="AUTHOR" HorizontalAlignment="Center" Margin="10 0"/>
+                        </StackPanel>
 
-                        </GroupBox>
-                        <Label Content="Speed"/>
-                        <Slider x:Name="SpeedSlider" Value="1"/>
+                        <StackPanel Margin="5" Background="Transparent" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Label Background="Transparent">Tag1</Label>
+                            <Label Background="Transparent">Tag2</Label>
+                            <Label Background="Transparent">Tag3</Label>
+                        </StackPanel>
+
+                        <StackPanel Margin="5 20 5 0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Label Content="Speed: "/>
+                            <TextBox Width="50"/>
+                            <Button Content="+" Width="25"/>
+                            <Button Content="-" Width="25"/>
+                        </StackPanel>
+
+                        <Slider Margin="5" x:Name="SpeedSlider" Value="1"/>
+
+                        <Label x:Name="DEBUG" Content=""/>
+
                     </StackPanel>
                 </DockPanel>
 

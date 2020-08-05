@@ -75,7 +75,7 @@ namespace Noteslider.Code.Renderer
                         Source = bitmap,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         Margin = new Thickness(0, 4, 0, 4),
-                        MaxWidth = 800
+                        
                     };
                     images[i] = image;
                 }
@@ -90,7 +90,9 @@ namespace Noteslider.Code.Renderer
             foreach(var img in images)
             {
                 img.Width = Window.ScrollViewer.ActualWidth - MARGIN;
+
                 img.UpdateLayout();
+                Program.PrintDebug(string.Format("Width = {0}\nActualWidth = {1}",img.Width,img.ActualWidth));
             }
         }
 

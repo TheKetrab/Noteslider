@@ -81,7 +81,7 @@ namespace Noteslider
             }
             else
             {
-                MainWindowBorder.BorderThickness = new Thickness(0);
+                MainWindowBorder.BorderThickness = new Thickness(1);
                 RestoreButton.Visibility = Visibility.Collapsed;
                 MaximizeButton.Visibility = Visibility.Visible;
             }
@@ -110,6 +110,7 @@ namespace Noteslider
         public void SetTrackRenderer(TrackRenderer trackRenderer)
         {
             this.trackRenderer = trackRenderer;
+
         }
 
         public MainWindow()

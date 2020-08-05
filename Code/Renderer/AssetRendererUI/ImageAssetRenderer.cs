@@ -26,6 +26,7 @@ namespace Noteslider.Code.Renderer
         public override void ScaleToWidth()
         {
             image.Width = Window.ScrollViewer.ActualWidth - MARGIN;
+            Program.PrintDebug(image.Width.ToString());
             image.UpdateLayout();
         }
 
