@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.Exceptions
 {
-    class ForUserException
+    public class ForUserException
     {
     }
 }
