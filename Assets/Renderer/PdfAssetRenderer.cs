@@ -1,19 +1,16 @@
-﻿using Noteslider.Code.Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Text.RegularExpressions;
 using System.IO;
 using Windows.Storage;
 using Windows.Data.Pdf;
 using System.Windows.Media.Imaging;
 using Windows.Storage.Streams;
 using System.Windows;
+using Noteslider.Assets.Model;
+using Noteslider.Code;
 
-namespace Noteslider.Code.Renderer
+namespace Noteslider.Assets.Renderer
 {
     public class PdfAssetRenderer : AssetRenderer
     {

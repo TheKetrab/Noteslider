@@ -1,6 +1,5 @@
 ﻿using Noteslider.Code.Renderer;
 using Noteslider.Events;
-using Noteslider.Code.Assets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +17,7 @@ using System.Windows.Shapes;
 using System.Threading;
 using Noteslider.Code;
 using Windows.UI.ViewManagement;
+using Noteslider.Code.Animator;
 
 namespace Noteslider
 {
@@ -26,19 +26,23 @@ namespace Noteslider
     /// </summary>
     public partial class MainWindow : Window
     {
-        private MainWindowManager notifier;
-        private TrackRenderer trackRenderer;
         public bool Playing { get; private set; }
 
-
+        private TrackRenderer trackRenderer;
         private bool _leftPanelHidden, _rightPanelHidden;
         private bool _leftPanelMoving, _rightPanelMoving;
 
+        public MainWindow()
+        {
+            InitializeComponent();
+            StateChanged += MainWindowStateChangeRaised;
+            SizeChanged += MainWindow_SizeChanged;
+        }
 
-
-
-
-        #region Menu
+        #region --- Menu Procedures ---
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        //          ----------- MENU PROCEDURES -----------
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
 
         // Can execute
         private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -88,42 +92,36 @@ namespace Noteslider
         }
 
         #endregion
-
-
-
-
-
-
-
-        public void RepaintTrackRenderer()
+        #region --- Buttons Procedures ---
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        //          ----------- BUTTONS PROCEDURES ----------
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        private void MainWindowMenuNewTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            trackRenderer?.Render();
+            var dialog = new NewTrackDialog();
+            dialog.Show();
         }
 
-        public void StopPlaying()
+        private void MainWindowMenuOpenTrackButton_Click(object sender, RoutedEventArgs e)
         {
-            Playing = false;
-            MainWindowMenuPlayButtonImg.Source =
-                ResourceHelper.LoadBitmapFromResource("Resources/IcoPlay.png");
+            var dialog = new OpenTrackDialog();
+            dialog.Show();
         }
 
-        public void SetTrackRenderer(TrackRenderer trackRenderer)
+        private void MainWindowMenuPlayButton_Click(object sender, RoutedEventArgs e)
         {
-            this.trackRenderer = trackRenderer;
-
+            // TODO
         }
 
-        public MainWindow()
+        private void MainWindowMenuSettingsButton_Click(object sender, RoutedEventArgs e)
         {
-            InitializeComponent();
-            notifier = new MainWindowManager(this.MainWindowMenu);
-            InitEvents();
-            Register();
-
-            StateChanged += MainWindowStateChangeRaised;
-
+            // TODO !!!
         }
-
+        #endregion
+        #region --- AutoScroll ---
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        //             ----------- AUTO SCROLL -----------
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
 
         public async Task AutoScroll(double offset, int millisecondsDelay)
         {
@@ -135,7 +133,7 @@ namespace Noteslider
         public async void StartPlaying()
         {
             Playing = true;
-            MainWindowMenuPlayButtonImg.Source = 
+            MainWindowMenuPlayButtonImg.Source =
                 ResourceHelper.LoadBitmapFromResource("Resources/IcoPause.png");
 
             double speed;
@@ -143,7 +141,7 @@ namespace Noteslider
             double half = SpeedSlider.Maximum / 2;
             const int basePow = 2;
 
-            while(Playing)
+            while (Playing)
             {
                 if (SpeedSlider.Value == 0) { speed = 0; time = 5; }
                 else
@@ -153,121 +151,105 @@ namespace Noteslider
                     else if (speed <= 1) { time = 2; }
                     else { speed /= 2; time = 1; }
                 }
-                
+
                 await AutoScroll(speed, time);
             }
         }
-
-        public void Register()
+        public void StopPlaying()
         {
-            EventAgregator.Instance.AddSubscriber<MainWindowMenuNewTrackEvt>(notifier);
-            EventAgregator.Instance.AddSubscriber<MainWindowMenuOpenTrackEvt>(notifier);
-            EventAgregator.Instance.AddSubscriber<MainWindowMenuPlayEvt>(notifier);
-            EventAgregator.Instance.AddSubscriber<MainWindowMenuSettingsEvt>(notifier);
+            Playing = false;
+            MainWindowMenuPlayButtonImg.Source =
+                ResourceHelper.LoadBitmapFromResource("Resources/IcoPlay.png");
+        }
+        #endregion
+
+        public void RepaintTrackRenderer()
+        {
+            trackRenderer?.Render();
         }
 
- 
-
-        public void InitEvents()
+        public void SetTrackRenderer(TrackRenderer trackRenderer)
         {
-            SizeChanged += (s,e) =>
+            this.trackRenderer = trackRenderer;
+
+        }
+
+        private async void ButtonHideRightPanel_Click(object sender, RoutedEventArgs e)
+        {
+            // exit if
+            if (_rightPanelMoving) return;
+
+            // func
+            if (_rightPanelHidden)
             {
-                // ***** ***** *****
-                // RENDER ON RESIZE
-                trackRenderer?.Render();
-                // ***** ***** *****
+                _rightPanelMoving = true;
 
+                var anim = new MarginAnimator(RightPanel);
+                await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
+                ButtonHideRightPanel.Content = ">";
 
-                // percentage left and right panel
-                
-                LeftPanel.Width = this.ActualWidth * 0.15;
-                RightPanel.Width = this.ActualWidth * 0.15;
-                //LeftPanel.UpdateLayout();
-                //RightPanel.UpdateLayout();
-                // TODO if panel hidden or visible -> set margin!!!
+                _rightPanelHidden = false;
+                _rightPanelMoving = false;
+            }
 
+            else
+            {
+                _rightPanelMoving = true;
 
-                //LeftPanel.Width = Math.Max(LeftPanel.Width, tabItemWidth * 3);
-            };
+                double panelWidth = MWRightPanelStackPanel.ActualWidth;
+                var anim = new MarginAnimator(RightPanel);
+                await anim.AnimateMargin(new Thickness(0, 0, -panelWidth, 0));
+                ButtonHideRightPanel.Content = "<";
 
-
-            MainWindowMenuNewTrackButton.Click += 
-                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuNewTrackEvt()); };
-            MainWindowMenuOpenTrackButton.Click += 
-                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuOpenTrackEvt()); };
-            MainWindowMenuPlayButton.Click += 
-                (s, e) => {
-                    if (Playing) EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt(false)); 
-                    else EventAgregator.Instance.Publish(new MainWindowMenuPlayEvt(true));
-                };
-            MainWindowMenuSettingsButton.Click += 
-                (s, e) => { EventAgregator.Instance.Publish(new MainWindowMenuSettingsEvt()); };
-
-
-            ButtonHideLeftPanel.Click += async (s,e) => {
-
-                // exit if
-                if (_leftPanelMoving) return;
-
-                // func
-                if (_leftPanelHidden)
-                {
-                    _leftPanelMoving = true;
-
-                    var anim = new MarginAnimator(LeftPanel);
-                    await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
-                    ButtonHideLeftPanel.Content = "<";
-
-                    _leftPanelHidden = false;
-                    _leftPanelMoving = false;
-                } 
-                
-                else
-                {
-                    _leftPanelMoving = true;
-
-                    double panelWidth = MWLeftPanelTabControl.ActualWidth;
-                    var anim = new MarginAnimator(LeftPanel);
-                    await anim.AnimateMargin(new Thickness(-panelWidth, 0, 0, 0));
-                    ButtonHideLeftPanel.Content = ">";
-
-                    _leftPanelHidden = true;
-                    _leftPanelMoving = false;
-                }
-            };
-            ButtonHideRightPanel.Click += async (s, e) => {
-
-                // exit if
-                if (_rightPanelMoving) return;
-
-                // func
-                if (_rightPanelHidden)
-                {
-                    _rightPanelMoving = true;
-
-                    var anim = new MarginAnimator(RightPanel);
-                    await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
-                    ButtonHideRightPanel.Content = ">";
-
-                    _rightPanelHidden = false;
-                    _rightPanelMoving = false;
-                }
-
-                else
-                {
-                    _rightPanelMoving = true;
-
-                    double panelWidth = MWRightPanelStackPanel.ActualWidth;
-                    var anim = new MarginAnimator(RightPanel);
-                    await anim.AnimateMargin(new Thickness(0, 0, -panelWidth, 0));
-                    ButtonHideRightPanel.Content = "<";
-
-                    _rightPanelHidden = true;
-                    _rightPanelMoving = false;
-                }
-
-            };
+                _rightPanelHidden = true;
+                _rightPanelMoving = false;
+            }
         }
 
+        private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)
+        {
+            // exit if
+            if (_leftPanelMoving) return;
+
+            // func
+            if (_leftPanelHidden)
+            {
+                _leftPanelMoving = true;
+
+                var anim = new MarginAnimator(LeftPanel);
+                await anim.AnimateMargin(new Thickness(0, 0, 0, 0));
+                ButtonHideLeftPanel.Content = "<";
+
+                _leftPanelHidden = false;
+                _leftPanelMoving = false;
+            }
+
+            else
+            {
+                _leftPanelMoving = true;
+
+                double panelWidth = MWLeftPanelTabControl.ActualWidth;
+                var anim = new MarginAnimator(LeftPanel);
+                await anim.AnimateMargin(new Thickness(-panelWidth, 0, 0, 0));
+                ButtonHideLeftPanel.Content = ">";
+
+                _leftPanelHidden = true;
+                _leftPanelMoving = false;
+            }
+        }
+
+        private void MainWindow_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+
+            // percentage left and right panel
+            LeftPanel.Width = this.ActualWidth * 0.15;
+            RightPanel.Width = this.ActualWidth * 0.15;
+            // TODO if panel hidden or visible -> set margin!!!
+            LeftPanel.UpdateLayout();
+            RightPanel.UpdateLayout();
+
+            // scale assets
+            RepaintTrackRenderer();
+        }
     }
 }

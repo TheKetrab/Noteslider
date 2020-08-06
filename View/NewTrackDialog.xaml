@@ -53,8 +53,8 @@
                             <Image x:Name="NTDImage" Source="/Noteslider;component/Resources/Default.png" Margin="5 -25 5 5" Width="150" Height="150"/>
                             <Label Content="Select image for the track" HorizontalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="NTDImageButtonBrowse" Content="Browse" Width="64" Margin="5 0"/>
-                                <Button x:Name="NTDImageButtonPaste" Content="Paste" Width="64" Margin="5 0"/>
+                                <Button x:Name="NTDImageButtonBrowse" Content="Browse" Width="64" Margin="5 0" Click="NTDImageButtonBrowse_Click"/>
+                                <Button x:Name="NTDImageButtonPaste" Content="Paste" Width="64" Margin="5 0" Click="NTDImageButtonPaste_Click"/>
                             </StackPanel>
 
 
@@ -74,8 +74,8 @@
                     <GroupBox DockPanel.Dock="Top" Header="Choose files" VerticalAlignment="Stretch">
                         <DockPanel>
                             <StackPanel DockPanel.Dock="Right" Margin="20" MinWidth="80">
-                                <Button x:Name="NTDFilesAdd" Content="+" Margin="0 5"/>
-                                <Button x:Name="NTDFilesRemove" Content="-" Margin="0 5"/>
+                                <Button x:Name="NTDFilesAdd" Content="+" Margin="0 5" Click="NTDFilesAdd_Click"/>
+                                <Button x:Name="NTDFilesRemove" Content="-" Margin="0 5" Click="NTDFilesRemove_Click"/>
                             </StackPanel>
                             <ListBox x:Name="NTDFiles" DockPanel.Dock="Left">
                             </ListBox>

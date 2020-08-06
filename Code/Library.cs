@@ -8,13 +8,8 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code
 {
-    public class Library
+    public static class Library
     {
-        public Library()
-        {
-
-        }
-
         public static List<TrackInfo> LoadLibraryInfo()
         {
             List<TrackInfo> list = new List<TrackInfo>();

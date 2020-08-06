@@ -49,7 +49,7 @@
             </ListViewItem>
         </ListView>
         <StackPanel Grid.Row="0" Grid.Column="1">
-            <Image x:Name="OTDInfoImage" Source="" MaxWidth="150" Margin="10" MaxHeight="150"/>
+            <Image x:Name="OTDInfoImage" Source="/Noteslider;component/Resources/Default.png" MaxWidth="150" Margin="10" MaxHeight="150"/>
             <Label x:Name="OTDInfoTitle" Content="TITLE OF SELECTED" HorizontalAlignment="Center" Margin="10 0"/>
             <Label x:Name="OTDInfoAuthor" Content="AUTHOR" HorizontalAlignment="Center" Margin="10 0"/>
         </StackPanel>
@@ -57,7 +57,7 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5 5" Click="OTDLoadButton_Click" />
-            <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5 5" Width="80"/>
+            <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5 5" Width="80" Click="OTDCancelButton_Click"/>
         </StackPanel>
 
 

@@ -1,13 +1,5 @@
-﻿using Noteslider.Code.Assets;
-using System;
+﻿using Noteslider.Assets.Renderer;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
 
 namespace Noteslider.Code.Renderer
 {
@@ -24,7 +16,8 @@ namespace Noteslider.Code.Renderer
             _track = track;
             foreach (var asset in _track.Assets)
             {
-                var renderer = AssetRendererFactory.Instance.Create(asset);
+                // create renderer for current asset
+                var renderer = AssetRendererFactory.CreateRenderer(asset);
                 _renderers.Add(renderer);
             }
 

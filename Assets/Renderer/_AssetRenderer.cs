@@ -1,13 +1,7 @@
-﻿using Noteslider.Code.Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Noteslider.Assets.Model;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace Noteslider.Code.Renderer
+namespace Noteslider.Assets.Renderer
 {
     public abstract class AssetRenderer : UIElement
     {

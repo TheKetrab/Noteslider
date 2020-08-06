@@ -64,16 +64,16 @@
                 <!--Center-->
                 <StackPanel Margin="5" x:Name="MainWindowMenu" Orientation="Horizontal" MaxHeight="48" HorizontalAlignment="Center">
                     <!-- TODO: scroll to top, scroll to bottom, edit current track, close track -->
-                    <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
+                    <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuNewTrackButton_Click">
                         <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
+                    <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuOpenTrackButton_Click">
                         <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
+                    <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuPlayButton_Click">
                         <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000">
+                    <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuSettingsButton_Click">
                         <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
                     </Button>
                 </StackPanel>
@@ -84,7 +84,7 @@
             <!--App content-->
             <DockPanel LastChildFill="True">
                 <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
-                    <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;"/>
+                    <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;" Click="ButtonHideLeftPanel_Click"/>
 
                     <TabControl Background="#414141" x:Name="MWLeftPanelTabControl" Style="{DynamicResource StretchingTabControl}">
                         <TabItem x:Name="MWTabItemMain" Header="Main">
@@ -97,7 +97,7 @@
                 </DockPanel>
 
                 <DockPanel x:Name="RightPanel" MinWidth="150" DockPanel.Dock="Right" LastChildFill="True">
-                    <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left"/>
+                    <Button x:Name="ButtonHideRightPanel" Content="&gt;" DockPanel.Dock="Left" Click="ButtonHideRightPanel_Click"/>
                     <StackPanel Background="#414141" x:Name="MWRightPanelStackPanel" DockPanel.Dock="Right" Orientation="Vertical" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                         <StackPanel Background="Transparent">
                             <Image x:Name="MWInfoImage" Source="/Noteslider;component/Resources/Default.png" MaxWidth="150" Margin="10" MaxHeight="150"/>

@@ -1,12 +1,9 @@
-﻿using Noteslider.Code;
-using Noteslider.Code.Assets;
-using System;
+﻿
+using Noteslider.Assets;
+using Noteslider.Assets.Converter;
+using Noteslider.Assets.Model;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Noteslider
 {
@@ -142,7 +139,7 @@ namespace Noteslider
                 writer.Write(Assets.Count);
                 foreach (var asset in Assets)
                 {
-                    var basset = asset.ToBinaryAsset();
+                    var basset = AssetConverter.ConvertToBinaryAsset(asset);
                     basset.WriteBinaryAsset(writer);
                 }
             }

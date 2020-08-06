@@ -6,14 +6,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Noteslider.Code
+namespace Noteslider.Code.Animator
 {
-    public class MarginAnimator
+    public class MarginAnimator : BaseAnimator
     {
-        FrameworkElement _element;
-        double _step;
-        int _delay;
-
 
         public MarginAnimator(FrameworkElement element, double step = 5, int delay = 2)
         {
@@ -46,7 +42,7 @@ namespace Noteslider.Code
                 // update
                 _element.Margin = ModifyThickness(_element.Margin, left, top, right, bottom);
                 _element.UpdateLayout();
-                Program.Window.RepaintTrackRenderer();
+                Program.MainWindow.RepaintTrackRenderer();
             }
         }
 

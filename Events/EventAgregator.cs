@@ -32,16 +32,10 @@ namespace Noteslider
             get
             {
                 if (_instance == null)
-                {
                     lock(_lock)
-                    {
-                        if (_instance == null)
-                        {
+                        if (_instance == null) 
                             _instance = new EventAgregator();
-                        }
-                    }
-                }
-
+    
                 return _instance;
             }
         }

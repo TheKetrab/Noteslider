@@ -1,6 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        xmlns:local="clr-namespace:Noteslider">
+                        xmlns:local="clr-namespace:Noteslider"
+                        xmlns:controls="clr-namespace:Noteslider.Code.Controls"
+                    >
 
     <!-- overwriting tabcontrol -->
     <!-- GRID: Header + Content -->
@@ -18,7 +20,7 @@
 
                         <!-- HEADER -->
                         <Border>
-                            <local:UniformTabPanel x:Name="HeaderPanel"/>
+                            <controls:UniformTabPanel x:Name="HeaderPanel"/>
                         </Border>
 
                         <!-- CONTENT -->

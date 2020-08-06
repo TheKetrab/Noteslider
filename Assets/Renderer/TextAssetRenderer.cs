@@ -1,14 +1,8 @@
-﻿using Noteslider.Code.Assets;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
+using Noteslider.Assets.Model;
 
-namespace Noteslider.Code.Renderer
+namespace Noteslider.Assets.Renderer
 {
     public class TextAssetRenderer : AssetRenderer
     {
@@ -19,8 +13,9 @@ namespace Noteslider.Code.Renderer
             label = new Label();
             label.Background = new SolidColorBrush(Colors.White);
             label.FontFamily = new System.Windows.Media.FontFamily("Lucida Console");
+            label.Foreground = new SolidColorBrush(Colors.Black);
 
-              var txtAsset = asset as TextAsset;
+            var txtAsset = asset as TextAsset;
 
             label.Content = txtAsset.data;
             Window.MainWindowNotePanel.Children.Add(label);

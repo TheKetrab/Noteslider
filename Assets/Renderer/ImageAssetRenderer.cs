@@ -1,13 +1,8 @@
-﻿using Noteslider.Code.Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Noteslider.Assets.Model;
+using Noteslider.Code;
 using System.Windows.Controls;
-using System.Windows.Media.Imaging;
 
-namespace Noteslider.Code.Renderer
+namespace Noteslider.Assets.Renderer
 {
     public class ImageAssetRenderer : AssetRenderer
     {

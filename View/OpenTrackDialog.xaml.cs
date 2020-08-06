@@ -30,16 +30,16 @@ namespace Noteslider
             this.AlignWindowLocationToMainWindowCenter();
 
             tracks = Library.LoadLibraryInfo();
+            InitListView();
+
         }
 
-
-        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        private void InitListView()
         {
-            var item = sender as ListViewItem;
-            int i = OTDListView.NumberOnList(item);
-            TrackInfo info = tracks[i];
-
-            SetInfo(info.Name, info.Author, info.Image);
+            OTDListView.SelectionMode = System.Windows.Controls.SelectionMode.Single;
+            OTDListView.Items.Clear();
+            foreach (var item in tracks)
+                OTDListView.Items.Add($"{item.Name} by {item.Author}");
         }
 
         public void SetInfo(string name, string author, byte[] bytes)
@@ -55,14 +55,29 @@ namespace Noteslider
         {
             var track = Track.ReadTrack(tracks[i].Path);
             TrackRenderer tr = new TrackRenderer(track);
-            Program.Window.SetTrackRenderer(tr);
+            Program.MainWindow.SetTrackRenderer(tr);
             tr.Render();
 
-            Program.Window.MWInfoTitle.Content = track.TrackInfo.Name;
-            Program.Window.MWInfoAuthor.Content = track.TrackInfo.Author;
-            Program.Window.MWInfoImage.Source = track.TrackInfo.Image != null ?
+            Program.MainWindow.MWInfoTitle.Content = track.TrackInfo.Name;
+            Program.MainWindow.MWInfoAuthor.Content = track.TrackInfo.Author;
+            Program.MainWindow.MWInfoImage.Source =
+                (track.TrackInfo.Image != null && track.TrackInfo.ImageLen > 0) ?
                 (BitmapSource)new ImageSourceConverter().ConvertFrom(track.TrackInfo.Image) :
                 ResourceHelper.LoadBitmapFromResource("Resources/Default.png");
+        }
+
+        #region --- Events ---
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        //               ----------- EVENTS ----------
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+
+        private void ListViewItem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            var item = sender as ListViewItem;
+            int i = OTDListView.NumberOnList(item);
+            TrackInfo info = tracks[i];
+
+            SetInfo(info.Name, info.Author, info.Image);
         }
 
         private void ListViewItem_MouseLeave(object sender, MouseEventArgs e)
@@ -83,7 +98,6 @@ namespace Noteslider
             Close();
         }
 
-
         private void OTDLoadButton_Click(object sender, RoutedEventArgs e)
         {
             int i = OTDListView.SelectedIndex;
@@ -91,5 +105,12 @@ namespace Noteslider
             Close();
         }
 
+        private void OTDCancelButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        #endregion
+        
     }
 }

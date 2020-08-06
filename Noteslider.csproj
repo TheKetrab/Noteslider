@@ -81,38 +81,37 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Code\Assets\_AssetConverter.cs" />
-    <Compile Include="Code\Assets\DocAsset.cs" />
-    <Compile Include="Code\Assets\PngAsset.cs" />
-    <Compile Include="Code\Assets\JpgAsset.cs" />
-    <Compile Include="Code\Assets\_IBinAssetConvertable.cs" />
+    <Compile Include="Assets\Converter\ImageAssetConverter.cs" />
+    <Compile Include="Assets\Converter\PdfAssetConverter.cs" />
+    <Compile Include="Assets\Renderer\_AssetRendererFactory.cs" />
+    <Compile Include="Code\Animator\_BaseAnimator.cs" />
+    <Compile Include="Assets\Converter\TextAssetConverter.cs" />
+    <Compile Include="Assets\Converter\_AssetConverter.cs" />
+    <Compile Include="Assets\Model\DocAsset.cs" />
+    <Compile Include="Assets\Model\PngAsset.cs" />
+    <Compile Include="Assets\Model\JpgAsset.cs" />
+    <Compile Include="Assets\Converter\_IBinAssetConvertable.cs" />
+    <Compile Include="Code\Converter.cs" />
+    <Compile Include="Code\Extension.cs" />
     <Compile Include="Code\Library.cs" />
-    <Compile Include="Code\NewTrackDialogManager.cs" />
-    <Compile Include="Code\OpenTrackDialogManager.cs" />
-    <Compile Include="Code\MarginAnimator.cs" />
+    <Compile Include="Code\Animator\MarginAnimator.cs" />
     <Compile Include="Code\Program.cs" />
-    <Compile Include="Code\Renderer\AssetRendererUI\AssetRenderer.cs" />
-    <Compile Include="Code\Renderer\AssetRendererFactory\_AssetRendererFactory.cs" />
-    <Compile Include="Code\Renderer\AssetRendererFactory\_IAssetRendererWorker.cs" />
-    <Compile Include="Code\Renderer\AssetRendererFactory\ImageAssetRendererWorker.cs" />
-    <Compile Include="Code\Renderer\AssetRendererFactory\PdfAssetRendererWorker.cs" />
-    <Compile Include="Code\Renderer\AssetRendererFactory\TextAssetRendererWorker.cs" />
-    <Compile Include="Code\Renderer\AssetRendererUI\ImageAssetRenderer.cs" />
-    <Compile Include="Code\Renderer\AssetRendererUI\PdfAssetRenderer.cs" />
-    <Compile Include="Code\Renderer\AssetRendererUI\TextAssetRenderer.cs" />
-    <Compile Include="Code\Renderer\TrackRenderer.cs" />
+    <Compile Include="Assets\Renderer\_AssetRenderer.cs" />
+    <Compile Include="Assets\Renderer\ImageAssetRenderer.cs" />
+    <Compile Include="Assets\Renderer\PdfAssetRenderer.cs" />
+    <Compile Include="Assets\Renderer\TextAssetRenderer.cs" />
+    <Compile Include="Code\TrackRenderer.cs" />
     <Compile Include="Code\ResourceHelper.cs" />
-    <Compile Include="Converter.cs" />
+    <Compile Include="Code\Controls\UniformTabPanel.cs" />
     <Compile Include="Events\MenuEvents.cs" />
-    <Compile Include="Code\MainWindowManager.cs" />
     <Compile Include="Code\Paths.cs" />
     <Compile Include="Events\TrackEvents.cs" />
-    <Compile Include="Code\Assets\_Asset.cs" />
-    <Compile Include="Code\Assets\ImageAssets.cs" />
-    <Compile Include="Code\Assets\PdfAsset.cs" />
-    <Compile Include="Code\Assets\TextAsset.cs" />
-    <Compile Include="Code\Assets\_BinaryAsset.cs" />
-    <Compile Include="Model\Track.cs" />
+    <Compile Include="Assets\Model\_Asset.cs" />
+    <Compile Include="Assets\Model\ImageAsset.cs" />
+    <Compile Include="Assets\Model\PdfAsset.cs" />
+    <Compile Include="Assets\Model\TextAsset.cs" />
+    <Compile Include="Assets\_BinaryAsset.cs" />
+    <Compile Include="Code\Track.cs" />
     <Page Include="View\Style\StyleOverlayNTD.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
