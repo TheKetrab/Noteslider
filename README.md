@@ -12,25 +12,22 @@ TODO
 
 ## Extensions
 You can register your own file type to be interpreted by Noteslider.
-To do so, you need to write class implementing IAssetRendererWorker interface.
-You also have to define how to render it: write class derived from AssetRenderer.
+To do so, you need to write three classes: Model, Converter and Renderer.
+* Model represents that your asset consists of. (Should derive from Asset)
+* Converter provides methods to serialize asset. (Should implements IBassetToAssetConvertable interface)
+* Renderer defines how to render you concrete asset. (Should derive from AssetRenderer)
+
 At the end you have to register new asset type in Main-CompositionRoot.
 
 ```csharp
 
-    // register file type
+    // use concrete asset for concrete extension
     AssetConverter.RegisterExtension<TextAsset>(".txt");
 
-    // define conversion from binary asset to your asset
-    AssetConverter.RegisterConversionTo<TextAsset>((basset) =>
-    {
-        var text = Encoding.UTF8.GetString(basset.Bytes);
-        return new TextAsset(text);
-    });
+    // for concrete asset use concrete asset converter
+    AssetConverter.RegisterConverter<TextAsset, TextAssetConverter>();
 
-    // register worker
-    AssetRendererFactory.Instance
-        .SetRendererProvider<TextAsset>(new TextAssetRendererWorker());
-
+    // for concrete asset use concrete asset renderer
+    AssetRendererFactory.RegisterRenderer<TextAsset, TextAssetRenderer>();
 
 ```
