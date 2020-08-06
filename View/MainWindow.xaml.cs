@@ -110,7 +110,8 @@ namespace Noteslider
 
         private void MainWindowMenuPlayButton_Click(object sender, RoutedEventArgs e)
         {
-            // TODO
+            if (Playing) StopPlaying();
+            else StartPlaying();
         }
 
         private void MainWindowMenuSettingsButton_Click(object sender, RoutedEventArgs e)

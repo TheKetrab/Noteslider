@@ -20,7 +20,7 @@ namespace Noteslider.Events
 
     }
 
-    public class PlayTracStopEvt
+    public class PlayTrackStopEvt
     {
 
     }
