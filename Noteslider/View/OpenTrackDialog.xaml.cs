@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Noteslider.Code;
 using Noteslider.Code.Renderer;
+using Noteslider.Events;
 
 namespace Noteslider
 {
@@ -64,6 +65,9 @@ namespace Noteslider
                 (track.TrackInfo.Image != null && track.TrackInfo.ImageLen > 0) ?
                 (BitmapSource)new ImageSourceConverter().ConvertFrom(track.TrackInfo.Image) :
                 ResourceHelper.LoadBitmapFromResource("Resources/Default.png");
+
+            // set slider value
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(track.TrackInfo.SliderValue));
         }
 
         #region --- Events ---

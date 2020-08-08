@@ -45,6 +45,7 @@
                 <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent" VerticalAlignment="Top">
                     <Image Margin="10 5 0 5" MaxHeight="16" Source="/Noteslider;component/Resources/Logo64.png"/>
                     <Label Margin="5" Content="Noteslider" Background="Transparent"/>
+                    <Label x:Name="DEBUG" Content=""/>
                 </StackPanel>
 
                 <!--Caption buttons-->
@@ -86,12 +87,23 @@
                 <DockPanel x:Name="LeftPanel" MinWidth="150" DockPanel.Dock="Left"  LastChildFill="True">
                     <Button x:Name="ButtonHideLeftPanel" DockPanel.Dock="Right" Content="&lt;" Click="ButtonHideLeftPanel_Click"/>
 
-                    <TabControl Background="#414141" x:Name="MWLeftPanelTabControl" Style="{DynamicResource StretchingTabControl}">
+                    <TabControl SelectionChanged="MWLeftPanelTabControl_SelectionChanged" Background="#414141" x:Name="MWLeftPanelTabControl" Style="{DynamicResource StretchingTabControl}">
                         <TabItem x:Name="MWTabItemMain" Header="Main">
                             <Label Content="Content goes here..." />
                         </TabItem>
-                        <TabItem x:Name="MWTabItemTracks" Header="Tracks" />
-                        <TabItem x:Name="MWTabItemUpload" Header="Upload" />
+                        <TabItem x:Name="MWTabItemTracks" Header="Tracks">
+                            <StackPanel>
+                                <Label x:Name="MWTabItemsTracksInfo" />
+                                <ListView x:Name="MWTabItemsTracksList"/>
+                            </StackPanel>
+                        </TabItem>
+                        <TabItem x:Name="MWTabItemUpload" Header="Upload">
+                            <StackPanel>
+                                <Label Content="In the future..." />
+                                <Label Content="For now: send an email to" />
+                                <Label Content=" ketrab508@gmail.com"/>
+                            </StackPanel>
+                        </TabItem>
                     </TabControl>
 
                 </DockPanel>
@@ -115,7 +127,6 @@
 
                         <Slider x:Name="MWSlider" Margin="5" Value="1" ValueChanged="MWSlider_ValueChanged"/>
 
-                        <Label x:Name="DEBUG" Content=""/>
 
                     </StackPanel>
                 </DockPanel>

@@ -27,7 +27,7 @@ namespace Noteslider
     public partial class MainWindow : Window
     {
         public bool Playing { get; private set; }
-
+        private ServerManager serverManager;
         private TrackRenderer trackRenderer;
         private bool _leftPanelHidden, _rightPanelHidden;
         private bool _leftPanelMoving, _rightPanelMoving;
@@ -39,6 +39,8 @@ namespace Noteslider
             MainWindowSubscriber mainWindowSubscriber = new MainWindowSubscriber(this);
             EventAgregator.Instance.AddSubscriber(mainWindowSubscriber);
             EventAgregator.Instance.Publish(new MWSliderValChangedEvt(1));
+
+            serverManager = new ServerManager(this);
 
             StateChanged += MainWindowStateChangeRaised;
             SizeChanged += MainWindow_SizeChanged;
@@ -252,6 +254,14 @@ namespace Noteslider
         private void MWSliderText_LostFocus(object sender, RoutedEventArgs e)
         {
             MWSliderText_TextChanged();
+        }
+
+        private async void MWLeftPanelTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (MWTabItemTracks.IsSelected)
+            {
+                await serverManager.UpdateTrackList();
+            }
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)
