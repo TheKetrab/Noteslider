@@ -17,6 +17,7 @@ namespace Noteslider.Code
             AssetConverterInit();
             AssetRendererInit();
 
+
         }
 
         public static MainWindow MainWindow

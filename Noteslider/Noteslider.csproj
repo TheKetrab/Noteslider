@@ -104,6 +104,7 @@
     <Compile Include="Code\TrackRenderer.cs" />
     <Compile Include="Code\ResourceHelper.cs" />
     <Compile Include="Code\Controls\UniformTabPanel.cs" />
+    <Compile Include="Events\MainWindowSubscriber.cs" />
     <Compile Include="Events\MenuEvents.cs" />
     <Compile Include="Code\Paths.cs" />
     <Compile Include="Events\TrackEvents.cs" />

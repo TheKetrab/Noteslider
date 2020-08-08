@@ -22,7 +22,6 @@ namespace Noteslider
     public class Track
     {
         public TrackInfo TrackInfo { get; set; }
-        public List<string> Tags;
         public List<Asset> Assets;
 
 
@@ -54,7 +53,6 @@ namespace Noteslider
         private Track()
         {
             TrackInfo = new TrackInfo();
-            Tags = new List<string>();
             Assets = new List<Asset>();
         }
 
@@ -75,10 +73,6 @@ namespace Noteslider
                 t.TrackInfo.ImageLen = reader.ReadInt32();
                 t.TrackInfo.Image = reader.ReadBytes(t.TrackInfo.ImageLen);
                 t.TrackInfo.SliderValue = reader.ReadDouble();
-
-                // TAGS
-                int tagsCnt = reader.ReadInt32();
-                for (int i = 0; i < tagsCnt; i++) t.Tags.Add(reader.ReadString());
 
                 // DATA
                 int dataCnt = reader.ReadInt32();
@@ -130,10 +124,6 @@ namespace Noteslider
                 writer.Write(TrackInfo.ImageLen);
                 if (TrackInfo.Image != null) writer.Write(TrackInfo.Image);
                 writer.Write(TrackInfo.SliderValue);
-
-                // TAGS
-                writer.Write(Tags.Count);
-                foreach (var t in Tags) writer.Write(t);
 
                 // ASSETS
                 writer.Write(Assets.Count);

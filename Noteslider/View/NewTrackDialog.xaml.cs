@@ -137,7 +137,6 @@ namespace Noteslider
             Track track = new Track(author, name, imgBytes);
 
             // REGISTER
-            RegisterTags(track);
             RegisterAssets(track);
 
             // SAVE TO FILE
@@ -147,17 +146,6 @@ namespace Noteslider
 
         }
 
-        /// <summary>
-        /// Collects info about tags from dialog and adds it to track.
-        /// </summary>
-        public void RegisterTags(Track track)
-        {
-            var tags = NTDTags.Items;
-            foreach (var tag in tags)
-            {
-                track.Tags.Add(tag.ToString());
-            }
-        }
 
         /// <summary>
         /// Collects info about data and injects it into track's assets list.

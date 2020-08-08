@@ -35,6 +35,11 @@ namespace Noteslider
         public MainWindow()
         {
             InitializeComponent();
+
+            MainWindowSubscriber mainWindowSubscriber = new MainWindowSubscriber(this);
+            EventAgregator.Instance.AddSubscriber(mainWindowSubscriber);
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(1));
+
             StateChanged += MainWindowStateChangeRaised;
             SizeChanged += MainWindow_SizeChanged;
         }
@@ -139,15 +144,15 @@ namespace Noteslider
 
             double speed;
             int time;
-            double half = SpeedSlider.Maximum / 2;
+            double half = MWSlider.Maximum / 2;
             const int basePow = 2;
 
             while (Playing)
             {
-                if (SpeedSlider.Value == 0) { speed = 0; time = 5; }
+                if (MWSlider.Value == 0) { speed = 0; time = 5; }
                 else
                 {
-                    speed = Math.Pow(basePow, SpeedSlider.Value - half);
+                    speed = Math.Pow(basePow, MWSlider.Value - half);
                     if (speed <= 0.5) { speed *= 2; time = 4; }
                     else if (speed <= 1) { time = 2; }
                     else { speed /= 2; time = 1; }
@@ -205,6 +210,48 @@ namespace Noteslider
                 _rightPanelHidden = true;
                 _rightPanelMoving = false;
             }
+        }
+
+        #region --- Slider Events ---
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        //             ----------- SLIDER EVENTS -----------
+        // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
+        private void MWSliderButtonPlus_Click(object sender, RoutedEventArgs e)
+        {
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value + 1));
+        }
+
+        private void MWSliderButtonMinus_Click(object sender, RoutedEventArgs e)
+        {
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value - 1));
+        }
+
+        private void MWSliderText_TextChanged()
+        {
+            if (double.TryParse(MWSliderText.Text, out double newVal))
+            {
+                EventAgregator.Instance.Publish(new MWSliderValChangedEvt(newVal));
+            } else
+            {
+                EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value));
+            }
+        }
+
+        private void MWSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value));
+        }
+        #endregion
+
+        private void MWSliderText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)
+                MWSliderText_TextChanged();
+        }
+
+        private void MWSliderText_LostFocus(object sender, RoutedEventArgs e)
+        {
+            MWSliderText_TextChanged();
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)

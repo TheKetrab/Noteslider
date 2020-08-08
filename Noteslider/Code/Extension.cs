@@ -1,4 +1,5 @@
 ﻿
+using System;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -20,6 +21,13 @@ namespace Noteslider.Code
                     return i;
 
             return -1;
+        }
+
+        public static double RoundToDecPlaces(this double d, int places)
+        {
+            if (places < 0) places = 0;
+            long tenPow = (long)Math.Pow(10, places);
+            return Math.Round(d * tenPow) / tenPow;
         }
 
     }

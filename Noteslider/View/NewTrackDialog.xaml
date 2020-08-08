@@ -85,7 +85,7 @@
 
                 </DockPanel>
             </TabItem>
-            <TabItem x:Name="NTDTabItemTags" Header="Tags" Width="60">
+            <TabItem x:Name="NTDTabItemAdvanced" Header="Advanced" Width="80">
                 <DockPanel>
                     <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Set keywords for the track" HorizontalAlignment="Center"/>
                     <Grid>
@@ -94,17 +94,7 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <ListBox x:Name="NTDTags" Grid.Column="0" Margin="10">
-
-                        </ListBox>
-                        <StackPanel Grid.Column="1">
-                            <TextBox x:Name="NTDTagsText" Margin="20 20 20 0" HorizontalAlignment="Stretch"/>
-                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button x:Name="NTDTagsAdd" Margin="10" MinWidth="80" Content="-"/>
-                                <Button x:Name="NTDTagsRemove" Margin="10" MinWidth="80" Content="+"/>
-                            </StackPanel>
-                        </StackPanel>
-
+                        <!-- TODO -->
                     </Grid>
                 </DockPanel>
             </TabItem>
