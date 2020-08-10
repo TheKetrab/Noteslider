@@ -256,12 +256,22 @@ namespace Noteslider
             MWSliderText_TextChanged();
         }
 
-        private async void MWLeftPanelTabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void OnTabSelected(object sender, RoutedEventArgs e)
         {
             if (MWTabItemTracks.IsSelected)
             {
                 await serverManager.UpdateTrackList();
             }
+        }
+
+        private async void MWTabItemsDownloadButton_Click(object sender, RoutedEventArgs e)
+        {
+            int i = MWTabItemsTracksList.SelectedIndex;
+            ListViewItem item = (ListViewItem)MWTabItemsTracksList
+                .ItemContainerGenerator.ContainerFromIndex(i);
+
+            string name = item.Content.ToString();
+            await serverManager.DownloadTrack(name);
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)

@@ -14,6 +14,8 @@ namespace Noteslider.Code
     public class ServerManager
     {
         const string NotesliderServer = "https://noteslider-server.herokuapp.com/";
+        const int NotesliderTimeout = 10;
+
         private MainWindow _window;
 
         public ServerManager(MainWindow mainWindow)
@@ -24,9 +26,9 @@ namespace Noteslider.Code
         public async Task UpdateTrackList()
         {
             _window.MWTabItemsTracksInfo.Content = "Loading...";
-            _window.MWTabItemsTracksList.Items.Clear();
             string[] tracks = await GetTrackList();
 
+            _window.MWTabItemsTracksList.Items.Clear();
             _window.MWTabItemsTracksInfo.Content = "";
             foreach(var track in tracks)
             {
@@ -42,7 +44,7 @@ namespace Noteslider.Code
             try
             {
                 var request = WebRequest.Create(NotesliderServer);
-                request.Timeout = 10;
+                request.Timeout = NotesliderTimeout;
                 var response = (HttpWebResponse)await Task.Factory
                         .FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
 
@@ -70,6 +72,44 @@ namespace Noteslider.Code
                 throw new ServerIsDownException();
             }
             
+        }
+
+        public async Task DownloadTrack(string name)
+        {
+            try
+            {
+                var request = WebRequest.Create(NotesliderServer + name);
+                request.Timeout = NotesliderTimeout;
+                
+                var response = (HttpWebResponse)await Task.Factory
+                        .FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var responseStream = response.GetResponseStream();
+                    MemoryStream memoryStream = new MemoryStream();
+                    await responseStream.CopyToAsync(memoryStream);
+
+                    string path = $"{Paths.Library}/{name}.ns";
+                    FileStream file = File.Create(path);
+                    byte[] bytes = memoryStream.ToArray();
+                    file.Write(bytes, 0, bytes.Length);
+                    file.Close();
+
+                }
+                else
+                {
+                    throw new ForUserException("Error with downloading track.");
+                }
+            }
+            catch (WebException)
+            {
+                throw new ServerIsDownException();
+            }
+            catch (ForUserException e)
+            {
+                e.ShowGUIMessage();
+            }
         }
     }
 }
