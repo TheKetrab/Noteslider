@@ -20,9 +20,12 @@ namespace Noteslider.Code.Renderer
                 var renderer = AssetRendererFactory.CreateRenderer(asset);
                 _renderers.Add(renderer);
             }
+            
+        }
 
-            
-            
+        public Track GetTrack()
+        {
+            return _track;
         }
 
         

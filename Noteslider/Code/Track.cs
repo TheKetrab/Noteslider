@@ -2,6 +2,7 @@
 using Noteslider.Assets;
 using Noteslider.Assets.Converter;
 using Noteslider.Assets.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -133,6 +134,33 @@ namespace Noteslider
                     var basset = AssetConverter.ConvertToBinaryAsset(asset);
                     basset.WriteBinaryAsset(writer);
                 }
+            }
+
+        }
+
+        /// <summary>
+        /// Updates value of speed in .ns file.
+        /// </summary>
+        public void UpdateTrackSpeed(double speed)
+        {
+            if (speed < 0 || speed > 10) throw new ArgumentException();
+
+            var path = GetTrackPath();
+            long offset;
+
+            // find position of speed
+            using (BinaryReader reader = new BinaryReader(File.OpenRead(path)))
+            {
+                reader.ReadString();              // name
+                reader.ReadString();              // author
+                int imgLen = reader.ReadInt32();  // image len
+                offset = reader.BaseStream.Position + imgLen;
+            }
+
+            using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Open)))
+            {
+                writer.Seek((int)offset, SeekOrigin.Begin);
+                writer.Write(speed); // write speed
             }
 
         }

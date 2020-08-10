@@ -127,7 +127,7 @@
                         </StackPanel>
 
                         <Slider x:Name="MWSlider" Margin="5" Value="1" ValueChanged="MWSlider_ValueChanged"/>
-                        <Button x:Name="MWSliderApplyValueButton" Content="Save speed" />
+                        <Button x:Name="MWSliderApplyValueButton" Content="Save speed" Click="MWSliderApplyValueButton_Click" />
 
                     </StackPanel>
                 </DockPanel>

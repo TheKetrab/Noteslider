@@ -274,6 +274,17 @@ namespace Noteslider
             await serverManager.DownloadTrack(name);
         }
 
+        private void MWSliderApplyValueButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (trackRenderer != null)
+            {
+                if (double.TryParse(MWSliderText.Text,out double value))
+                {
+                    trackRenderer.GetTrack().UpdateTrackSpeed(value);
+                }
+            }
+        }
+
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)
         {
             // exit if
