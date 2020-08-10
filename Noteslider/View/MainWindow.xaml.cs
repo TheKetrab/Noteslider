@@ -310,11 +310,22 @@ namespace Noteslider
         {
 
             // percentage left and right panel
-            LeftPanel.Width = this.ActualWidth * 0.15;
-            RightPanel.Width = this.ActualWidth * 0.15;
-            // TODO if panel hidden or visible -> set margin!!!
+            var desiredPanelWidth = this.ActualWidth * 0.15;
+            LeftPanel.Width = Math.Max(desiredPanelWidth, LeftPanel.MinWidth);
+            RightPanel.Width = Math.Max(desiredPanelWidth, RightPanel.MinWidth);
+
             LeftPanel.UpdateLayout();
             RightPanel.UpdateLayout();
+
+            if (_leftPanelHidden)
+                LeftPanel.Margin = new Thickness(
+                    -MWLeftPanelTabControl.ActualWidth, LeftPanel.Margin.Top,
+                    LeftPanel.Margin.Right, LeftPanel.Margin.Bottom);
+
+            if (_rightPanelHidden)
+                RightPanel.Margin = new Thickness(
+                    RightPanel.Margin.Left, RightPanel.Margin.Top,
+                    -MWRightPanelStackPanel.ActualWidth, RightPanel.Margin.Bottom);
 
             // scale assets
             RepaintTrackRenderer();

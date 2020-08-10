@@ -4,6 +4,7 @@ using Noteslider.Assets.Converter;
 using Noteslider.Assets.Model;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 
 namespace Noteslider
 {

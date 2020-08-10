@@ -119,15 +119,15 @@
                         </StackPanel>
                         
                         <!-- SLIDER -->
-                        <StackPanel Margin="5 20 5 0" Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Margin="5 20 5 0" Orientation="Horizontal" HorizontalAlignment="Center">
                             <Label Content="Speed: "/>
-                            <TextBox x:Name="MWSliderText" Width="50" KeyDown="MWSliderText_KeyDown" LostFocus="MWSliderText_LostFocus" />
-                            <Button x:Name="MWSliderButtonPlus" Content="+" Width="25" Click="MWSliderButtonPlus_Click"/>
-                            <Button x:Name="MWSliderButtonMinus" Content="-" Width="25" Click="MWSliderButtonMinus_Click"/>
+                            <TextBox x:Name="MWSliderText" Width="30" KeyDown="MWSliderText_KeyDown" LostFocus="MWSliderText_LostFocus" VerticalAlignment="Center"/>
+                            <Button x:Name="MWSliderButtonPlus" Content="+" Width="25" Click="MWSliderButtonPlus_Click" VerticalAlignment="Center"/>
+                            <Button x:Name="MWSliderButtonMinus" Content="-" Width="25" Click="MWSliderButtonMinus_Click" VerticalAlignment="Center"/>
                         </StackPanel>
 
                         <Slider x:Name="MWSlider" Margin="5" Value="1" ValueChanged="MWSlider_ValueChanged"/>
-
+                        <Button x:Name="MWSliderApplyValueButton" Content="Save speed" />
 
                     </StackPanel>
                 </DockPanel>

@@ -7,6 +7,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Helpers;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Noteslider.Code
@@ -96,6 +97,7 @@ namespace Noteslider.Code
                     file.Write(bytes, 0, bytes.Length);
                     file.Close();
 
+                    MessageBox.Show("DOWNLOADED SUCCESSFUL");
                 }
                 else
                 {
