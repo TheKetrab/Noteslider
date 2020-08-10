@@ -15,7 +15,7 @@ app.use(express.static( 'public' ))
 
 app.get("/", async (req, res) => {
     var info = await trackManager.readTracksInfo();
-    res.send(JSON.stringify(info));
+    res.send(info);
 });
 
 app.get("/:name", async (req, res) => {
