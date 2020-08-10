@@ -24,8 +24,12 @@ namespace Noteslider.Assets.Renderer
 
         public static AssetRenderer CreateRenderer(Asset asset)
         {
-            var renderer = _renderers[asset.GetType()];
-            return Activator.CreateInstance(renderer,asset) as AssetRenderer;
+            var type = _renderers[asset.GetType()];
+            AssetRenderer renderer = Activator.CreateInstance(type, asset) as AssetRenderer;
+            if (renderer == null) throw new KeyNotFoundException(string.Format(
+                "None AssetRenderer registered for type: {0}",type.Name));
+
+            return renderer;
         }
     }
 }

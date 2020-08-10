@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using Noteslider.Assets;
 using Noteslider.Assets.Converter;
 using Noteslider.Code;
+using Noteslider.Code.Exceptions;
 
 namespace Noteslider
 {
@@ -117,8 +118,8 @@ namespace Noteslider
             }
             else if (i >= 3)
             {
-                CreateTrack();
-                Close();
+                bool success = CreateTrack();
+                if (success) Close();
             }
             else
             {
@@ -129,21 +130,37 @@ namespace Noteslider
         /// <summary>
         /// Collects info from Dialog, creates new track and adds it to library.
         /// </summary>
-        public void CreateTrack()
+        public bool CreateTrack()
         {
-            var author = NTDAuthor.Text;
-            var name = NTDTitle.Text;
+            try
+            {
+                if (string.IsNullOrWhiteSpace(NTDAuthor.Text)
+                 || string.IsNullOrWhiteSpace(NTDTitle.Text))
+                    throw new NewTrackDialogException("Name and Author cannot be empty.");
 
-            Track track = new Track(author, name, imgBytes);
+                if (!NTDAuthor.Text.IsAlphanumeric()
+                 || !NTDTitle.Text.IsAlphanumeric())
+                    throw new NewTrackDialogException(
+                        "Name and Author must consist of alphanumeric characters only.");
 
-            // REGISTER
-            RegisterAssets(track);
+                var author = NTDAuthor.Text;
+                var name = NTDTitle.Text;
 
-            // SAVE TO FILE
-            track.WriteTrack();
+                Track track = new Track(author, name, imgBytes);
 
-            // TODO EventAgregator.Instance.Publish<> publish new track event
+                // REGISTER
+                RegisterAssets(track);
 
+                // SAVE TO FILE
+                track.WriteTrack();
+
+                // TODO EventAgregator.Instance.Publish<> publish new track event
+                return true;
+            } catch (ForUserException e)
+            {
+                e.ShowGUIMessage();
+                return false;
+            }
         }
 
 
@@ -152,16 +169,23 @@ namespace Noteslider
         /// </summary>
         public void RegisterAssets(Track track)
         {
-            var filePaths = NTDFiles.Items;
-            foreach (string file in filePaths)
+            try
             {
-                FileInfo fi = new FileInfo(file);
-                Type type = AssetConverter.GetAssetTypeByExtension(fi.Extension);
-                var bytes = File.ReadAllBytes(file);
+                var filePaths = NTDFiles.Items;
+                foreach (string file in filePaths)
+                {
+                    FileInfo fi = new FileInfo(file);
+                    Type type = AssetConverter.GetAssetTypeByExtension(fi.Extension);
+                    var bytes = File.ReadAllBytes(file);
 
-                var basset = new BinaryAsset(type, bytes);
-                var asset = AssetConverter.ResolveBinaryAsset(basset);
-                track.Assets.Add(asset);
+                    var basset = new BinaryAsset(type, bytes);
+                    var asset = AssetConverter.ResolveBinaryAsset(basset);
+                    track.Assets.Add(asset);
+                }
+            } catch(Exception e)
+            {
+                throw new ForUserException(
+                    "A Problem occured during registering assets. Details: " + e.Message);
             }
         }
 

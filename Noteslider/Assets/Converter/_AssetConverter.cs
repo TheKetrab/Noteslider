@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using Noteslider.Assets.Model;
+using Noteslider.Code.Exceptions;
 
 namespace Noteslider.Assets.Converter
 {
@@ -27,20 +28,28 @@ namespace Noteslider.Assets.Converter
         public static Asset ResolveBinaryAsset(BinaryAsset basset)
         {
             Type type = _converters[basset.AssetType];
-            if (type == null) throw new Exception("Not found");
+            if (type == null) throw new AssetConverterException(
+                string.Format("Failed to find converter for type: {0}",basset.AssetType.FullName));
 
             var converter = Activator.CreateInstance(type) as IBassetToAssetConvertable<Asset>;
+            if (converter == null) throw new AssetConverterException(string.Format(
+                "Converter {0} does not implement interface IBassetToAssetConvertable.",type.Name));
+
             return converter.ToAsset(basset);
         }
 
         public static BinaryAsset ConvertToBinaryAsset(Asset asset)
         {
             Type type = _converters[asset.GetType()];
-            if (type == null) throw new Exception("Not found");
+            if (type == null) throw new AssetConverterException(
+                string.Format("Failed to find converter for type: {0}", asset.GetType()));
 
             // TODO c# covariance, contrvariance
             dynamic converter = Activator.CreateInstance(type);
             System.Reflection.MethodInfo toBinaryAsset = type.GetMethod("ToBinaryAsset");
+            if (toBinaryAsset == null ) throw new AssetConverterException(string.Format(
+                "Converter {0} does not implement interface IAssetToBassetConvertable.",type.Name));
+
             return toBinaryAsset.Invoke(converter, new object[] { asset });
         }
 

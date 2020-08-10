@@ -110,7 +110,9 @@
     <Compile Include="Assets\Model\JpgAsset.cs" />
     <Compile Include="Assets\Converter\_IBinAssetConvertable.cs" />
     <Compile Include="Code\Converter.cs" />
+    <Compile Include="Code\Exceptions\AssetConverterException.cs" />
     <Compile Include="Code\Exceptions\ForUserException.cs" />
+    <Compile Include="Code\Exceptions\NewTrackDialogException.cs" />
     <Compile Include="Code\Exceptions\ServerIsDownException.cs" />
     <Compile Include="Code\Extension.cs" />
     <Compile Include="Code\Library.cs" />

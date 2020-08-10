@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Noteslider.Code.Exceptions
 {
-    public class NewTrackDialogException : ForUserException
+    public class AssetConverterException : Exception
     {
-        public NewTrackDialogException(string msg) : base(msg)
-        {
-        }  
+        public AssetConverterException(string msg) : base(msg) { }
     }
 }

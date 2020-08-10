@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -28,6 +29,12 @@ namespace Noteslider.Code
             if (places < 0) places = 0;
             long tenPow = (long)Math.Pow(10, places);
             return Math.Round(d * tenPow) / tenPow;
+        }
+
+        public static bool IsAlphanumeric(this string s)
+        {
+            Regex regex = new Regex("^[a-zA-Z0-9]*$");
+            return regex.IsMatch(s);
         }
 
     }
