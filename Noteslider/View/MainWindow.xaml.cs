@@ -131,6 +131,31 @@ namespace Noteslider
         //             ----------- AUTO SCROLL -----------
         // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
 
+        public async Task ScrollToTop()
+        {
+            const int step = 60;
+            const int time = 1;
+
+            while (ScrollViewer.VerticalOffset > 0)
+                if (ScrollViewer.VerticalOffset < step)
+                    await AutoScroll(-ScrollViewer.VerticalOffset, time);
+                else await AutoScroll(-step, time);
+
+        }
+
+        public async Task ScrollToBottom()
+        {
+            const int step = 60;
+            const int time = 1;
+
+            while (ScrollViewer.VerticalOffset < ScrollViewer.ScrollableHeight)
+            {
+                var offset = ScrollViewer.ScrollableHeight - ScrollViewer.VerticalOffset;
+                if (offset < step) await AutoScroll(offset, time);
+                else await AutoScroll(step, time);
+            }
+        }
+
         public async Task AutoScroll(double offset, int millisecondsDelay)
         {
             await Task.Delay(millisecondsDelay);
@@ -283,6 +308,36 @@ namespace Noteslider
                     trackRenderer.GetTrack().UpdateTrackSpeed(value);
                 }
             }
+        }
+
+        private void MainWindowMenuModifyTrackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.trackRenderer != null)
+            {
+                var dialog = new NewTrackDialog(this.trackRenderer.GetTrack());
+                dialog.Show();
+
+            }
+        }
+
+        private async void MainWindowMenuUpButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ScrollToTop();
+        }
+
+        private async void MainWindowMenuDownButton_Click(object sender, RoutedEventArgs e)
+        {
+            await ScrollToBottom();
+        }
+
+        private void MainWindowMenuCloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.trackRenderer = null;
+        }
+
+        private void MainWindowMenuDeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)

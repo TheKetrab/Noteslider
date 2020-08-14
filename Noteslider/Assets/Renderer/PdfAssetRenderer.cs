@@ -17,7 +17,8 @@ namespace Noteslider.Assets.Renderer
         // each pdf page is converted to image
         Image[] images;
 
-        public PdfAssetRenderer(Asset asset) : base(asset) {
+        public PdfAssetRenderer(Asset asset) : base(asset)
+        {
 
             var pdfAsset = asset as PdfAsset;
             // Task.Run(async () => await Procede(pdfAsset)); TODO Window.MainWindowNotePanel.Children.Add(img); exception
@@ -29,7 +30,7 @@ namespace Noteslider.Assets.Renderer
 
             await InterpretePdf(asset.data);
 
-            foreach(var img in images)
+            foreach (var img in images)
                 Window.MainWindowNotePanel.Children.Add(img);
 
             ScaleToWidth();
@@ -72,7 +73,7 @@ namespace Noteslider.Assets.Renderer
                         Source = bitmap,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         Margin = new Thickness(0, 4, 0, 4),
-                        
+
                     };
                     images[i] = image;
                 }
@@ -84,12 +85,12 @@ namespace Noteslider.Assets.Renderer
             // scaling at the begining will be skipped
             if (images == null) return;
 
-            foreach(var img in images)
+            foreach (var img in images)
             {
                 img.Width = Window.ScrollViewer.ActualWidth - MARGIN;
 
                 img.UpdateLayout();
-                Program.PrintDebug(string.Format("Width = {0}\nActualWidth = {1}",img.Width,img.ActualWidth));
+                Program.PrintDebug(string.Format("Width = {0}\nActualWidth = {1}", img.Width, img.ActualWidth));
             }
         }
 

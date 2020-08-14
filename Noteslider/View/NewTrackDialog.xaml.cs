@@ -19,7 +19,7 @@ namespace Noteslider
     {
         private int page;
         private byte[] imgBytes; // bytes to save and store image
-
+        private bool _modifyMode;
 
         public NewTrackDialog()
         {
@@ -28,6 +28,15 @@ namespace Noteslider
 
             InitBaseEvents();
             SetPage(0);
+        }
+
+        public NewTrackDialog(Track t) : this()
+        {
+            _modifyMode = true;
+            this.NTDAuthor.Text = t.TrackInfo.Author;
+            this.NTDTitle.Text = t.TrackInfo.Name;
+            this.NTDImage.Source = Converter.BytesToBmpSource(t.TrackInfo.Image);
+            // TODO -> assets
         }
 
         #region --- Buttons Procedures ---
@@ -106,7 +115,7 @@ namespace Noteslider
             if (page == 0) NTDPrevButton.Content = "Close";
             else NTDPrevButton.Content = "Previous";
 
-            if (page == 2) NTDNextButton.Content = "Add";
+            if (page == 2) NTDNextButton.Content = _modifyMode ? "Update" : "Add";
             else NTDNextButton.Content = "Next";
         }
 

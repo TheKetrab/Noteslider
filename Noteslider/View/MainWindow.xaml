@@ -71,8 +71,23 @@
                     <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuOpenTrackButton_Click">
                         <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
                     </Button>
+                    <Button x:Name="MainWindowMenuModifyTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuModifyTrackButton_Click">
+                        <Image Source="/Noteslider;component/Resources/IcoModify.png"/>
+                    </Button>
                     <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuPlayButton_Click">
                         <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuUpButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuUpButton_Click">
+                        <Image Source="/Noteslider;component/Resources/IcoUp.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuDownButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDownButton_Click">
+                        <Image Source="/Noteslider;component/Resources/IcoDown.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuCloseButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuCloseButton_Click">
+                        <Image Source="/Noteslider;component/Resources/IcoClose.png"/>
+                    </Button>
+                    <Button x:Name="MainWindowMenuDeleteButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDeleteButton_Click">
+                        <Image Source="/Noteslider;component/Resources/IcoDelete.png"/>
                     </Button>
                     <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuSettingsButton_Click">
                         <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
