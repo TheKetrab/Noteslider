@@ -8,6 +8,7 @@ using Microsoft.Win32;
 using Noteslider.Assets;
 using Noteslider.Assets.Converter;
 using Noteslider.Code;
+using Noteslider.Code.Controls;
 using Noteslider.Code.Exceptions;
 
 namespace Noteslider
@@ -162,6 +163,7 @@ namespace Noteslider
 
                 // SAVE TO FILE
                 track.WriteTrack();
+                InfoDialog.ShowMessageDialog("Track created successfully.");
 
                 // TODO EventAgregator.Instance.Publish<> publish new track event
                 return true;

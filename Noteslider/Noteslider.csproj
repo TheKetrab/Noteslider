@@ -115,7 +115,7 @@
     <Compile Include="Code\Exceptions\NewTrackDialogException.cs" />
     <Compile Include="Code\Exceptions\ServerIsDownException.cs" />
     <Compile Include="Code\Extension.cs" />
-    <Compile Include="Code\InfoDialog.cs" />
+    <Compile Include="Code\Controls\InfoDialog.cs" />
     <Compile Include="Code\Library.cs" />
     <Compile Include="Code\Animator\MarginAnimator.cs" />
     <Compile Include="Code\Program.cs" />

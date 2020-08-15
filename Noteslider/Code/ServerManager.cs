@@ -1,4 +1,5 @@
-﻿using Noteslider.Code.Exceptions;
+﻿using Noteslider.Code.Controls;
+using Noteslider.Code.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -97,7 +98,7 @@ namespace Noteslider.Code
                     file.Write(bytes, 0, bytes.Length);
                     file.Close();
 
-                    InfoDialog.ShowInfo("Downloading complete.");
+                    InfoDialog.ShowMessageDialog("Downloading complete.");
                 }
                 else
                 {

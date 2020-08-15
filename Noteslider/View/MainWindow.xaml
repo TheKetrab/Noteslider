@@ -9,6 +9,9 @@
         MinWidth="800"
         MinHeight="450" Icon="Logo64.png"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
         
         >
     <Window.Resources>
@@ -21,12 +24,10 @@
         </ResourceDictionary>
     </Window.Resources>
     
-    
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="48"
             />
     </WindowChrome.WindowChrome>
-
 
     <!--Title bar button commands-->
     <Window.CommandBindings>
@@ -50,8 +51,8 @@
 
                 <!--Caption buttons-->
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent">
-                    <Button Style="{StaticResource MicrophoneButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
-                        Command=""/>
+                    <!--<Button Style="{StaticResource MicrophoneButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
+                        Command=""/>-->
                     <Button Style="{StaticResource MinimizeButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Minimize"
                         Command="{x:Static SystemCommands.MinimizeWindowCommand}"/>
                     <Button x:Name="RestoreButton" Visibility="Collapsed" Style="{StaticResource RestoreButtonStyle}" 
@@ -65,31 +66,31 @@
                 <!--Center-->
                 <StackPanel Margin="5" x:Name="MainWindowMenu" Orientation="Horizontal" MaxHeight="48" HorizontalAlignment="Center">
                     <!-- TODO: scroll to top, scroll to bottom, edit current track, close track -->
-                    <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuNewTrackButton_Click">
+                    <Button x:Name="MainWindowMenuNewTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuNewTrackButton_Click" ToolTip="Add track">
                         <Image Source="/Noteslider;component/Resources/IcoNew.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuOpenTrackButton_Click">
+                    <Button x:Name="MainWindowMenuOpenTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuOpenTrackButton_Click" ToolTip="Open track">
                         <Image Source="/Noteslider;component/Resources/IcoOpen.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuModifyTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuModifyTrackButton_Click">
+                    <Button x:Name="MainWindowMenuModifyTrackButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuModifyTrackButton_Click" ToolTip="Edit track">
                         <Image Source="/Noteslider;component/Resources/IcoModify.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuPlayButton_Click">
+                    <Button x:Name="MainWindowMenuPlayButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuPlayButton_Click" ToolTip="Play">
                         <Image x:Name="MainWindowMenuPlayButtonImg" Source="/Noteslider;component/Resources/IcoPlay.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuUpButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuUpButton_Click">
+                    <Button x:Name="MainWindowMenuUpButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuUpButton_Click" ToolTip="Scroll to the top">
                         <Image Source="/Noteslider;component/Resources/IcoUp.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuDownButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDownButton_Click">
+                    <Button x:Name="MainWindowMenuDownButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDownButton_Click" ToolTip="Scroll to the bottom">
                         <Image Source="/Noteslider;component/Resources/IcoDown.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuCloseButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuCloseButton_Click">
+                    <Button x:Name="MainWindowMenuCloseButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuCloseButton_Click" ToolTip="Close track">
                         <Image Source="/Noteslider;component/Resources/IcoClose.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuDeleteButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDeleteButton_Click">
+                    <Button x:Name="MainWindowMenuDeleteButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuDeleteButton_Click" ToolTip="Delete track">
                         <Image Source="/Noteslider;component/Resources/IcoDelete.png"/>
                     </Button>
-                    <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuSettingsButton_Click">
+                    <Button x:Name="MainWindowMenuSettingsButton" WindowChrome.IsHitTestVisibleInChrome="True" Background="#00000000" Click="MainWindowMenuSettingsButton_Click" ToolTip="Settings">
                         <Image Source="/Noteslider;component/Resources/IcoSettings.png"/>
                     </Button>
                 </StackPanel>
@@ -141,8 +142,8 @@
                             <Button x:Name="MWSliderButtonMinus" Content="-" Width="25" Click="MWSliderButtonMinus_Click" VerticalAlignment="Center"/>
                         </StackPanel>
 
-                        <Slider x:Name="MWSlider" Margin="5" Value="1" ValueChanged="MWSlider_ValueChanged"/>
-                        <Button x:Name="MWSliderApplyValueButton" Content="Save speed" Click="MWSliderApplyValueButton_Click" />
+                        <Slider x:Name="MWSlider" Margin="5" Value="1" ValueChanged="MWSlider_ValueChanged" MaxWidth="200"/>
+                        <Button Margin="10 5 10 0"  x:Name="MWSliderApplyValueButton" Content="Save speed" Click="MWSliderApplyValueButton_Click" MaxWidth="150" />
 
                     </StackPanel>
                 </DockPanel>

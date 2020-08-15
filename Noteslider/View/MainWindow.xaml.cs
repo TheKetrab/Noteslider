@@ -19,6 +19,7 @@ using Noteslider.Code;
 using Windows.UI.ViewManagement;
 using Noteslider.Code.Animator;
 using System.IO;
+using Noteslider.Code.Controls;
 
 namespace Noteslider
 {
@@ -246,12 +247,12 @@ namespace Noteslider
         // ----- ----- ----- ----- ----- ----- ----- ----- ----- ----- //
         private void MWSliderButtonPlus_Click(object sender, RoutedEventArgs e)
         {
-            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value + 1));
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value + 0.1));
         }
 
         private void MWSliderButtonMinus_Click(object sender, RoutedEventArgs e)
         {
-            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value - 1));
+            EventAgregator.Instance.Publish(new MWSliderValChangedEvt(MWSlider.Value - 0.1));
         }
 
         private void MWSliderText_TextChanged()
@@ -347,15 +348,22 @@ namespace Noteslider
             // EXIT IF
             if (trackRenderer == null) return;
 
-            // FUNC
-            var trackPath = trackRenderer.GetTrack().GetTrackPath();
-            if (File.Exists(trackPath))
+            var dialog = InfoDialog.ShowYesNoDialog(
+                "Are you sure you want to remove this track from your computer?",
+                "Yes (Remove)", "No (Cancel)");
+
+            if (dialog.InfoDialogState == InfoDialogState.YesNoDialogYes)
             {
-                File.Delete(trackPath);
-                CloseTrack();
-                InfoDialog.ShowInfo("Track has been removed successfully.");
+
+                // FUNC
+                var trackPath = trackRenderer.GetTrack().GetTrackPath();
+                if (File.Exists(trackPath))
+                {
+                    File.Delete(trackPath);
+                    CloseTrack();
+                    InfoDialog.ShowMessageDialog("Track has been removed successfully.");
+                }
             }
-            
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)
