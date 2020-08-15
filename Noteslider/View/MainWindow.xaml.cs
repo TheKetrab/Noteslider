@@ -18,6 +18,7 @@ using System.Threading;
 using Noteslider.Code;
 using Windows.UI.ViewManagement;
 using Noteslider.Code.Animator;
+using System.IO;
 
 namespace Noteslider
 {
@@ -332,12 +333,29 @@ namespace Noteslider
 
         private void MainWindowMenuCloseButton_Click(object sender, RoutedEventArgs e)
         {
+            CloseTrack();
+        }
+
+        public void CloseTrack()
+        {
             this.trackRenderer = null;
+            MainWindowNotePanel.Children.Clear();
         }
 
         private void MainWindowMenuDeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            // EXIT IF
+            if (trackRenderer == null) return;
 
+            // FUNC
+            var trackPath = trackRenderer.GetTrack().GetTrackPath();
+            if (File.Exists(trackPath))
+            {
+                File.Delete(trackPath);
+                CloseTrack();
+                InfoDialog.ShowInfo("Track has been removed successfully.");
+            }
+            
         }
 
         private async void ButtonHideLeftPanel_Click(object sender, RoutedEventArgs e)

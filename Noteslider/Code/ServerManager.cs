@@ -97,7 +97,7 @@ namespace Noteslider.Code
                     file.Write(bytes, 0, bytes.Length);
                     file.Close();
 
-                    MessageBox.Show("DOWNLOADED SUCCESSFUL");
+                    InfoDialog.ShowInfo("Downloading complete.");
                 }
                 else
                 {
