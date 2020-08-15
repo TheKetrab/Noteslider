@@ -2,6 +2,7 @@
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
@@ -38,6 +39,17 @@ namespace Noteslider
             this.NTDTitle.Text = t.TrackInfo.Name;
             this.NTDImage.Source = Converter.BytesToBmpSource(t.TrackInfo.Image);
             // TODO -> assets
+        }
+
+
+        private void CommandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+        // Close
+        private void CommandBinding_Executed_Close(object sender, ExecutedRoutedEventArgs e)
+        {
+            SystemCommands.CloseWindow(this);
         }
 
         #region --- Buttons Procedures ---

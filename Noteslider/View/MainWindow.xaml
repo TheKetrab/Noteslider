@@ -25,8 +25,7 @@
     </Window.Resources>
     
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="48"
-            />
+        <WindowChrome CaptionHeight="48"/>
     </WindowChrome.WindowChrome>
 
     <!--Title bar button commands-->

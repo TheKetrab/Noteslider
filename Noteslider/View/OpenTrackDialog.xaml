@@ -12,51 +12,78 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Style/StyleBase.xaml" />
                 <ResourceDictionary Source="Style/StyleOverlayOTD.xaml"/>
+                <ResourceDictionary Source="Style/StyleTitleBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="65*"/>
-            <ColumnDefinition Width="35*"/>
-        </Grid.ColumnDefinitions>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32"/>
+    </WindowChrome.WindowChrome>
 
-        <ListView x:Name="OTDListView" Grid.Column="0" SelectionMode="Single" SelectedIndex="0">
-            <ListView.ItemContainerStyle>
-                <Style TargetType="{x:Type ListViewItem}">
-                    <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter" />
-                    <EventSetter Event="MouseLeave" Handler="ListViewItem_MouseLeave" />
-                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
-                </Style>
-            </ListView.ItemContainerStyle>
-            
-            <ListViewItem>
-                <Label Content="foo"/>
-            </ListViewItem>
-            <ListViewItem>
-                <Label Content="bar"/>
-            </ListViewItem>
-            <ListViewItem>
-                <Label Content="baz"/>
-            </ListViewItem>
-            <ListViewItem>
-                <Label Content="qux"/>
-            </ListViewItem>
-        </ListView>
-        <DockPanel Grid.Column="1">
-            <Image DockPanel.Dock="Top" x:Name="OTDInfoImage" Source="/Noteslider;component/Resources/Default.png" MaxWidth="150" Margin="10" MaxHeight="150"/>
-            <Label DockPanel.Dock="Top" x:Name="OTDInfoTitle" Content="TITLE OF SELECTED" HorizontalAlignment="Center" Margin="10 0"/>
-            <Label DockPanel.Dock="Top" x:Name="OTDInfoAuthor" Content="AUTHOR" HorizontalAlignment="Center" Margin="10 0"/>
+    <Window.CommandBindings>
+        <CommandBinding Command="{x:Static SystemCommands.CloseWindowCommand}" CanExecute="CommandBinding_CanExecute" Executed="CommandBinding_Executed_Close" />
+    </Window.CommandBindings>
 
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5 5" Click="OTDLoadButton_Click" />
-                <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5 5" Width="80" Click="OTDCancelButton_Click"/>
+    <DockPanel LastChildFill="True">
+        <!-- TITLE BAR -->
+        <DockPanel DockPanel.Dock="Top" MaxHeight="48" Background="#1a1a1a" LastChildFill="True">
+            <!--Left-->
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" Background="Transparent" VerticalAlignment="Top">
+                <!--<Image Margin="10 5 0 5" MaxHeight="16" Source="/Noteslider;component/Resources/Logo64.png"/>-->
+                <Label Margin="5" Content="Open track" Background="Transparent"/>
+                <Label x:Name="DEBUG" Content=""/>
             </StackPanel>
 
+            <!--Caption buttons-->
+            <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Background="Transparent">
+                <Button Style="{StaticResource CloseButtonStyle}" WindowChrome.IsHitTestVisibleInChrome="True" ToolTip="Close"
+                            Command="{x:Static SystemCommands.CloseWindowCommand}"/>
+            </StackPanel>
         </DockPanel>
 
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65*"/>
+                <ColumnDefinition Width="35*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView x:Name="OTDListView" Grid.Column="0" SelectionMode="Single" SelectedIndex="0">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <EventSetter Event="MouseEnter" Handler="ListViewItem_MouseEnter" />
+                        <EventSetter Event="MouseLeave" Handler="ListViewItem_MouseLeave" />
+                        <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+
+                <ListViewItem>
+                    <Label Content="foo"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <Label Content="bar"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <Label Content="baz"/>
+                </ListViewItem>
+                <ListViewItem>
+                    <Label Content="qux"/>
+                </ListViewItem>
+            </ListView>
+            <DockPanel Grid.Column="1">
+                <Image DockPanel.Dock="Top" x:Name="OTDInfoImage" Source="/Noteslider;component/Resources/Default.png" MaxWidth="150" Margin="10" MaxHeight="150"/>
+                <Label DockPanel.Dock="Top" x:Name="OTDInfoTitle" Content="TITLE OF SELECTED" HorizontalAlignment="Center" Margin="10 0"/>
+                <Label DockPanel.Dock="Top" x:Name="OTDInfoAuthor" Content="AUTHOR" HorizontalAlignment="Center" Margin="10 0"/>
+
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                    <Button x:Name="OTDLoadButton" Content="Load" Width="80" Margin="5 5" Click="OTDLoadButton_Click" />
+                    <Button x:Name="OTDCancelButton" Content="Cancel" Margin="5 5" Width="80" Click="OTDCancelButton_Click"/>
+                </StackPanel>
+
+            </DockPanel>
 
 
-    </Grid>
+
+        </Grid>
+    </DockPanel>
 </Window>
