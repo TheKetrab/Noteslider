@@ -33,7 +33,7 @@ namespace Noteslider.Code
 
         public static bool IsAlphanumeric(this string s)
         {
-            Regex regex = new Regex("^[a-zA-Z0-9]*$");
+            Regex regex = new Regex("^[a-zA-Z0-9 -]*$");
             return regex.IsMatch(s);
         }
 

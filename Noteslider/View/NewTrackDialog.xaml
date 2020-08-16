@@ -114,17 +114,23 @@
                     </DockPanel>
                 </TabItem>
                 <TabItem x:Name="NTDTabItemAdvanced" Header="Advanced" Width="80">
-                    <DockPanel>
-                        <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Set keywords for the track" HorizontalAlignment="Center"/>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- TODO -->
-                        </Grid>
-                    </DockPanel>
+                    <StackPanel>
+                        <StackPanel Margin="10 50 10 10" Orientation="Horizontal">
+                            <CheckBox x:Name="NTDAdvancedSlidingSpeedCheckBox" IsChecked="False" VerticalAlignment="Center"/>
+                            <Label Width="150" Content="Sliding speed: " />
+                            <TextBox x:Name="NTDAdvancedSlidingSpeedInput" Width="100" IsEnabled="{Binding ElementName=NTDAdvancedSlidingSpeedCheckBox, Path=IsChecked}" />
+                        </StackPanel>
+                        <DockPanel Margin="10" LastChildFill="True">
+                            <CheckBox x:Name="NTDAdvancedPasswordCheckBox" IsChecked="False" VerticalAlignment="Center"/>
+                            <Label Width="150" Content="Set password for track:" />
+                            <TextBox x:Name="NTDAdvancedPassword" IsEnabled="{Binding ElementName=NTDAdvancedPasswordCheckBox, Path=IsChecked}"/>
+                        </DockPanel>
+                        <DockPanel Margin="10" LastChildFill="True">
+                            <CheckBox x:Name="NTDAdvancedWriteToCheckBox" IsChecked="False" VerticalAlignment="Center"/>
+                            <Label Width="150" Content="Write to:" />
+                            <TextBox x:Name="NTDAdvancedWriteTo" IsEnabled="{Binding ElementName=NTDAdvancedWriteToCheckBox, Path=IsChecked}" />
+                        </DockPanel>
+                    </StackPanel>
                 </TabItem>
             </TabControl>
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -11,13 +12,16 @@ namespace Noteslider.Code.Controls
     public enum InfoDialogState
     {
         YesNoDialogYes,
-        YesNoDialogNo
+        YesNoDialogNo,
+        ValueDialogOK
     }
 
     // custom Message Box
     public class InfoDialog : Window
     {
         StackPanel panel;
+        public object data;
+
         public InfoDialogState InfoDialogState { get; private set; }
 
 
@@ -98,6 +102,43 @@ namespace Noteslider.Code.Controls
 
             window.panel.Children.Add(text);
             window.panel.Children.Add(buttonsPanel);
+            window.ShowDialog();
+
+            return window;
+        }
+
+        public static InfoDialog ShowValueDialog(string message)
+        {
+            InfoDialog window = new InfoDialog();
+            TextBlock text = new TextBlock()
+            {
+                TextWrapping = TextWrapping.Wrap,
+                TextAlignment = TextAlignment.Center,
+                Margin = new Thickness(5, 5, 5, 5),
+                Text = message
+            };
+
+            TextBox textBox = new TextBox()
+            {
+                Margin = new Thickness(10, 5, 10, 5)
+            };
+
+            Button buttonOK = new Button()
+            {
+                Content = "OK",
+                Width = 100,
+                Margin = new Thickness(10, 10, 10, 10)
+            };
+
+            buttonOK.Click += (s, e) => { 
+                window.InfoDialogState = InfoDialogState.ValueDialogOK;
+                window.data = textBox.Text;
+                window.Close(); 
+            };
+
+            window.panel.Children.Add(text);
+            window.panel.Children.Add(textBox);
+            window.panel.Children.Add(buttonOK);
             window.ShowDialog();
 
             return window;

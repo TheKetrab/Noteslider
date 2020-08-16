@@ -102,6 +102,7 @@ namespace Noteslider
         private void NTDFilesRemove_Click(object sender, RoutedEventArgs e)
         {
             var list = NTDFiles;
+            if (list.SelectedItem == null) return;
             list.Items.RemoveAt(
                 list.Items.IndexOf(
                     list.SelectedItem));
@@ -175,11 +176,68 @@ namespace Noteslider
 
                 Track track = new Track(author, name, imgBytes);
 
+
+                if (NTDAdvancedSlidingSpeedCheckBox.IsChecked == true)
+                {
+                    NTDAdvancedSlidingSpeedInput.Text = 
+                        NTDAdvancedSlidingSpeedInput.Text.Replace('.', ',');
+                    
+                    if (double.TryParse(NTDAdvancedSlidingSpeedInput.Text, out double speed))
+                    {
+                        if (speed < 0 || speed >= 10)
+                            throw new NewTrackDialogException("Slider speed has to be decimal number between 0 and 10.");
+
+                        speed = speed.RoundToDecPlaces(2);
+                        track.TrackInfo.SliderValue = speed;
+                    } else
+                    {
+                        throw new NewTrackDialogException("Slider speed has to be decimal number between 0 and 10.");
+                    }
+                }
+
                 // REGISTER
                 RegisterAssets(track);
 
+
+                // PASSWORD ?
+                string password = null;
+                if (NTDAdvancedPasswordCheckBox.IsChecked == true)
+                {
+                    password = NTDAdvancedPassword.Text;
+                }
+
+
                 // SAVE TO FILE
-                track.WriteTrack();
+                if (NTDAdvancedWriteToCheckBox.IsChecked == true)
+                {
+                    string dirPath = NTDAdvancedWriteTo.Text;
+                    if (Directory.Exists(dirPath))
+                        track.WriteTrack($"{dirPath}/{name}.ns",password);
+                    else
+                    {
+                        var dialog = InfoDialog.ShowYesNoDialog(string.Format(
+                            "Directory {0} does not exists. Do you want to create one?", dirPath), 
+                            "Yes", "No"
+                        );
+
+                        if (dialog.InfoDialogState == InfoDialogState.YesNoDialogYes)
+                        {
+                            Directory.CreateDirectory(dirPath);
+                            track.WriteTrack($"{dirPath}/{name}.ns", password);
+                        }
+                        else
+                        {
+                            throw new NewTrackDialogException("Set path you really want...");
+                        }
+                    }
+
+                }
+                else
+                {
+                    track.WriteTrack(password);
+                }
+
+                // DONE !!!
                 InfoDialog.ShowMessageDialog("Track created successfully.");
 
                 // TODO EventAgregator.Instance.Publish<> publish new track event
@@ -234,5 +292,7 @@ namespace Noteslider
             string item = WebAssetString + NTDWebAssetValue.Text;
             NTDFiles.Items.Add(item);
         }
+
+
     }
 }

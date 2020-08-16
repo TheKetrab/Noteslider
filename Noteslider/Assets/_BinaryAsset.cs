@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Security.Cryptography.Certificates;
 
 namespace Noteslider.Assets
 {
@@ -12,15 +14,45 @@ namespace Noteslider.Assets
     /// </summary>
     public class BinaryAsset
     {
-        public byte[] Bytes { get; }
+        public byte[] Bytes { get; private set; }
         public Type AssetType { get; private set; }
         public Int64 Length { get { return Bytes.Length; } }
-
+        private string _iv = "HjMb2FH6myl0T9pNRusL";
 
         public BinaryAsset(Type assetType, byte[] bytes)
         {
             AssetType = assetType;
             Bytes = bytes;
+        }
+
+        public Aes CreateAes(string cipher)
+        {
+            
+            var aes = Aes.Create();
+            aes.KeySize = 128;
+            aes.BlockSize = 128;
+            aes.FeedbackSize = 128;
+            aes.Padding = PaddingMode.Zeros;
+
+            byte[] salt = new byte[8];
+            Array.Copy(aes.IV, salt, 8);
+            Rfc2898DeriveBytes keyGen = new Rfc2898DeriveBytes(cipher, salt, 50);
+            byte[] aesKey = keyGen.GetBytes(16);
+
+            aes.Key = aesKey;
+            aes.IV = aesKey;
+
+            return aes;
+        }
+
+        public void EncryptBytes(string cipher)
+        {
+            Bytes = Noteslider.Code.Cryptography.Encrypt(Bytes, cipher);
+        }
+
+        public void DecryptBytes(string cipher)
+        {
+            Bytes = Noteslider.Code.Cryptography.Decrypt(Bytes, cipher);
         }
 
 

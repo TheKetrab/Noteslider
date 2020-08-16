@@ -2,6 +2,8 @@
 using Noteslider.Assets;
 using Noteslider.Assets.Converter;
 using Noteslider.Assets.Model;
+using Noteslider.Code.Controls;
+using Noteslider.Code.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +18,7 @@ namespace Noteslider
         public int ImageLen { get; set; }
         public byte[] Image { get; set; }
         public double SliderValue { get; set; }
+        public bool Encrypted { get; set; }
 
         // other
         public string Path { get; set; }
@@ -66,28 +69,45 @@ namespace Noteslider
         /// <returns></returns>
         public static Track ReadTrack(string nsPath)
         {
-            Track t = new Track();
-            using (BinaryReader reader = new BinaryReader(File.OpenRead(nsPath)))
+            try
             {
-                // TRACK INFO
-                t.TrackInfo.Name = reader.ReadString();
-                t.TrackInfo.Author = reader.ReadString();
-                t.TrackInfo.ImageLen = reader.ReadInt32();
-                t.TrackInfo.Image = reader.ReadBytes(t.TrackInfo.ImageLen);
-                t.TrackInfo.SliderValue = reader.ReadDouble();
 
-                // DATA
-                int dataCnt = reader.ReadInt32();
-                for (int i = 0; i < dataCnt; i++)
+                Track t = new Track();
+                using (BinaryReader reader = new BinaryReader(File.OpenRead(nsPath)))
                 {
-                    var basset = BinaryAsset.ReadBinaryAsset(reader);
-                    var asset = AssetConverter.ResolveBinaryAsset(basset);
-                    t.Assets.Add(asset);
+                    // TRACK INFO
+                    t.TrackInfo.Name = reader.ReadString();
+                    t.TrackInfo.Author = reader.ReadString();
+                    t.TrackInfo.ImageLen = reader.ReadInt32();
+                    t.TrackInfo.Image = reader.ReadBytes(t.TrackInfo.ImageLen);
+                    t.TrackInfo.SliderValue = reader.ReadDouble();
+                    t.TrackInfo.Encrypted = reader.ReadBoolean();
+
+                    string password = null;
+                    if (t.TrackInfo.Encrypted)
+                    {
+                        var dialog = InfoDialog.ShowValueDialog("Enter the password:");
+                        password = (string)dialog.data;
+                    }
+
+                    // DATA
+                    int dataCnt = reader.ReadInt32();
+                    for (int i = 0; i < dataCnt; i++)
+                    {
+                        var basset = BinaryAsset.ReadBinaryAsset(reader);
+                        if (password != null) basset.DecryptBytes(password);
+                        var asset = AssetConverter.ResolveBinaryAsset(basset);
+                        t.Assets.Add(asset);
+                    }
+
                 }
 
+                return t;
             }
-
-            return t;
+            catch (Exception e)
+            {
+                throw new ForUserException("Fail with interpreting the track.");
+            }
         }
 
 
@@ -106,6 +126,7 @@ namespace Noteslider
                     ti.Image = reader.ReadBytes(ti.ImageLen);
 
                 ti.SliderValue = reader.ReadDouble();
+                ti.Encrypted = reader.ReadBoolean();
             }
 
             return ti;
@@ -115,9 +136,14 @@ namespace Noteslider
         /// <summary>
         /// Writes metadata and data to file: LIB/Name.ns
         /// </summary>
-        public void WriteTrack()
+        public void WriteTrack(string password = null)
         {
-            var path = GetTrackPath();           
+            var path = GetTrackPath();
+            WriteTrack(path,password);
+        }
+
+        public void WriteTrack(string path, string password = null)
+        {
             using (BinaryWriter writer = new BinaryWriter(File.Open(path, FileMode.Create)))
             {
                 // TRACK INFO
@@ -126,16 +152,17 @@ namespace Noteslider
                 writer.Write(TrackInfo.ImageLen);
                 if (TrackInfo.Image != null) writer.Write(TrackInfo.Image);
                 writer.Write(TrackInfo.SliderValue);
+                writer.Write(password != null); // write TRUE if password is not null
 
                 // ASSETS
                 writer.Write(Assets.Count);
                 foreach (var asset in Assets)
                 {
                     var basset = AssetConverter.ConvertToBinaryAsset(asset);
+                    if (password != null) basset.EncryptBytes(password);
                     basset.WriteBinaryAsset(writer);
                 }
             }
-
         }
 
         /// <summary>
