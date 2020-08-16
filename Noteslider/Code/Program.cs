@@ -41,6 +41,7 @@ namespace Noteslider.Code
 
             // for concrete asset use concrete asset converter
             AssetConverter.RegisterConverter<TextAsset, TextAssetConverter>();
+            AssetConverter.RegisterConverter<WebAsset, TextAssetConverter>();
             AssetConverter.RegisterConverter<JpgAsset,ImageAssetConverter>();
             AssetConverter.RegisterConverter<PngAsset,ImageAssetConverter> ();
             AssetConverter.RegisterConverter<PdfAsset,PdfAssetConverter>();
@@ -53,6 +54,8 @@ namespace Noteslider.Code
             AssetRendererFactory.RegisterRenderer<TextAsset, TextAssetRenderer>();
             AssetRendererFactory.RegisterRenderer<ImageAsset, ImageAssetRenderer>();
             AssetRendererFactory.RegisterRenderer<PdfAsset, PdfAssetRenderer>();
+            AssetRendererFactory.RegisterRenderer<WebAsset, WebAssetRenderer>();
+
         }
 
         public static void PrintDebug(string msg)

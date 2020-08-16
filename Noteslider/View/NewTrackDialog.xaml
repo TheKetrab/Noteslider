@@ -96,7 +96,7 @@
                         <Label DockPanel.Dock="Top" Margin="10 20 10 20" Content="Choose resources for your track" HorizontalAlignment="Center"/>
                         <DockPanel DockPanel.Dock="Bottom" HorizontalAlignment="Stretch">
                             <Label Content="Web asset:" Margin="10"/>
-                            <Button x:Name="NTDWebAssetButton" DockPanel.Dock="Right" Margin="0 10 10 10" Width="60" Content="+" />
+                            <Button x:Name="NTDWebAssetButton" DockPanel.Dock="Right" Margin="0 10 10 10" Width="60" Content="+" Click="NTDWebAssetButton_Click"/>
                             <TextBox x:Name="NTDWebAssetValue" Margin="0 10"/>
                         </DockPanel>
                         <GroupBox DockPanel.Dock="Top" Header="Choose files" VerticalAlignment="Stretch">

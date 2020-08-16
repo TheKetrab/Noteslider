@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -8,6 +9,7 @@ using System.Windows.Media.Imaging;
 using Microsoft.Win32;
 using Noteslider.Assets;
 using Noteslider.Assets.Converter;
+using Noteslider.Assets.Model;
 using Noteslider.Code;
 using Noteslider.Code.Controls;
 using Noteslider.Code.Exceptions;
@@ -19,6 +21,9 @@ namespace Noteslider
     /// </summary>
     public partial class NewTrackDialog : Window
     {
+        private const string WebAssetString = "WebAsset: ";
+        private const string WebAssetPattern = "^WebAsset: (.*)$";
+
         private int page;
         private byte[] imgBytes; // bytes to save and store image
         private bool _modifyMode;
@@ -197,6 +202,18 @@ namespace Noteslider
                 var filePaths = NTDFiles.Items;
                 foreach (string file in filePaths)
                 {
+                    // WEB ASSET
+                    if (Regex.IsMatch(file,WebAssetPattern))
+                    {
+                        Match m = Regex.Match(file, WebAssetPattern);
+                        string url = m.Groups[1].Value;
+
+                        WebAsset webAsset = new WebAsset(url);
+                        track.Assets.Add(webAsset);
+                        continue;
+                    }
+
+                    // OTHER FILES
                     FileInfo fi = new FileInfo(file);
                     Type type = AssetConverter.GetAssetTypeByExtension(fi.Extension);
                     var bytes = File.ReadAllBytes(file);
@@ -212,6 +229,10 @@ namespace Noteslider
             }
         }
 
-
+        private void NTDWebAssetButton_Click(object sender, RoutedEventArgs e)
+        {
+            string item = WebAssetString + NTDWebAssetValue.Text;
+            NTDFiles.Items.Add(item);
+        }
     }
 }

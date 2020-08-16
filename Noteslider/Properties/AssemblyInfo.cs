@@ -8,11 +8,11 @@ using System.Windows;
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
 [assembly: AssemblyTitle("Noteslider")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Program to read notes and play the instrument automatically.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Bartłomiej Grochowski")]
 [assembly: AssemblyProduct("Noteslider")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © BGr 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

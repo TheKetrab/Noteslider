@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 using Noteslider.Assets.Model;
 
 namespace Noteslider.Assets.Converter
@@ -9,13 +10,15 @@ namespace Noteslider.Assets.Converter
         public TextAsset ToAsset(BinaryAsset basset)
         {
             var text = Encoding.UTF8.GetString(basset.Bytes);
-            return new TextAsset(text);
+            TextAsset asset = Activator.CreateInstance(
+                basset.AssetType, new object[] { text }) as TextAsset;
+            return asset;
         }
 
         public BinaryAsset ToBinaryAsset(TextAsset asset)
         {
             byte[] bytes = Encoding.UTF8.GetBytes(asset.data);
-            return new BinaryAsset(typeof(TextAsset), bytes);
+            return new BinaryAsset(asset.GetType(), bytes);
         }
     }
 }
