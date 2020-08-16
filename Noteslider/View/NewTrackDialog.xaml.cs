@@ -23,10 +23,13 @@ namespace Noteslider
     {
         private const string WebAssetString = "WebAsset: ";
         private const string WebAssetPattern = "^WebAsset: (.*)$";
+        private const string ModifyTrackPattern = @"\(page (.+)\).*";
+
 
         private int page;
         private byte[] imgBytes; // bytes to save and store image
         private bool _modifyMode;
+        private Track _track; // for modify mode
 
         public NewTrackDialog()
         {
@@ -40,10 +43,17 @@ namespace Noteslider
         public NewTrackDialog(Track t) : this()
         {
             _modifyMode = true;
+            _track = t;
+
             this.NTDAuthor.Text = t.TrackInfo.Author;
             this.NTDTitle.Text = t.TrackInfo.Name;
-            this.NTDImage.Source = Converter.BytesToBmpSource(t.TrackInfo.Image);
-            // TODO -> assets
+    
+            if (t.TrackInfo.ImageLen > 0)
+                this.NTDImage.Source = Converter.BytesToBmpSource(t.TrackInfo.Image);
+
+            for (int i=0; i<_track.Assets.Count; i++)
+                this.NTDFiles.Items.Add($"(page {i + 1}) {_track.Assets[i].GetType().Name}");
+
         }
 
 
@@ -238,7 +248,8 @@ namespace Noteslider
                 }
 
                 // DONE !!!
-                InfoDialog.ShowMessageDialog("Track created successfully.");
+                if (_modifyMode) InfoDialog.ShowMessageDialog("Track updated successfully.");
+                else             InfoDialog.ShowMessageDialog("Track created successfully.");
 
                 // TODO EventAgregator.Instance.Publish<> publish new track event
                 return true;
@@ -271,6 +282,18 @@ namespace Noteslider
                         continue;
                     }
 
+                    // MODIFY
+                    if (_modifyMode)
+                    {
+                        Match m = Regex.Match(file, ModifyTrackPattern);
+                        if (m.Success)
+                        {
+                            int indexOfAsset = int.Parse(m.Groups[1].Value) - 1;
+                            track.Assets.Add(_track.Assets[indexOfAsset]);
+                            continue;
+                        }
+                    }
+
                     // OTHER FILES
                     FileInfo fi = new FileInfo(file);
                     Type type = AssetConverter.GetAssetTypeByExtension(fi.Extension);
@@ -293,6 +316,36 @@ namespace Noteslider
             NTDFiles.Items.Add(item);
         }
 
+        private void NTDFilesMoveUp_Click(object sender, RoutedEventArgs e)
+        {
+            var list = NTDFiles;
+            if (list.SelectedItem == null) return;
 
+            int i = list.Items.IndexOf(list.SelectedItem);
+            if (i == 0) return;
+
+            // swap items
+            var temp = list.Items[i];
+            list.Items[i] = list.Items[i-1];
+            list.Items[i - 1] = temp;
+
+            list.SelectedIndex = i - 1;
+        }
+
+        private void NTDFilesMoveDown_Click(object sender, RoutedEventArgs e)
+        {
+            var list = NTDFiles;
+            if (list.SelectedItem == null) return;
+
+            int i = list.Items.IndexOf(list.SelectedItem);
+            if (i == list.Items.Count - 1) return;
+
+            var temp = list.Items[i];
+            list.Items[i] = list.Items[i + 1];
+            list.Items[i + 1] = temp;
+
+            list.SelectedIndex = i + 1;
+
+        }
     }
 }
