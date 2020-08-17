@@ -104,13 +104,15 @@
 
                     <TabControl Background="#414141" x:Name="MWLeftPanelTabControl" Style="{DynamicResource StretchingTabControl}">
                         <TabItem Selector.Selected="OnTabSelected" x:Name="MWTabItemMain" Header="Main">
-                            <Label Content="Content goes here..." />
+                            <StackPanel x:Name="MWTabControlNews" >
+                                <Label x:Name="MWTabControlNewsLoading"/>
+                            </StackPanel>
                         </TabItem>
                         <TabItem Selector.Selected="OnTabSelected" x:Name="MWTabItemTracks" Header="Tracks">
                             <DockPanel LastChildFill="False">
                                 <Label DockPanel.Dock="Top" x:Name="MWTabItemsTracksInfo" />
                                 <ListView DockPanel.Dock="Top" x:Name="MWTabItemsTracksList"/>
-                                <Button  DockPanel.Dock="Bottom" Margin="10" x:Name="MWTabItemsDownloadButton" Content="Download" Click="MWTabItemsDownloadButton_Click"/>
+                                <Button DockPanel.Dock="Bottom" Margin="10" x:Name="MWTabItemsDownloadButton" Content="Download" Click="MWTabItemsDownloadButton_Click"/>
                             </DockPanel>
                         </TabItem>
                         <TabItem Selector.Selected="OnTabSelected" x:Name="MWTabItemUpload" Header="Upload">

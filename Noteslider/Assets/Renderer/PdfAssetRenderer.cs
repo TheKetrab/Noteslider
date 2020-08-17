@@ -90,7 +90,7 @@ namespace Noteslider.Assets.Renderer
                 img.Width = Window.ScrollViewer.ActualWidth - MARGIN;
 
                 img.UpdateLayout();
-                Program.PrintDebug(string.Format("Width = {0}\nActualWidth = {1}", img.Width, img.ActualWidth));
+                //Program.PrintDebug(string.Format("Width = {0}\nActualWidth = {1}", img.Width, img.ActualWidth));
             }
         }
 

@@ -11,8 +11,26 @@ using System.Web.Helpers;
 using System.Windows;
 using System.Windows.Controls;
 
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Windows.Navigation;
+
 namespace Noteslider.Code
 {
+    class NewsModel
+    {
+        public string Title { get; set; }
+        public DateTime Date { get; set; }
+        public string Content { get; set; }
+
+        public static int Compare(NewsModel x, NewsModel y)
+        {
+            return DateTime.Compare(x.Date, y.Date);
+        }
+
+    }
+
+
     public class ServerManager
     {
         const string NotesliderServer = "https://noteslider-server.herokuapp.com/";
@@ -24,6 +42,60 @@ namespace Noteslider.Code
         {
             _window = mainWindow;
         }
+
+        public async Task<Stream> MakeRequest(string uri)
+        {
+            try
+            {
+                var request = WebRequest.Create(uri);
+                request.Timeout = NotesliderTimeout;
+                var response = (HttpWebResponse)await Task.Factory
+                        .FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+
+                if (response.StatusCode == HttpStatusCode.OK)
+                {
+                    var responseStream = response.GetResponseStream();
+                    return responseStream;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (WebException)
+            {
+                throw new ServerIsDownException();
+            }
+        }
+
+
+        public async Task UpdateNews()
+        {
+            _window.MWTabControlNewsLoading.Content = "Loading...";
+            List<NewsModel> list = await GetNews();
+            list.Sort(NewsModel.Compare);
+            _window.MWTabControlNewsLoading.Content = "";
+
+            foreach (var news in list)
+                _window.MWTabControlNews.Children.Add(
+                    new NewsItem(news.Title, news.Date, news.Content));
+            
+        }
+
+
+        private async Task<List<NewsModel>> GetNews()
+        {
+            var responseStream = await MakeRequest(NotesliderServer + "news");
+            using (var streamReader = new StreamReader(responseStream))
+            {
+                string jsonData = streamReader.ReadToEnd();
+                var list = JsonSerializer.Deserialize<List<NewsModel>>(jsonData);
+                return list;
+            }
+
+
+        }
+
 
         public async Task UpdateTrackList()
         {
@@ -43,76 +115,33 @@ namespace Noteslider.Code
 
         public async Task<string[]> GetTrackList()
         {
-            try
+            var responseStream = await MakeRequest(NotesliderServer);
+            using (var streamReader = new StreamReader(responseStream))
             {
-                var request = WebRequest.Create(NotesliderServer);
-                request.Timeout = NotesliderTimeout;
-                var response = (HttpWebResponse)await Task.Factory
-                        .FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+                string str = streamReader.ReadToEnd();
+                dynamic tracks = Json.Decode(str);
+                int n = tracks.Length;
+                var res = new string[n];
+                for (int i = 0; i < n; i++)
+                    res[i] = tracks[i];
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var responseStream = response.GetResponseStream();
-                    using (var streamReader = new StreamReader(responseStream))
-                    {
-                        string str = streamReader.ReadToEnd();
-                        dynamic tracks = Json.Decode(str);
-                        int n = tracks.Length;
-                        var res = new string[n];
-                        for (int i = 0; i < n; i++)
-                            res[i] = tracks[i];
-
-                        return res;
-                    }
-                }
-                else
-                {
-                    return new string[] { };
-                }
-            } catch (WebException)
-            {
-                throw new ServerIsDownException();
-            }
-            
+                return res;
+            }            
         }
 
         public async Task DownloadTrack(string name)
         {
-            try
-            {
-                var request = WebRequest.Create(NotesliderServer + name);
-                request.Timeout = NotesliderTimeout;
-                
-                var response = (HttpWebResponse)await Task.Factory
-                        .FromAsync(request.BeginGetResponse, request.EndGetResponse, null);
+            var responseStream = await MakeRequest(NotesliderServer + name);
+            MemoryStream memoryStream = new MemoryStream();
+            await responseStream.CopyToAsync(memoryStream);
 
-                if (response.StatusCode == HttpStatusCode.OK)
-                {
-                    var responseStream = response.GetResponseStream();
-                    MemoryStream memoryStream = new MemoryStream();
-                    await responseStream.CopyToAsync(memoryStream);
+            string path = $"{Paths.Library}/{name}.ns";
+            FileStream file = File.Create(path);
+            byte[] bytes = memoryStream.ToArray();
+            file.Write(bytes, 0, bytes.Length);
+            file.Close();
 
-                    string path = $"{Paths.Library}/{name}.ns";
-                    FileStream file = File.Create(path);
-                    byte[] bytes = memoryStream.ToArray();
-                    file.Write(bytes, 0, bytes.Length);
-                    file.Close();
-
-                    InfoDialog.ShowMessageDialog("Downloading complete.");
-                }
-                else
-                {
-                    throw new ForUserException("Error with downloading track.");
-                }
-            }
-            catch (WebException)
-            {
-                throw new ServerIsDownException();
-            }
-            catch (ForUserException e)
-            {
-                e.ShowGUIMessage();
-            }
+            InfoDialog.ShowMessageDialog("Downloading complete.");
         }
     }
 }

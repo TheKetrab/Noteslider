@@ -289,6 +289,11 @@ namespace Noteslider
             {
                 await serverManager.UpdateTrackList();
             }
+
+            else if (MWTabItemMain.IsSelected)
+            {
+                await serverManager.UpdateNews();
+            }
         }
 
         private async void MWTabItemsDownloadButton_Click(object sender, RoutedEventArgs e)
