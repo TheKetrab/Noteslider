@@ -76,6 +76,8 @@ namespace Noteslider.Code
             list.Sort(NewsModel.Compare);
             _window.MWTabControlNewsLoading.Content = "";
 
+            _window.MWTabControlNews.Children.Clear();
+
             foreach (var news in list)
                 _window.MWTabControlNews.Children.Add(
                     new NewsItem(news.Title, news.Date, news.Content));
