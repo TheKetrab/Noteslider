@@ -1,6 +1,8 @@
 # Noteslider
 
-<img src="./NotesliderScreen.jpg" alt="" width="400"/>
+<p align="center">
+<img src="./NotesliderScreen.jpg" alt="" width="600"/>
+</p>
 
 ## Introduction
 Noteslider is an application to store notes (especially music sheets), load them and auto-slide.
@@ -10,10 +12,9 @@ If you create the track you can load it and click play button. It will start to 
 You can modify speed using slider on the right side.
 
 ## Download
-You can download the program, unzip it and open Noteslider.exe app.
-<a href="www.google.com">
-<img src="https://i.imgur.com/O04AxSV.png" alt="" width="150" />
-</a>
+You can download the program, unzip it and open Noteslider.exe app.  
+
+<a href="https://www.google.com"><img src="https://i.imgur.com/O04AxSV.png" alt="" width="150" /></a>
 
 ## Extensions
 You can register your own file type to be interpreted by Noteslider.
