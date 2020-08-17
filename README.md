@@ -1,7 +1,7 @@
 # Noteslider
 
 <p align="center">
-<img src="./NotesliderScreen.jpg" alt="" width="600"/>
+  <img src="./NotesliderScreen.jpg" alt="" width="600"/>
 </p>
 
 ## Introduction
@@ -14,7 +14,9 @@ You can modify speed using slider on the right side.
 ## Download
 You can download the program, unzip it and open Noteslider.exe app.  
 
-<a href="https://www.google.com"><img src="https://i.imgur.com/O04AxSV.png" alt="" width="150" /></a>
+<a href="https://www.google.com" targer="_blank">
+  <img src="https://i.imgur.com/O04AxSV.png" alt="" width="150" />
+</a>
 
 ## Extensions
 You can register your own file type to be interpreted by Noteslider.
