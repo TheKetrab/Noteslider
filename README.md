@@ -12,9 +12,9 @@ If you create the track you can load it and click play button. It will start to 
 You can modify speed using slider on the right side.
 
 ## Download
-You can download the program, unzip it and open Noteslider.exe app.  
+You can download the program, unzip it and open Noteslider.exe app.
 
-<a href="https://www.google.com" targer="_blank">
+<a href="https://drive.google.com/file/d/1qa9fHD56SxB1dykHFtpCkrIh2JFwAo81/view?usp=sharing" targer="_blank">
   <img src="https://i.imgur.com/O04AxSV.png" alt="" width="150" />
 </a>
 
