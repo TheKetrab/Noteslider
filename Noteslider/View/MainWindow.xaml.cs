@@ -299,6 +299,8 @@ namespace Noteslider
         private async void MWTabItemsDownloadButton_Click(object sender, RoutedEventArgs e)
         {
             int i = MWTabItemsTracksList.SelectedIndex;
+            if (i < 0) return;
+
             ListViewItem item = (ListViewItem)MWTabItemsTracksList
                 .ItemContainerGenerator.ContainerFromIndex(i);
 

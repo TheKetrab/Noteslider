@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,9 +9,8 @@ namespace Noteslider
 {
     public class Paths
     {
-        public static string Library = @"C:\Projekty\.NET\Noteslider\Noteslider\notes";
-        public static string Temp = @"C:\Projekty\.NET\Noteslider\Noteslider\.temp";
-        public static string PdfViewer = @"C:\Projekty\.NET\Noteslider\Noteslider\PdfViewer.html";
-        public static string DefaultImage = @"C:\Projekty\.NET\Noteslider\Noteslider\Resources\Icons\Default.png";
+        public static string Library = Directory.GetCurrentDirectory() + @"\Data\notes";
+        public static string Temp = Directory.GetCurrentDirectory() + @"\Data\.temp";
+        public static string DefaultImage = Directory.GetCurrentDirectory() + @"\Data\Default.png";
     }
 }
